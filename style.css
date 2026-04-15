@@ -1,0 +1,52 @@
+/* Estilos generales y reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Configuración de la cuadrícula (Grid) */
+.galeria {
+    display: grid;
+    /* Esto hace que sea responsivo automáticamente. 
+       Las cartas tendrán un mínimo de 250px de ancho */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* Espacio entre las cartas */
+    max-width: 1200px;
+    margin: 0 auto; /* Centra la galería en la pantalla */
+}
+
+/* Diseño de cada carta y efecto Hover */
+.carta {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación fluida */
+    cursor: pointer;
+}
+
+/* Efecto al pasar el ratón por encima (Hover) */
+.carta:hover {
+    transform: scale(1.05); /* Amplía la carta un 5% */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Sombra más fuerte */
+}
