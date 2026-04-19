@@ -164,6 +164,13 @@ body {
 }
 .card-item:hover .card-label { color: var(--text); }
 
+/* ── Deck section colors ─────────────────── */
+:root {
+  --party-c:    #9b7ee8;
+  --mazo-c:     #3b82f6;
+  --banquillo-c:#10b981;
+}
+
 /* ── Deck Sidebar ─────────────────────────── */
 .deck-sidebar {
   width: 0; overflow: hidden; transition: width .25s ease;
@@ -203,7 +210,76 @@ body {
 }
 .deck-ctrl:hover { background: var(--bg3); border-color: var(--muted); }
 
-.deck-footer { padding: 12px 14px; border-top: 1px solid var(--border); display: flex; gap: 6px; }
+.deck-footer { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ── Deck tabs ────────────────────────────── */
+.deck-tabs { display: flex; border-bottom: 1px solid var(--border); }
+.deck-tab {
+  flex: 1; background: none; border: none; padding: 8px 4px;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  color: var(--muted); font-size: 11px; transition: color .15s, background .15s;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.deck-tab:hover { color: var(--text); background: var(--bg3); }
+.deck-tab.active.tab-party     { color: var(--party-c);    border-bottom-color: var(--party-c); }
+.deck-tab.active.tab-mazo      { color: var(--mazo-c);     border-bottom-color: var(--mazo-c); }
+.deck-tab.active.tab-banquillo { color: var(--banquillo-c);border-bottom-color: var(--banquillo-c); }
+.deck-tab.active .tab-label    { color: var(--text); }
+
+.tab-label { font-size: 11px; font-weight: 600; }
+.tab-count { font-size: 10px; font-weight: 500; }
+.tab-count.complete { font-weight: 700; }
+.tab-party    .tab-count.complete { color: var(--party-c); }
+.tab-mazo     .tab-count.complete { color: var(--mazo-c); }
+.tab-banquillo.tab-count.complete { color: var(--banquillo-c); }
+
+/* ── Section hint ─────────────────────────── */
+.section-hint {
+  padding: 5px 14px; font-size: 11px; color: var(--muted);
+  border-bottom: 1px solid var(--border); background: var(--bg3);
+}
+
+/* ── Validation message ───────────────────── */
+.validation-msg {
+  margin: 6px 10px; padding: 7px 10px; font-size: 12px;
+  background: rgba(192,57,43,.15); color: #e07070;
+  border-radius: 6px; border: 1px solid rgba(192,57,43,.3); line-height: 1.4;
+}
+
+/* ── Count colors per section ─────────────── */
+.deck-row-count.count-party     { color: var(--party-c); }
+.deck-row-count.count-mazo      { color: var(--mazo-c); }
+.deck-row-count.count-banquillo { color: var(--banquillo-c); }
+
+/* ── In-deck badge per section ────────────── */
+.in-deck-badge.badge-party     { background: var(--party-c); }
+.in-deck-badge.badge-mazo      { background: var(--mazo-c); }
+.in-deck-badge.badge-banquillo { background: var(--banquillo-c); }
+
+/* ── Section dots on gallery cards ───────── */
+.card-section-dots {
+  position: absolute; bottom: 6px; left: 6px;
+  display: flex; gap: 3px; align-items: center;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; display: block; }
+.dot-party     { background: var(--party-c); }
+.dot-mazo      { background: var(--mazo-c); }
+.dot-banquillo { background: var(--banquillo-c); }
+
+/* ── Deck sections summary (Mis Mazos) ────── */
+.deck-sections-summary {
+  display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0;
+}
+.section-badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500;
+}
+.section-badge.party     { background: rgba(155,126,232,.15); color: var(--party-c);    border: 1px solid rgba(155,126,232,.3); }
+.section-badge.mazo      { background: rgba(59,130,246,.15);  color: var(--mazo-c);     border: 1px solid rgba(59,130,246,.3); }
+.section-badge.banquillo { background: rgba(16,185,129,.15);  color: var(--banquillo-c);border: 1px solid rgba(16,185,129,.3); }
+
+.entry-count.party     { color: var(--party-c); }
+.entry-count.mazo      { color: var(--mazo-c); }
+.entry-count.banquillo { color: var(--banquillo-c); }
 
 /* ── Buttons ──────────────────────────────── */
 .btn {
