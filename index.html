@@ -110,6 +110,11 @@
             <button @click="newDeck" class="btn btn-ghost">Nuevo</button>
             <button @click="clearDeck" class="btn btn-ghost" :disabled="!deckCards.length">Limpiar</button>
           </div>
+          <div class="deck-footer">
+            <button @click="exportCurrentToTTS" class="btn btn-tts" :disabled="!deckCards.length" title="Exportar a Tabletop Simulator">
+              🎲 Exportar a TTS
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -151,6 +156,7 @@
         </ul>
         <div class="deck-card-actions">
           <button @click="loadDeck(deck)" class="btn btn-primary sm">Cargar</button>
+          <button @click="exportSavedToTTS(deck)" class="btn btn-tts sm" title="Exportar a Tabletop Simulator">🎲 TTS</button>
           <button @click="deleteDeck(deck.id)" class="btn btn-danger sm">Eliminar</button>
         </div>
       </div>

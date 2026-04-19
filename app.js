@@ -171,6 +171,85 @@ createApp({
       return { left: x + 'px', top: y + 'px' };
     });
 
+    // ── Tabletop Simulator export ──────────────
+    const PAGES_BASE = 'https://fikiy-stimorol.github.io/EthrA_CG/';
+
+    function buildTTSJson(entries, deckName) {
+      // entries: [{ path, nombre, tipo, count }]
+      const BACK = PAGES_BASE + 'dorso.png';
+      const deckIds = [], customDeck = {}, containedObjects = [];
+
+      entries.forEach((entry, i) => {
+        const idx = i + 1;
+        const faceUrl = PAGES_BASE + entry.path.split('/').map(encodeURIComponent).join('/');
+        const cardId = idx * 100;
+        customDeck[String(idx)] = {
+          FaceURL: faceUrl, BackURL: BACK,
+          NumWidth: 1, NumHeight: 1,
+          BackIsHidden: true, UniqueBack: false, Type: 0
+        };
+        for (let c = 0; c < entry.count; c++) {
+          deckIds.push(cardId);
+          containedObjects.push({
+            Name: 'Card',
+            Transform: { posX:0, posY:0, posZ:0, rotX:0, rotY:180, rotZ:180, scaleX:1, scaleY:1, scaleZ:1 },
+            Nickname: entry.nombre,
+            Description: entry.tipo || '',
+            CardID: cardId,
+            CustomDeck: { [String(idx)]: customDeck[String(idx)] },
+            XmlUI:'', LuaScript:'', LuaScriptState:'',
+            GUID: Math.random().toString(16).slice(2, 8)
+          });
+        }
+      });
+
+      const deckObject = containedObjects.length === 1
+        ? { ...containedObjects[0], Transform: { posX:0, posY:1, posZ:0, rotX:0, rotY:180, rotZ:180, scaleX:1, scaleY:1, scaleZ:1 } }
+        : {
+            Name: 'Deck',
+            Transform: { posX:0, posY:1, posZ:0, rotX:0, rotY:0, rotZ:180, scaleX:1, scaleY:1, scaleZ:1 },
+            Nickname: deckName, Description: '',
+            ColorDiffuse: { r:0.713235259, g:0.713235259, b:0.713235259 },
+            Locked:false, Grid:true, Snap:true, IgnoreFoW:false, Autoraise:true,
+            Sticky:true, Tooltip:true, GridProjection:false, HideWhenFaceDown:true,
+            Hands:false, SidewaysCard:false,
+            DeckIDs: deckIds, CustomDeck: customDeck,
+            XmlUI:'', LuaScript:'', LuaScriptState:'',
+            ContainedObjects: containedObjects,
+            GUID: Math.random().toString(16).slice(2, 8)
+          };
+
+      return {
+        SaveName: deckName, GameMode:'', Date:'', Gravity:0.5, PlayArea:0.5,
+        Table:'', Sky:'', Note:'', Rules:'', XmlUI:'', LuaScript:'', LuaScriptState:'',
+        ObjectStates: [deckObject]
+      };
+    }
+
+    function downloadTTS(json, name) {
+      const blob = new Blob([JSON.stringify(json, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name.replace(/[^\w\s-]/g, '').trim() + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportCurrentToTTS() {
+      if (!deckCards.value.length) return;
+      const entries = deckCards.value.map(e => ({ path: e.card.path, nombre: e.card.nombre, tipo: e.card.tipo, count: e.count }));
+      downloadTTS(buildTTSJson(entries, deckName.value), deckName.value);
+    }
+
+    function exportSavedToTTS(deck) {
+      const entries = deck.cards.map(e => ({
+        path: 'cartas/' + e.cardId + '.png',
+        nombre: e.nombre, tipo: e.tipo, count: e.count
+      }));
+      downloadTTS(buildTTSJson(entries, deck.name), deck.name);
+    }
+
     // ── Export / Import ────────────────────────
     function exportDecks() {
       if (!savedDecks.value.length) return;
@@ -248,6 +327,7 @@ createApp({
       openModal, formatDate, cardUrl,
       hoveredCard, zoomStyle, startHover, moveHover, endHover,
       exportDecks, importDecks, importMsg,
+      exportCurrentToTTS, exportSavedToTTS,
     };
   }
 }).mount('#app');
