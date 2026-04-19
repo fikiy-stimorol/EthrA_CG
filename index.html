@@ -1,21 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Cartas</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EthrA CG</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="app">
 
-    <header>
-        <h1>Mi Juego de Cartas</h1>
-        <p>Explora la colección completa</p>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <span class="brand-name">ETHRA</span>
+      <span class="brand-tag">CG</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn" :class="{active: view==='gallery'}" @click="view='gallery'">Galería</button>
+      <button class="nav-btn" :class="{active: view==='decks'}" @click="view='decks'">
+        Mis Mazos
+        <span v-if="savedDecks.length" class="nav-badge">{{ savedDecks.length }}</span>
+      </button>
+    </nav>
+    <button class="deck-toggle-btn" @click="showDeck=!showDeck" :class="{active: showDeck}">
+      Mazo <span class="deck-count-badge">{{ deckTotal }}</span>
+    </button>
+  </header>
 
-    <main id="galeria-cartas" class="galeria">
-        </main>
+  <!-- GALLERY VIEW -->
+  <div v-show="view==='gallery'" class="gallery-view">
 
-    <script src="script.js"></script>
+    <div class="filters-bar">
+      <input v-model="search" class="search" type="text" placeholder="Buscar carta..." />
+
+      <div class="filter-row">
+        <button v-for="t in tipoOptions" :key="t.value"
+          class="pill" :class="['tipo-'+t.value, {active: filterTipo===t.value}]"
+          @click="setTipo(t.value)">{{ t.label }}</button>
+      </div>
+
+      <div v-if="subtipoOptions.length > 1" class="filter-row">
+        <button v-for="s in subtipoOptions" :key="s.value"
+          class="pill sm" :class="{active: filterSubtipo===s.value}"
+          @click="setSubtipo(s.value)">{{ s.label }}</button>
+      </div>
+
+      <div v-if="subsubtipoOptions.length > 1" class="filter-row">
+        <button v-for="s in subsubtipoOptions" :key="s.value"
+          class="pill xs" :class="{active: filterSubsubtipo===s.value}"
+          @click="filterSubsubtipo=s.value">{{ s.label }}</button>
+      </div>
+
+      <span class="result-count">{{ filteredCards.length }} cartas</span>
+    </div>
+
+    <div class="content-layout">
+
+      <!-- CARD GRID -->
+      <main class="card-grid">
+        <div v-for="card in filteredCards" :key="card.id" class="card-item" @click="openModal(card)">
+          <div class="card-img-wrap">
+            <img :src="cardUrl(card.path)" :alt="card.nombre" loading="lazy" />
+            <div class="card-overlay">
+              <button class="add-to-deck-btn" @click.stop="addToDeck(card)">+</button>
+            </div>
+            <span v-if="cardInDeck(card)" class="in-deck-badge">{{ cardInDeck(card) }}</span>
+          </div>
+          <div class="card-label">{{ card.nombre }}</div>
+        </div>
+      </main>
+
+      <!-- DECK SIDEBAR -->
+      <aside class="deck-sidebar" :class="{open: showDeck}">
+        <div class="deck-sidebar-inner">
+          <div class="deck-top">
+            <input v-model="deckName" class="deck-name-input" placeholder="Nombre del mazo" maxlength="40" />
+            <span class="deck-total">{{ deckTotal }}c</span>
+          </div>
+          <div class="deck-list">
+            <div v-if="!deckCards.length" class="deck-empty-msg">
+              Pulsa + en una carta<br>para añadirla al mazo
+            </div>
+            <div v-for="entry in deckCards" :key="entry.card.id" class="deck-row">
+              <span class="deck-row-count">{{ entry.count }}x</span>
+              <span class="deck-row-name" :title="entry.card.nombre">{{ entry.card.nombre }}</span>
+              <div class="deck-row-btns">
+                <button @click="decrementCard(entry.card)" class="deck-ctrl">−</button>
+                <button @click="addToDeck(entry.card)" class="deck-ctrl">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="deck-footer">
+            <button @click="saveDeck" class="btn btn-primary" :disabled="!deckCards.length">Guardar</button>
+            <button @click="newDeck" class="btn btn-ghost">Nuevo</button>
+            <button @click="clearDeck" class="btn btn-ghost" :disabled="!deckCards.length">Limpiar</button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- DECKS VIEW -->
+  <div v-show="view==='decks'" class="decks-view">
+    <div class="decks-header">
+      <h2>Mis Mazos</h2>
+      <button @click="view='gallery'" class="btn btn-ghost">← Galería</button>
+    </div>
+    <div v-if="!savedDecks.length" class="empty-state">
+      <p>Aún no has guardado ningún mazo.</p>
+      <button @click="view='gallery'" class="btn btn-primary">Ir a la galería</button>
+    </div>
+    <div v-else class="decks-grid">
+      <div v-for="deck in savedDecks" :key="deck.id" class="deck-card">
+        <div class="deck-card-name">{{ deck.name }}</div>
+        <div class="deck-card-meta">
+          <span>{{ deckCardCount(deck) }} cartas · {{ deck.cards.length }} tipos</span>
+          <span>{{ formatDate(deck.savedAt) }}</span>
+        </div>
+        <ul class="deck-card-list">
+          <li v-for="entry in deck.cards.slice(0,8)" :key="entry.cardId">
+            <span class="entry-count">{{ entry.count }}x</span> {{ entry.nombre }}
+          </li>
+          <li v-if="deck.cards.length > 8" class="more-hint">+{{ deck.cards.length - 8 }} más...</li>
+        </ul>
+        <div class="deck-card-actions">
+          <button @click="loadDeck(deck)" class="btn btn-primary sm">Cargar</button>
+          <button @click="deleteDeck(deck.id)" class="btn btn-danger sm">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <Transition name="fade">
+    <div v-if="selectedCard" class="modal-bg" @click.self="selectedCard=null">
+      <div class="modal">
+        <button class="modal-close" @click="selectedCard=null">✕</button>
+        <img :src="cardUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img" />
+        <div class="modal-info">
+          <h3>{{ selectedCard.nombre }}</h3>
+          <p class="modal-type">
+            {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
+          </p>
+          <p v-if="selectedCard.copies > 1" class="modal-copies">Copias en el set: {{ selectedCard.copies }}</p>
+          <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
+        </div>
+      </div>
+    </div>
+  </Transition>
+
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
