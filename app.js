@@ -41,21 +41,26 @@ function translateAuthError(code) {
 // ── Reglas de cada sección ────────────────────────────────────────
 const RULES = {
   party: {
-    label: 'La Party', target: 10,
+    label: 'La Party',    target: 10,
     hint: '1 héroe + 9 esbirros · sin repeticiones',
   },
   mazo: {
-    label: 'El Deck', target: 40,
-    hint: '40 cartas · máx. 2 copias por carta',
+    label: 'El Deck',     target: 40,
+    hint: '40 cartas · máx. 2 copias · sin personajes ni fichas',
   },
   banquillo: {
-    label: 'El Banquillo', target: 10,
-    hint: '10 cartas · esbirros máx. 1 copia · sin héroes',
+    label: 'El Banquillo',target: 10,
+    hint: '10 cartas · esbirros máx. 1 copia · sin héroes ni fichas',
+  },
+  fichas: {
+    label: 'Fichas',      target: null,  // sin límite de total
+    hint: 'Solo fichas · 1 copia de cada una',
   },
 };
 
 function isHero(card)    { return card.tipo === 'personajes' && card.subtipo === 'Heroes'; }
 function isEsbirro(card) { return card.tipo === 'personajes' && card.subtipo === 'Esbirros'; }
+function isFicha(card)   { return card.tipo === 'fichas'; }
 
 function canAdd(section, card, entries) {
   const total  = entries.reduce((s, e) => s + e.count, 0);
@@ -75,6 +80,12 @@ function canAdd(section, card, entries) {
   }
 
   if (section === 'mazo') {
+    if (isHero(card))
+      return 'Los Héroes solo van en La Party.';
+    if (isEsbirro(card))
+      return 'Los Esbirros solo van en La Party o El Banquillo.';
+    if (isFicha(card))
+      return 'Las Fichas solo van en el apartado de Fichas.';
     if (total >= 40)
       return 'El Deck ya tiene 40 cartas.';
     if (exists && exists.count >= 2)
@@ -83,7 +94,9 @@ function canAdd(section, card, entries) {
 
   if (section === 'banquillo') {
     if (isHero(card))
-      return 'El Banquillo no admite Héroes.';
+      return 'Los Héroes solo van en La Party.';
+    if (isFicha(card))
+      return 'Las Fichas solo van en el apartado de Fichas.';
     if (total >= 10)
       return 'El Banquillo ya tiene 10 cartas.';
     const max = isEsbirro(card) ? 1 : 2;
@@ -91,6 +104,13 @@ function canAdd(section, card, entries) {
       return isEsbirro(card)
         ? 'Los Esbirros solo pueden tener 1 copia en el Banquillo.'
         : 'Máximo 2 copias por carta en el Banquillo.';
+  }
+
+  if (section === 'fichas') {
+    if (!isFicha(card))
+      return 'Este apartado solo admite Fichas.';
+    if (exists)
+      return 'Solo puede haber 1 copia de cada Ficha.';
   }
 
   return null; // ok
@@ -201,10 +221,11 @@ createApp({
 
     // ── Deck builder ───────────────────────────
     const deckName      = ref('Nuevo Mazo');
-    const activeSection = ref('mazo');    // 'party' | 'mazo' | 'banquillo'
+    const activeSection = ref('mazo');    // 'party' | 'mazo' | 'banquillo' | 'fichas'
     const partyCards    = ref([]);
     const mainCards     = ref([]);
     const benchCards    = ref([]);
+    const fichaCards    = ref([]);
     const editingDeckId = ref(null);
     const saving        = ref(false);
     const validationMsg = ref('');
@@ -217,13 +238,27 @@ createApp({
     }
 
     function sectionRef(section) {
-      return section === 'party' ? partyCards : section === 'mazo' ? mainCards : benchCards;
+      if (section === 'party')    return partyCards;
+      if (section === 'mazo')     return mainCards;
+      if (section === 'banquillo')return benchCards;
+      return fichaCards;
     }
 
     const partyTotal    = computed(() => partyCards.value.reduce((s, e) => s + e.count, 0));
     const mazoTotal     = computed(() => mainCards.value.reduce((s, e) => s + e.count, 0));
     const banquilloTotal= computed(() => benchCards.value.reduce((s, e) => s + e.count, 0));
-    const deckTotal     = computed(() => partyTotal.value + mazoTotal.value + banquilloTotal.value);
+    const fichaTotal    = computed(() => fichaCards.value.reduce((s, e) => s + e.count, 0));
+    const deckTotal     = computed(() => partyTotal.value + mazoTotal.value + banquilloTotal.value + fichaTotal.value);
+
+    // Devuelve el array de cartas de la sección activa (para la plantilla)
+    const activeCards = computed(() => sectionRef(activeSection.value).value);
+
+    function sectionTotalByKey(key) {
+      if (key === 'party')    return partyTotal.value;
+      if (key === 'mazo')     return mazoTotal.value;
+      if (key === 'banquillo')return banquilloTotal.value;
+      return fichaTotal.value;
+    }
 
     function addToDeck(card) {
       const target  = sectionRef(activeSection.value);
@@ -253,11 +288,12 @@ createApp({
       if (partyCards.value.find(e => e.card.id === card.id))  sections.push('party');
       if (mainCards.value.find(e => e.card.id === card.id))   sections.push('mazo');
       if (benchCards.value.find(e => e.card.id === card.id))  sections.push('banquillo');
+      if (fichaCards.value.find(e => e.card.id === card.id))  sections.push('fichas');
       return sections;
     }
 
     function clearDeck() { sectionRef(activeSection.value).value = []; }
-    function newDeck()   { partyCards.value = []; mainCards.value = []; benchCards.value = []; deckName.value = 'Nuevo Mazo'; editingDeckId.value = null; }
+    function newDeck()   { partyCards.value = []; mainCards.value = []; benchCards.value = []; fichaCards.value = []; deckName.value = 'Nuevo Mazo'; editingDeckId.value = null; }
 
     function loadDeck(deck) {
       deckName.value = deck.name;
@@ -267,12 +303,14 @@ createApp({
         return card ? { card, count: e.count } : null;
       }).filter(Boolean);
       if (deck.party !== undefined) {
-        partyCards.value = resolve(deck.party);
-        mainCards.value  = resolve(deck.mazo);
-        benchCards.value = resolve(deck.banquillo);
+        partyCards.value  = resolve(deck.party);
+        mainCards.value   = resolve(deck.mazo);
+        benchCards.value  = resolve(deck.banquillo);
+        fichaCards.value  = resolve(deck.fichas || []);
       } else {
         // Formato antiguo: todo al deck principal
-        partyCards.value = []; mainCards.value = resolve(deck.cards); benchCards.value = [];
+        partyCards.value = []; mainCards.value = resolve(deck.cards);
+        benchCards.value = []; fichaCards.value = [];
       }
       view.value = 'gallery'; showDeck.value = true;
     }
@@ -311,6 +349,7 @@ createApp({
         party:     serialize(partyCards.value),
         mazo:      serialize(mainCards.value),
         banquillo: serialize(benchCards.value),
+        fichas:    serialize(fichaCards.value),
         savedAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
       try {
@@ -328,7 +367,7 @@ createApp({
 
     function deckCardCount(deck) {
       if (deck.party !== undefined) {
-        return [...(deck.party||[]), ...(deck.mazo||[]), ...(deck.banquillo||[])].reduce((s,e)=>s+e.count,0);
+        return [...(deck.party||[]), ...(deck.mazo||[]), ...(deck.banquillo||[]), ...(deck.fichas||[])].reduce((s,e)=>s+e.count,0);
       }
       return (deck.cards||[]).reduce((s,e)=>s+e.count,0);
     }
@@ -418,9 +457,10 @@ createApp({
     function makePiles(deck) {
       if (deck.party !== undefined) {
         return [
-          { entries: toTTSEntries(deck.party    || []), name: 'La Party',     posX: -6 },
-          { entries: toTTSEntries(deck.mazo     || []), name: 'El Deck',      posX:  0 },
-          { entries: toTTSEntries(deck.banquillo|| []), name: 'El Banquillo', posX:  6 },
+          { entries: toTTSEntries(deck.party    || []), name: 'La Party',     posX: -9 },
+          { entries: toTTSEntries(deck.mazo     || []), name: 'El Deck',      posX: -3 },
+          { entries: toTTSEntries(deck.banquillo|| []), name: 'El Banquillo', posX:  3 },
+          { entries: toTTSEntries(deck.fichas   || []), name: 'Fichas',       posX:  9 },
         ];
       }
       return [{ entries: toTTSEntries(deck.cards || []), name: deck.name, posX: 0 }];
@@ -428,7 +468,7 @@ createApp({
 
     function exportCurrentToTTS() {
       if (!deckTotal.value) return;
-      const piles = makePiles({ party: serialize(partyCards.value), mazo: serialize(mainCards.value), banquillo: serialize(benchCards.value) });
+      const piles = makePiles({ party: serialize(partyCards.value), mazo: serialize(mainCards.value), banquillo: serialize(benchCards.value), fichas: serialize(fichaCards.value) });
       downloadFile(JSON.stringify(buildTTSMulti(piles, deckName.value), null, 2), deckName.value + '.json', 'application/json');
     }
 
@@ -514,8 +554,9 @@ createApp({
       tipoOptions, subtipoOptions, subsubtipoOptions, filteredCards,
       setTipo, setSubtipo,
       view, showDeck, selectedCard, openModal,
-      deckName, activeSection, partyCards, mainCards, benchCards,
-      partyTotal, mazoTotal, banquilloTotal, deckTotal,
+      deckName, activeSection, partyCards, mainCards, benchCards, fichaCards,
+      partyTotal, mazoTotal, banquilloTotal, fichaTotal, deckTotal,
+      activeCards, sectionTotalByKey,
       saving, validationMsg,
       addToDeck, decrementCard, cardInActiveSection, cardSections,
       clearDeck, newDeck, loadDeck, editingDeckId,

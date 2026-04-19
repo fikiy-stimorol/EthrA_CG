@@ -132,9 +132,10 @@
                 </div>
                 <!-- puntos de sección: morado=party, azul=deck, verde=banquillo -->
                 <div v-if="cardSections(card).length" class="card-section-dots">
-                  <span v-if="cardSections(card).includes('party')"    class="dot dot-party"></span>
-                  <span v-if="cardSections(card).includes('mazo')"     class="dot dot-mazo"></span>
+                  <span v-if="cardSections(card).includes('party')"     class="dot dot-party"></span>
+                  <span v-if="cardSections(card).includes('mazo')"      class="dot dot-mazo"></span>
                   <span v-if="cardSections(card).includes('banquillo')" class="dot dot-banquillo"></span>
+                  <span v-if="cardSections(card).includes('fichas')"    class="dot dot-fichas"></span>
                 </div>
                 <span v-if="cardInActiveSection(card)" class="in-deck-badge" :class="'badge-'+activeSection">{{ cardInActiveSection(card) }}</span>
               </div>
@@ -167,8 +168,8 @@
                   class="deck-tab" :class="['tab-'+key, {active: activeSection===key}]"
                   @click="activeSection=key">
                   <span class="tab-label">{{ rule.label }}</span>
-                  <span class="tab-count" :class="{complete: (key==='party'?partyTotal:key==='mazo'?mazoTotal:banquilloTotal)===rule.target}">
-                    {{ key==='party' ? partyTotal : key==='mazo' ? mazoTotal : banquilloTotal }}/{{ rule.target }}
+                  <span class="tab-count" :class="{complete: rule.target && sectionTotalByKey(key)===rule.target}">
+                    {{ sectionTotalByKey(key) }}{{ rule.target ? '/'+rule.target : '' }}
                   </span>
                 </button>
               </div>
@@ -183,12 +184,10 @@
 
               <!-- lista de cartas de la sección activa -->
               <div class="deck-list">
-                <div v-if="!(activeSection==='party'?partyCards:activeSection==='mazo'?mainCards:benchCards).length"
-                  class="deck-empty-msg">
+                <div v-if="!activeCards.length" class="deck-empty-msg">
                   Pulsa + en una carta<br>para añadirla a {{ RULES[activeSection].label }}
                 </div>
-                <div v-for="entry in (activeSection==='party'?partyCards:activeSection==='mazo'?mainCards:benchCards)"
-                  :key="entry.card.id" class="deck-row">
+                <div v-for="entry in activeCards" :key="entry.card.id" class="deck-row">
                   <span class="deck-row-count" :class="'count-'+activeSection">{{ entry.count }}x</span>
                   <span class="deck-row-name" :title="entry.card.nombre">{{ entry.card.nombre }}</span>
                   <div class="deck-row-btns">
@@ -203,7 +202,7 @@
                   {{ saving ? 'Guardando...' : 'Guardar' }}
                 </button>
                 <button @click="newDeck" class="btn btn-ghost">Nuevo</button>
-                <button @click="clearDeck" class="btn btn-ghost" :disabled="!(activeSection==='party'?partyCards:activeSection==='mazo'?mainCards:benchCards).length">Limpiar sección</button>
+                <button @click="clearDeck" class="btn btn-ghost" :disabled="!activeCards.length">Limpiar sección</button>
               </div>
               <div class="deck-footer">
                 <button @click="exportCurrentToTTS" class="btn btn-tts" :disabled="!deckTotal">
@@ -262,6 +261,7 @@
             <span class="section-badge party">Party {{ sectionCount(deck,'party') }}/10</span>
             <span class="section-badge mazo">Deck {{ sectionCount(deck,'mazo') }}/40</span>
             <span class="section-badge banquillo">Banquillo {{ sectionCount(deck,'banquillo') }}/10</span>
+            <span v-if="sectionCount(deck,'fichas')" class="section-badge fichas">Fichas {{ sectionCount(deck,'fichas') }}</span>
           </div>
           <ul class="deck-card-list">
             <template v-if="deck.party !== undefined">
