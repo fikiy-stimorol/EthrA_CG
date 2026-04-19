@@ -23,12 +23,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 firebase.initializeApp({
-  apiKey:            "PEGA_TU_API_KEY_AQUÍ",
-  authDomain:        "TU_PROYECTO.firebaseapp.com",
-  projectId:         "TU_PROYECTO_ID",
-  storageBucket:     "TU_PROYECTO.appspot.com",
-  messagingSenderId: "TU_SENDER_ID",
-  appId:             "TU_APP_ID"
+  apiKey:            "AIzaSyAB24rU0MhHUNjO9fEcnPpa6Oy3LdkRu6g",
+  authDomain:        "ethracg.firebaseapp.com",
+  projectId:         "ethracg",
+  storageBucket:     "ethracg.firebasestorage.app",
+  messagingSenderId: "772205753962",
+  appId:             "1:772205753962:web:deb07f35f52a1df811bc13"
 });
 
 window.db   = firebase.firestore();
