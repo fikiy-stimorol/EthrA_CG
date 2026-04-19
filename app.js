@@ -1,4 +1,4 @@
-const { createApp, ref, computed, onMounted } = Vue;
+const { createApp, ref, computed, watch, onMounted } = Vue;
 const db   = window.db;
 const auth = window.auth;
 
@@ -17,6 +17,12 @@ function parseCard(path) {
 }
 
 function cardUrl(path) { return path.split('/').map(encodeURIComponent).join('/'); }
+
+// URL de la versión WebP optimizada (galería). Fallback al PNG original si no existe.
+function webUrl(path) {
+  const webPath = 'web/' + path.slice('cartas/'.length).replace(/\.png$/i, '.webp');
+  return webPath.split('/').map(encodeURIComponent).join('/');
+}
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function translateAuthError(code) {
@@ -184,6 +190,14 @@ createApp({
     const view         = ref('gallery');
     const showDeck     = ref(false);
     const selectedCard = ref(null);
+
+    // ── Scroll infinito ────────────────────────
+    const PAGE = 60;
+    const visibleCount = ref(PAGE);
+    const visibleCards = computed(() => filteredCards.value.slice(0, visibleCount.value));
+    const hasMore      = computed(() => visibleCount.value < filteredCards.value.length);
+
+    function loadMore() { visibleCount.value += PAGE; }
 
     // ── Deck builder ───────────────────────────
     const deckName      = ref('Nuevo Mazo');
@@ -470,8 +484,19 @@ createApp({
       return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
     }
 
+    // Resetear paginación al cambiar filtros/búsqueda
+    watch(filteredCards, () => { visibleCount.value = PAGE; });
+
     // ── Lifecycle ──────────────────────────────
     onMounted(() => {
+      // IntersectionObserver: cargar más cartas al llegar al final del grid
+      const sentinel = document.getElementById('grid-sentinel');
+      if (sentinel) {
+        new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting && hasMore.value) loadMore();
+        }, { rootMargin: '300px' }).observe(sentinel);
+      }
+
       auth.onAuthStateChanged(user => {
         if (user && !isAllowed(user.email)) { auth.signOut(); return; }
         currentUser.value = user;
@@ -499,7 +524,8 @@ createApp({
       hoveredCard, zoomStyle, startHover, moveHover, endHover,
       exportCurrentToTTS, exportSavedToTTS,
       exportDecksJson, importDecksJson, importMsg,
-      formatDate, cardUrl,
+      formatDate, cardUrl, webUrl,
+      visibleCards, hasMore, loadMore,
       RULES,
     };
   }

@@ -118,13 +118,15 @@
         <div class="content-layout">
           <!-- CARD GRID -->
           <main class="card-grid">
-            <div v-for="card in filteredCards" :key="card.id" class="card-item"
+            <div v-for="card in visibleCards" :key="card.id" class="card-item"
               @click="openModal(card)"
               @mouseenter="startHover(card, $event)"
               @mousemove="moveHover($event)"
               @mouseleave="endHover">
               <div class="card-img-wrap">
-                <img :src="cardUrl(card.path)" :alt="card.nombre" loading="lazy" />
+                <!-- WebP optimizado para galería; fallback al PNG original si aún no existe -->
+                <img :src="webUrl(card.path)" :alt="card.nombre" loading="lazy"
+                  @error="$event.target.src = cardUrl(card.path)" />
                 <div class="card-overlay">
                   <button class="add-to-deck-btn" @click.stop="addToDeck(card)">+</button>
                 </div>
@@ -138,7 +140,16 @@
               </div>
               <div class="card-label">{{ card.nombre }}</div>
             </div>
+            <!-- sentinel para IntersectionObserver (scroll infinito) -->
+            <div id="grid-sentinel" style="grid-column:1/-1; height:1px;"></div>
           </main>
+
+          <!-- botón "cargar más" por si el observer falla (scroll en sidebar, etc.) -->
+          <div v-if="hasMore" class="load-more-wrap">
+            <button @click="loadMore" class="btn btn-ghost">
+              Cargar más cartas ({{ filteredCards.length - visibleCards.length }} restantes)
+            </button>
+          </div>
 
           <!-- DECK SIDEBAR -->
           <aside class="deck-sidebar" :class="{open: showDeck}">
@@ -282,7 +293,8 @@
     <!-- ZOOM PREVIEW -->
     <Transition name="zoom">
       <div v-if="hoveredCard && !selectedCard" class="card-zoom" :style="zoomStyle">
-        <img :src="cardUrl(hoveredCard.path)" :alt="hoveredCard.nombre" />
+        <img :src="webUrl(hoveredCard.path)" :alt="hoveredCard.nombre"
+          @error="$event.target.src = cardUrl(hoveredCard.path)" />
         <div class="card-zoom-label">{{ hoveredCard.nombre }}</div>
       </div>
     </Transition>

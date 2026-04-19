@@ -1,0 +1,57 @@
+name: Optimizar imágenes para web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cartas/**'
+      - '.github/workflows/optimize-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar herramientas
+        run: sudo apt-get install -y webp imagemagick
+
+      - name: Generar imágenes WebP optimizadas
+        run: |
+          find cartas -name "*.png" -type f | while read src; do
+            rel="${src#cartas/}"
+            out="web/${rel%.png}.webp"
+            mkdir -p "$(dirname "$out")"
+
+            # Solo regenerar si el original es más nuevo
+            if [ ! -f "$out" ] || [ "$src" -nt "$out" ]; then
+              # Redimensionar a máx 600px de ancho, convertir a WebP calidad 82
+              convert "$src" -resize '600x>' -quality 82 "$out"
+              echo "✓ $out"
+            fi
+          done
+
+          # Eliminar WebP huérfanos (carta borrada pero WebP permanece)
+          find web -name "*.webp" -type f | while read webp; do
+            rel="${webp#web/}"
+            original="cartas/${rel%.webp}.png"
+            if [ ! -f "$original" ]; then
+              rm "$webp"
+              echo "✗ borrado huérfano: $webp"
+            fi
+          done
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/
+          if git diff --staged --quiet; then
+            echo "Sin cambios en imágenes web"
+          else
+            git commit -m "chore: actualizar imágenes web optimizadas"
+            git push
+          fi

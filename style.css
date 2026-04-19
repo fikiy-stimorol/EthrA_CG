@@ -164,6 +164,11 @@ body {
 }
 .card-item:hover .card-label { color: var(--text); }
 
+/* ── Load more ────────────────────────────── */
+.load-more-wrap {
+  padding: 16px 20px; display: flex; justify-content: center;
+}
+
 /* ── Deck section colors ─────────────────── */
 :root {
   --party-c:    #9b7ee8;
