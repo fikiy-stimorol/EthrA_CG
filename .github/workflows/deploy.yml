@@ -1,0 +1,73 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'cards.json'   # generado por generate-cards.yml, no causar bucle
+      - 'web/**'       # generado por optimize-images.yml, no causar bucle
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Si aún no existen WebP (primer deploy o cartas nuevas antes de que
+      # optimize-images.yml haya podido hacer commit), los generamos aquí.
+      - name: Generar WebP si faltan
+        run: |
+          png_count=$(find cartas -name "*.png" 2>/dev/null | wc -l)
+          webp_count=$(find web -name "*.webp" 2>/dev/null | wc -l)
+          if [ "$webp_count" -lt "$png_count" ]; then
+            echo "Generando WebP para $((png_count - webp_count)) imagen(es)..."
+            sudo apt-get install -y imagemagick
+            find cartas -name "*.png" -type f | while read src; do
+              rel="${src#cartas/}"
+              out="web/${rel%.png}.webp"
+              mkdir -p "$(dirname "$out")"
+              if [ ! -f "$out" ]; then
+                convert "$src" -resize '600x>' -quality 82 \
+                  -define webp:lossless=false "$out"
+              fi
+            done
+            echo "Generación completa."
+          else
+            echo "WebP ya actualizados ($webp_count imágenes). Nada que generar."
+          fi
+
+      # Copiar todo EXCEPTO cartas/ (los PNG originales de 1.5 GB)
+      - name: Preparar carpeta de despliegue
+        run: |
+          mkdir _site
+          rsync -a \
+            --exclude='cartas/' \
+            --exclude='.github/' \
+            --exclude='.git/' \
+            --exclude='_site/' \
+            . _site/
+          echo "Tamaño del artefacto: $(du -sh _site | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -364,7 +364,7 @@ createApp({
       const deckIds = [], customDeck = {}, containedObjects = [];
       entries.forEach((entry, i) => {
         const idx = idxOffset + i + 1, cardId = idx * 100;
-        const faceUrl = PAGES_BASE + entry.path.split('/').map(encodeURIComponent).join('/');
+        const faceUrl = PAGES_BASE + webUrl(entry.path);  // WebP optimizado (cartas/ no se despliega en Pages)
         customDeck[String(idx)] = { FaceURL: faceUrl, BackURL: BACK, NumWidth:1, NumHeight:1, BackIsHidden:true, UniqueBack:false, Type:0 };
         for (let c = 0; c < entry.count; c++) {
           deckIds.push(cardId);

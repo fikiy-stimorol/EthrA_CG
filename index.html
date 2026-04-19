@@ -304,7 +304,8 @@
       <div v-if="selectedCard" class="modal-bg" @click.self="selectedCard=null">
         <div class="modal">
           <button class="modal-close" @click="selectedCard=null">✕</button>
-          <img :src="cardUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img" />
+          <img :src="webUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img"
+            @error="$event.target.src = cardUrl(selectedCard.path)" />
           <div class="modal-info">
             <h3>{{ selectedCard.nombre }}</h3>
             <p class="modal-type">
