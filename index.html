@@ -30,6 +30,17 @@
   <!-- GALLERY VIEW -->
   <div v-show="view==='gallery'" class="gallery-view">
 
+    <!-- ESTADO DE CARGA -->
+    <div v-if="loading" class="load-state">
+      <div class="spinner"></div>
+      <p>Cargando cartas...</p>
+    </div>
+    <div v-else-if="loadError" class="load-state error">
+      <p>No se pudieron cargar las cartas.</p>
+      <p class="load-hint">Comprueba que el repositorio es público y que tienes conexión.</p>
+    </div>
+
+    <template v-else>
     <div class="filters-bar">
       <input v-model="search" class="search" type="text" placeholder="Buscar carta..." />
 
@@ -58,7 +69,11 @@
 
       <!-- CARD GRID -->
       <main class="card-grid">
-        <div v-for="card in filteredCards" :key="card.id" class="card-item" @click="openModal(card)">
+        <div v-for="card in filteredCards" :key="card.id" class="card-item"
+          @click="openModal(card)"
+          @mouseenter="startHover(card, $event)"
+          @mousemove="moveHover($event)"
+          @mouseleave="endHover">
           <div class="card-img-wrap">
             <img :src="cardUrl(card.path)" :alt="card.nombre" loading="lazy" />
             <div class="card-overlay">
@@ -99,6 +114,7 @@
       </aside>
 
     </div>
+    </template>
   </div>
 
   <!-- DECKS VIEW -->
@@ -107,6 +123,15 @@
       <h2>Mis Mazos</h2>
       <button @click="view='gallery'" class="btn btn-ghost">← Galería</button>
     </div>
+    <div class="decks-io">
+      <button @click="exportDecks" class="btn btn-ghost" :disabled="!savedDecks.length">↓ Exportar mazos</button>
+      <label class="btn btn-ghost" style="cursor:pointer">
+        ↑ Importar mazos
+        <input type="file" accept=".json" @change="importDecks" style="display:none" />
+      </label>
+      <span v-if="importMsg" class="import-msg">{{ importMsg }}</span>
+    </div>
+
     <div v-if="!savedDecks.length" class="empty-state">
       <p>Aún no has guardado ningún mazo.</p>
       <button @click="view='gallery'" class="btn btn-primary">Ir a la galería</button>
@@ -131,6 +156,14 @@
       </div>
     </div>
   </div>
+
+  <!-- ZOOM PREVIEW -->
+  <Transition name="zoom">
+    <div v-if="hoveredCard && !selectedCard" class="card-zoom" :style="zoomStyle">
+      <img :src="cardUrl(hoveredCard.path)" :alt="hoveredCard.nombre" />
+      <div class="card-zoom-label">{{ hoveredCard.nombre }}</div>
+    </div>
+  </Transition>
 
   <!-- MODAL -->
   <Transition name="fade">
