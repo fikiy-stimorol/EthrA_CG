@@ -271,6 +271,64 @@ body {
 .modal-type { color: var(--muted); font-size: 13px; text-transform: capitalize; }
 .modal-copies { font-size: 12px; color: var(--muted); }
 
+/* ── Auth / Splash ────────────────────────── */
+.splash {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 24px;
+  background: var(--bg);
+}
+.splash-brand { font-size: 28px; font-weight: 700; letter-spacing: .15em; color: var(--accent-h); }
+.splash-brand span { color: var(--muted); font-size: 16px; }
+
+.auth-screen {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 20px; background: var(--bg);
+}
+.auth-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 32px; width: 100%; max-width: 360px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.auth-brand {
+  font-size: 22px; font-weight: 700; letter-spacing: .15em;
+  color: var(--accent-h); text-align: center;
+}
+.auth-brand span { color: var(--muted); font-size: 13px; }
+.auth-title { font-size: 18px; font-weight: 600; text-align: center; color: var(--text); }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 13px; color: var(--muted); }
+.form-input {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 9px 12px; color: var(--text);
+  font-size: 14px; outline: none; transition: border-color .15s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: var(--muted); }
+
+.auth-error { font-size: 13px; color: #e07070; background: rgba(192,57,43,.15); border-radius: 6px; padding: 8px 12px; }
+.auth-btn { width: 100%; padding: 10px; font-size: 15px; }
+
+.auth-switch { text-align: center; font-size: 13px; color: var(--muted); }
+.link-btn { background: none; border: none; color: var(--accent-h); cursor: pointer; font-size: 13px; text-decoration: underline; padding: 0; }
+.link-btn:hover { color: white; }
+
+/* ── Header user info ─────────────────────── */
+.header-user { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.user-email { font-size: 12px; color: var(--muted); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Deck owner badge ─────────────────────── */
+.deck-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.deck-owner-badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+  background: var(--bg3); color: var(--muted); border: 1px solid var(--border); flex-shrink: 0;
+}
+.deck-owner-badge.me { background: rgba(124,92,191,.2); color: var(--accent-h); border-color: var(--accent); }
+.deck-card.own { border-color: rgba(124,92,191,.4); }
+
+/* ── Decks header right ───────────────────── */
+.decks-header-right { display: flex; align-items: center; gap: 12px; }
+
 /* ── Loading ──────────────────────────────── */
 .load-state {
   display: flex; flex-direction: column; align-items: center;
