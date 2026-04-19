@@ -1,21 +1,331 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Cartas</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EthrA CG</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="app">
 
-    <header>
-        <h1>Mi Juego de Cartas</h1>
-        <p>Explora la colección completa</p>
+  <!-- ── Cargando sesión ── -->
+  <div v-if="authLoading" class="splash">
+    <div class="splash-brand">ETHRA <span>CG</span></div>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ── Pantalla de autenticación ── -->
+  <div v-else-if="!currentUser" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand">ETHRA <span>CG</span></div>
+      <h2 class="auth-title">{{ authMode === 'login' ? 'Iniciar sesión' : 'Crear cuenta' }}</h2>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input v-model="authEmail" type="email" class="form-input" placeholder="tu@email.com"
+          @keyup.enter="authMode === 'login' ? login() : register()" />
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input v-model="authPassword" type="password" class="form-input" placeholder="••••••••"
+          @keyup.enter="authMode === 'login' ? login() : register()" />
+      </div>
+      <div v-if="authMode === 'register'" class="form-group">
+        <label>Confirmar contraseña</label>
+        <input v-model="authPasswordConfirm" type="password" class="form-input" placeholder="••••••••"
+          @keyup.enter="register()" />
+      </div>
+
+      <p v-if="authError" class="auth-error">{{ authError }}</p>
+
+      <button @click="authMode === 'login' ? login() : register()"
+        class="btn btn-primary auth-btn" :disabled="authSubmitting">
+        {{ authSubmitting ? 'Cargando...' : (authMode === 'login' ? 'Entrar' : 'Registrarse') }}
+      </button>
+
+      <p class="auth-switch">
+        <span v-if="authMode === 'login'">
+          ¿No tienes cuenta?
+          <button class="link-btn" @click="authMode='register'; authError=''">Registrarse</button>
+        </span>
+        <span v-else>
+          ¿Ya tienes cuenta?
+          <button class="link-btn" @click="authMode='login'; authError=''">Iniciar sesión</button>
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ── App principal ── -->
+  <template v-else>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="brand">
+        <span class="brand-name">ETHRA</span>
+        <span class="brand-tag">CG</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn" :class="{active: view==='gallery'}" @click="view='gallery'">Galería</button>
+        <button class="nav-btn" :class="{active: view==='decks'}" @click="view='decks'">
+          Mazos
+          <span v-if="savedDecks.length" class="nav-badge">{{ savedDecks.length }}</span>
+        </button>
+      </nav>
+      <div class="header-user">
+        <span class="user-email">{{ currentUser.email }}</span>
+        <button @click="logout" class="btn btn-ghost sm">Salir</button>
+      </div>
+      <button class="deck-toggle-btn" @click="showDeck=!showDeck" :class="{active: showDeck}">
+        Mazo <span class="deck-count-badge">{{ deckTotal }}</span>
+      </button>
     </header>
 
-    <main id="galeria-cartas" class="galeria">
-        </main>
+    <!-- GALLERY VIEW -->
+    <div v-show="view==='gallery'" class="gallery-view">
 
-    <script src="script.js"></script>
+      <div v-if="loading" class="load-state">
+        <div class="spinner"></div>
+        <p>Cargando cartas...</p>
+      </div>
+      <div v-else-if="loadError" class="load-state error">
+        <p>No se pudieron cargar las cartas.</p>
+        <p class="load-hint">Comprueba que el repositorio es público y que tienes conexión.</p>
+      </div>
+
+      <template v-else>
+        <div class="filters-bar">
+          <input v-model="search" class="search" type="text" placeholder="Buscar carta..." />
+          <div class="filter-row">
+            <button v-for="t in tipoOptions" :key="t.value"
+              class="pill" :class="['tipo-'+t.value, {active: filterTipo===t.value}]"
+              @click="setTipo(t.value)">{{ t.label }}</button>
+          </div>
+          <div v-if="subtipoOptions.length > 1" class="filter-row">
+            <button v-for="s in subtipoOptions" :key="s.value"
+              class="pill sm" :class="{active: filterSubtipo===s.value}"
+              @click="setSubtipo(s.value)">{{ s.label }}</button>
+          </div>
+          <div v-if="subsubtipoOptions.length > 1" class="filter-row">
+            <button v-for="s in subsubtipoOptions" :key="s.value"
+              class="pill xs" :class="{active: filterSubsubtipo===s.value}"
+              @click="filterSubsubtipo=s.value">{{ s.label }}</button>
+          </div>
+          <span class="result-count">{{ filteredCards.length }} cartas</span>
+        </div>
+
+        <div class="content-layout">
+          <!-- CARD GRID -->
+          <main class="card-grid">
+            <div v-for="card in visibleCards" :key="card.id" class="card-item"
+              @click="openModal(card)"
+              @mouseenter="startHover(card, $event)"
+              @mousemove="moveHover($event)"
+              @mouseleave="endHover">
+              <div class="card-img-wrap">
+                <!-- WebP optimizado para galería; fallback al PNG original si aún no existe -->
+                <img :src="webUrl(card.path)" :alt="card.nombre" loading="lazy"
+                  @error="$event.target.src = cardUrl(card.path)" />
+                <div class="card-overlay">
+                  <button class="add-to-deck-btn" @click.stop="addToDeck(card)">+</button>
+                </div>
+                <!-- puntos de sección: morado=party, azul=deck, verde=banquillo -->
+                <div v-if="cardSections(card).length" class="card-section-dots">
+                  <span v-if="cardSections(card).includes('party')"     class="dot dot-party"></span>
+                  <span v-if="cardSections(card).includes('mazo')"      class="dot dot-mazo"></span>
+                  <span v-if="cardSections(card).includes('banquillo')" class="dot dot-banquillo"></span>
+                  <span v-if="cardSections(card).includes('fichas')"    class="dot dot-fichas"></span>
+                </div>
+                <span v-if="cardInActiveSection(card)" class="in-deck-badge" :class="'badge-'+activeSection">{{ cardInActiveSection(card) }}</span>
+              </div>
+              <div class="card-label">{{ card.nombre }}</div>
+            </div>
+            <!-- sentinel para IntersectionObserver (scroll infinito) -->
+            <div id="grid-sentinel" style="grid-column:1/-1; height:1px;"></div>
+          </main>
+
+          <!-- botón "cargar más" por si el observer falla (scroll en sidebar, etc.) -->
+          <div v-if="hasMore" class="load-more-wrap">
+            <button @click="loadMore" class="btn btn-ghost">
+              Cargar más cartas ({{ filteredCards.length - visibleCards.length }} restantes)
+            </button>
+          </div>
+
+          <!-- DECK SIDEBAR -->
+          <aside class="deck-sidebar" :class="{open: showDeck}">
+            <div class="deck-sidebar-inner">
+
+              <!-- nombre del mazo -->
+              <div class="deck-top">
+                <input v-model="deckName" class="deck-name-input" placeholder="Nombre del mazo" maxlength="40" />
+                <span class="deck-total">{{ deckTotal }}c</span>
+              </div>
+
+              <!-- pestañas de sección -->
+              <div class="deck-tabs">
+                <button v-for="(rule, key) in RULES" :key="key"
+                  class="deck-tab" :class="['tab-'+key, {active: activeSection===key}]"
+                  @click="activeSection=key">
+                  <span class="tab-label">{{ rule.label }}</span>
+                  <span class="tab-count" :class="{complete: rule.target && sectionTotalByKey(key)===rule.target}">
+                    {{ sectionTotalByKey(key) }}{{ rule.target ? '/'+rule.target : '' }}
+                  </span>
+                </button>
+              </div>
+
+              <!-- hint de la sección activa -->
+              <div class="section-hint">{{ RULES[activeSection].hint }}</div>
+
+              <!-- mensaje de validación -->
+              <Transition name="fade">
+                <div v-if="validationMsg" class="validation-msg">⚠ {{ validationMsg }}</div>
+              </Transition>
+
+              <!-- lista de cartas de la sección activa -->
+              <div class="deck-list">
+                <div v-if="!activeCards.length" class="deck-empty-msg">
+                  Pulsa + en una carta<br>para añadirla a {{ RULES[activeSection].label }}
+                </div>
+                <div v-for="entry in activeCards" :key="entry.card.id" class="deck-row">
+                  <span class="deck-row-count" :class="'count-'+activeSection">{{ entry.count }}x</span>
+                  <span class="deck-row-name" :title="entry.card.nombre">{{ entry.card.nombre }}</span>
+                  <div class="deck-row-btns">
+                    <button @click="decrementCard(entry.card)" class="deck-ctrl">−</button>
+                    <button @click="addToDeck(entry.card)" class="deck-ctrl">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="deck-footer">
+                <button @click="saveDeck" class="btn btn-primary" :disabled="!deckTotal || saving">
+                  {{ saving ? 'Guardando...' : 'Guardar' }}
+                </button>
+                <button @click="newDeck" class="btn btn-ghost">Nuevo</button>
+                <button @click="clearDeck" class="btn btn-ghost" :disabled="!activeCards.length">Limpiar sección</button>
+              </div>
+              <div class="deck-footer">
+                <button @click="exportCurrentToTTS" class="btn btn-tts" :disabled="!deckTotal">
+                  🎲 Exportar a TTS
+                </button>
+              </div>
+
+            </div>
+          </aside>
+        </div>
+      </template>
+    </div>
+
+    <!-- DECKS VIEW -->
+    <div v-show="view==='decks'" class="decks-view">
+      <div class="decks-header">
+        <h2>Mazos del grupo</h2>
+        <div class="decks-header-right">
+          <div class="filter-row">
+            <button class="pill sm" :class="{active: deckFilter==='all'}" @click="deckFilter='all'">Todos</button>
+            <button class="pill sm" :class="{active: deckFilter==='mine'}" @click="deckFilter='mine'">Mis mazos</button>
+          </div>
+          <button @click="view='gallery'" class="btn btn-ghost">← Galería</button>
+        </div>
+      </div>
+
+      <div class="decks-io">
+        <button @click="exportDecksJson" class="btn btn-ghost" :disabled="!myDecks.length">↓ Exportar mis mazos</button>
+        <label class="btn btn-ghost" style="cursor:pointer">
+          ↑ Importar mazos
+          <input type="file" accept=".json" @change="importDecksJson" style="display:none" />
+        </label>
+        <span v-if="importMsg" class="import-msg">{{ importMsg }}</span>
+      </div>
+
+      <div v-if="!filteredSavedDecks.length" class="empty-state">
+        <p>{{ deckFilter === 'mine' ? 'Aún no has guardado ningún mazo.' : 'Aún no hay mazos guardados.' }}</p>
+        <button @click="view='gallery'" class="btn btn-primary">Ir a la galería</button>
+      </div>
+
+      <div v-else class="decks-grid">
+        <div v-for="deck in filteredSavedDecks" :key="deck.id" class="deck-card"
+          :class="{own: deck.uid === currentUser.uid}">
+          <div class="deck-card-header">
+            <div class="deck-card-name">{{ deck.name }}</div>
+            <span class="deck-owner-badge" :class="{me: deck.uid === currentUser.uid}">
+              {{ deck.uid === currentUser.uid ? 'Tú' : deck.ownerEmail }}
+            </span>
+          </div>
+          <div class="deck-card-meta">
+            <span>{{ deckCardCount(deck) }} cartas totales</span>
+            <span>{{ formatDate(deck.savedAt) }}</span>
+          </div>
+          <!-- resumen de secciones -->
+          <div class="deck-sections-summary" v-if="deck.party !== undefined">
+            <span class="section-badge party">Party {{ sectionCount(deck,'party') }}/10</span>
+            <span class="section-badge mazo">Deck {{ sectionCount(deck,'mazo') }}/40</span>
+            <span class="section-badge banquillo">Banquillo {{ sectionCount(deck,'banquillo') }}/10</span>
+            <span v-if="sectionCount(deck,'fichas')" class="section-badge fichas">Fichas {{ sectionCount(deck,'fichas') }}</span>
+          </div>
+          <ul class="deck-card-list">
+            <template v-if="deck.party !== undefined">
+              <li v-for="entry in (deck.party||[]).slice(0,4)" :key="'p'+entry.cardId">
+                <span class="entry-count party">{{ entry.count }}x</span> {{ entry.nombre }}
+              </li>
+              <li v-for="entry in (deck.mazo||[]).slice(0,3)" :key="'m'+entry.cardId">
+                <span class="entry-count mazo">{{ entry.count }}x</span> {{ entry.nombre }}
+              </li>
+              <li v-if="(deck.party||[]).length + (deck.mazo||[]).length > 7" class="more-hint">
+                +{{ ((deck.party||[]).length + (deck.mazo||[]).length) - 7 }} más...
+              </li>
+            </template>
+            <template v-else>
+              <li v-for="entry in (deck.cards||[]).slice(0,8)" :key="entry.cardId">
+                <span class="entry-count">{{ entry.count }}x</span> {{ entry.nombre }}
+              </li>
+            </template>
+          </ul>
+          <div class="deck-card-actions">
+            <button @click="loadDeck(deck)" class="btn btn-primary sm">Cargar</button>
+            <button @click="exportSavedToTTS(deck)" class="btn btn-tts sm">🎲 TTS</button>
+            <button v-if="deck.uid === currentUser.uid" @click="deleteDeck(deck.id)" class="btn btn-danger sm">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZOOM PREVIEW -->
+    <Transition name="zoom">
+      <div v-if="hoveredCard && !selectedCard" class="card-zoom" :style="zoomStyle">
+        <img :src="webUrl(hoveredCard.path)" :alt="hoveredCard.nombre"
+          @error="$event.target.src = cardUrl(hoveredCard.path)" />
+        <div class="card-zoom-label">{{ hoveredCard.nombre }}</div>
+      </div>
+    </Transition>
+
+    <!-- MODAL -->
+    <Transition name="fade">
+      <div v-if="selectedCard" class="modal-bg" @click.self="selectedCard=null">
+        <div class="modal">
+          <button class="modal-close" @click="selectedCard=null">✕</button>
+          <img :src="webUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img"
+            @error="$event.target.src = cardUrl(selectedCard.path)" />
+          <div class="modal-info">
+            <h3>{{ selectedCard.nombre }}</h3>
+            <p class="modal-type">
+              {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
+            </p>
+            <p v-if="selectedCard.copies > 1" class="modal-copies">Copias en el set: {{ selectedCard.copies }}</p>
+            <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+  </template>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+name: Actualizar catálogo de cartas
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'cards.json'   # evita bucle infinito cuando el bot hace commit
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generar cards.json
+        run: |
+          find cartas -type f -name "*.png" | sort | python3 -c "
+          import sys, json
+          paths = [line.strip() for line in sys.stdin if line.strip()]
+          print(json.dumps(paths, indent=2, ensure_ascii=False))
+          " > cards.json
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards.json
+          if git diff --staged --quiet; then
+            echo "cards.json sin cambios, nada que hacer"
+          else
+            git commit -m "chore: actualizar catálogo de cartas"
+            git push
+          fi
