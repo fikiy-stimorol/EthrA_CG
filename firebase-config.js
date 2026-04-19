@@ -33,3 +33,13 @@ firebase.initializeApp({
 
 window.db   = firebase.firestore();
 window.auth = firebase.auth();
+
+// ── Emails autorizados ────────────────────────────────────────────
+// Solo estas personas pueden registrarse y acceder a la app.
+// Para añadir a alguien nuevo, añade su email aquí y haz push.
+window.ALLOWED_EMAILS = [
+  'alexfandila@gmail.com',   // añade aquí los emails de tus 3 amigos
+  'rbunce98@gmail.com',
+  'guillermo13gn@gmail.com',
+  'nacho1999ol@gmail.com',
+];

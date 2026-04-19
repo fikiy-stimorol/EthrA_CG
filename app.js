@@ -49,14 +49,25 @@ createApp({
     const authError            = ref('');
     const authSubmitting       = ref(false);
 
+    const ALLOWED = (window.ALLOWED_EMAILS || []).map(e => e.toLowerCase());
+    function isAllowed(email) { return ALLOWED.includes(email.trim().toLowerCase()); }
+
     async function login() {
       authSubmitting.value = true; authError.value = '';
-      try { await auth.signInWithEmailAndPassword(authEmail.value.trim(), authPassword.value); }
+      try {
+        if (!isAllowed(authEmail.value)) {
+          authError.value = 'Este email no está autorizado para acceder.'; return;
+        }
+        await auth.signInWithEmailAndPassword(authEmail.value.trim(), authPassword.value);
+      }
       catch (e) { authError.value = translateAuthError(e.code); }
       finally { authSubmitting.value = false; }
     }
 
     async function register() {
+      if (!isAllowed(authEmail.value)) {
+        authError.value = 'Este email no está autorizado. Pide al admin que te añada.'; return;
+      }
       if (authPassword.value !== authPasswordConfirm.value) {
         authError.value = 'Las contraseñas no coinciden.'; return;
       }
@@ -351,6 +362,9 @@ createApp({
     // ── Lifecycle ──────────────────────────────
     onMounted(() => {
       auth.onAuthStateChanged(user => {
+        if (user && !isAllowed(user.email)) {
+          auth.signOut(); return;
+        }
         currentUser.value = user;
         authLoading.value = false;
         if (user) { loadCards(); subscribeToDecks(); }
