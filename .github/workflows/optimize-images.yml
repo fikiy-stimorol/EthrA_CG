@@ -15,42 +15,70 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # necesario para git diff HEAD~1
 
-      - name: Instalar herramientas
-        run: sudo apt-get install -y webp imagemagick
-
-      - name: Generar imágenes WebP optimizadas
+      - name: Detectar PNGs modificados o sin WebP
+        id: detect
         run: |
-          find cartas -name "*.png" -type f | while read src; do
+          # PNGs que cambiaron en este push (fiable, no depende de timestamps)
+          changed=$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
+            | grep -E '^cartas/.*\.png$' || true)
+
+          # PNGs que todavía no tienen WebP (nuevo en el repo)
+          missing=$(find cartas -name "*.png" -type f | while read src; do
+            out="web/${src#cartas/}"; out="${out%.png}.webp"
+            [ ! -f "$out" ] && echo "$src"
+          done)
+
+          to_process=$(printf '%s\n%s\n' "$changed" "$missing" \
+            | sort -u | grep -v '^[[:space:]]*$')
+
+          if [ -z "$to_process" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "No hay imágenes que procesar."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            # Guardar lista en fichero para el siguiente paso
+            echo "$to_process" > /tmp/to_process.txt
+            echo "$(echo "$to_process" | wc -l) imagen(es) a procesar:"
+            cat /tmp/to_process.txt
+          fi
+
+      - name: Instalar ImageMagick
+        if: steps.detect.outputs.skip == 'false'
+        run: sudo apt-get install -y imagemagick
+
+      - name: Generar WebP
+        if: steps.detect.outputs.skip == 'false'
+        run: |
+          while IFS= read -r src; do
+            [ -z "$src" ] && continue
             rel="${src#cartas/}"
             out="web/${rel%.png}.webp"
             mkdir -p "$(dirname "$out")"
+            convert "$src" -resize '600x>' -quality 82 \
+              -define webp:lossless=false "$out"
+            echo "✓ $out"
+          done < /tmp/to_process.txt
 
-            # Solo regenerar si el original es más nuevo
-            if [ ! -f "$out" ] || [ "$src" -nt "$out" ]; then
-              # Redimensionar a máx 600px de ancho, convertir a WebP calidad 82
-              convert "$src" -resize '600x>' -quality 82 "$out"
-              echo "✓ $out"
-            fi
-          done
-
-          # Eliminar WebP huérfanos (carta borrada pero WebP permanece)
+          # Eliminar WebP huérfanos (carta borrada)
           find web -name "*.webp" -type f | while read webp; do
-            rel="${webp#web/}"
-            original="cartas/${rel%.webp}.png"
+            original="cartas/${webp#web/}"; original="${original%.webp}.png"
             if [ ! -f "$original" ]; then
               rm "$webp"
               echo "✗ borrado huérfano: $webp"
             fi
           done
 
-      - name: Commit si hay cambios
+      - name: Commit y push
+        if: steps.detect.outputs.skip == 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add web/
           if git diff --staged --quiet; then
-            echo "Sin cambios en imágenes web"
+            echo "Sin cambios que guardar."
           else
             git commit -m "chore: actualizar imágenes web optimizadas"
             git push

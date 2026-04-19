@@ -5,7 +5,8 @@ on:
     branches: [main]
     paths-ignore:
       - 'cards.json'   # generado por generate-cards.yml, no causar bucle
-      - 'web/**'       # generado por optimize-images.yml, no causar bucle
+      # web/** NO está en paths-ignore: cuando optimize-images actualiza un WebP
+      # necesitamos que el deploy se vuelva a ejecutar con la imagen nueva.
 
 permissions:
   contents: read
