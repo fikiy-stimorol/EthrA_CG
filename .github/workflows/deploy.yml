@@ -1,15 +1,16 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths-ignore:
-      - 'cards.json'   # generado por generate-cards.yml, no causar bucle
-      # web/** NO está en paths-ignore: cuando optimize-images actualiza un WebP
-      # necesitamos que el deploy se vuelva a ejecutar con la imagen nueva.
+      # Ignoramos los artefactos que este mismo workflow commitea al final,
+      # para no entrar en bucle.
+      - 'cards.json'
+      - 'web/**'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -18,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -26,31 +27,55 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      # Si aún no existen WebP (primer deploy o cartas nuevas antes de que
-      # optimize-images.yml haya podido hacer commit), los generamos aquí.
-      - name: Generar WebP si faltan
+      - name: Generar cards.json
         run: |
-          png_count=$(find cartas -name "*.png" 2>/dev/null | wc -l)
-          webp_count=$(find web -name "*.webp" 2>/dev/null | wc -l)
-          if [ "$webp_count" -lt "$png_count" ]; then
-            echo "Generando WebP para $((png_count - webp_count)) imagen(es)..."
-            sudo apt-get install -y imagemagick
-            find cartas -name "*.png" -type f | while read src; do
+          find cartas -type f -name "*.png" | sort | python3 -c "
+          import sys, json
+          paths = [line.strip() for line in sys.stdin if line.strip()]
+          print(json.dumps(paths, indent=2, ensure_ascii=False))
+          " > cards.json
+
+      - name: Instalar ImageMagick
+        run: sudo apt-get install -y imagemagick
+
+      - name: Generar WebP para cartas nuevas o modificadas
+        run: |
+          changed=$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
+            | grep -E '^cartas/.*\.png$' || true)
+          missing=$(find cartas -name "*.png" -type f | while read src; do
+            out="web/${src#cartas/}"; out="${out%.png}.webp"
+            [ ! -f "$out" ] && echo "$src"
+          done)
+          to_process=$(printf '%s\n%s\n' "$changed" "$missing" \
+            | sort -u | grep -v '^[[:space:]]*$')
+
+          if [ -z "$to_process" ]; then
+            echo "No hay imágenes que procesar."
+          else
+            echo "$(echo "$to_process" | wc -l) imagen(es) a procesar."
+            echo "$to_process" | while IFS= read -r src; do
+              [ -z "$src" ] && continue
               rel="${src#cartas/}"
               out="web/${rel%.png}.webp"
               mkdir -p "$(dirname "$out")"
-              if [ ! -f "$out" ]; then
-                convert "$src" -resize '600x>' -quality 82 \
-                  -define webp:lossless=false "$out"
-              fi
+              convert "$src" -resize '600x>' -quality 82 \
+                -define webp:lossless=false "$out"
+              echo "✓ $out"
             done
-            echo "Generación completa."
-          else
-            echo "WebP ya actualizados ($webp_count imágenes). Nada que generar."
           fi
 
-      # Copiar todo EXCEPTO cartas/ (los PNG originales de 1.5 GB)
+          # Eliminar WebP huérfanos (cartas borradas)
+          find web -name "*.webp" -type f | while read webp; do
+            original="cartas/${webp#web/}"; original="${original%.webp}.png"
+            if [ ! -f "$original" ]; then
+              rm "$webp"
+              echo "✗ borrado huérfano: $webp"
+            fi
+          done
+
       - name: Preparar carpeta de despliegue
         run: |
           mkdir _site
@@ -72,3 +97,18 @@ jobs:
       - name: Desplegar
         id: deployment
         uses: actions/deploy-pages@v5
+
+      # Tras un deploy exitoso, persistimos cards.json y los WebP para que el
+      # siguiente run no tenga que regenerarlos. Este commit NO redispara el
+      # workflow gracias al paths-ignore de arriba.
+      - name: Persistir cards.json y WebP generados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards.json web/
+          if git diff --staged --quiet; then
+            echo "Sin cambios que persistir."
+          else
+            git commit -m "chore: actualizar catálogo y WebP optimizados"
+            git push
+          fi
