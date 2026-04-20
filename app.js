@@ -299,7 +299,7 @@ createApp({
       deckName.value = deck.name;
       editingDeckId.value = deck.uid === currentUser.value?.uid ? deck.id : null;
       const resolve = entries => (entries || []).map(e => {
-        const card = allCards.value.find(c => c.id === e.cardId);
+        const card = findCardByAnyId(e.cardId);
         return card ? { card, count: e.count } : null;
       }).filter(Boolean);
       if (deck.party !== undefined) {
@@ -379,9 +379,25 @@ createApp({
     // ── Zoom preview ───────────────────────────
     const hoveredCard = ref(null);
     const hoverX = ref(0), hoverY = ref(0);
+    // Normaliza un cardId quitando el sufijo de versión "(N)" al final:
+    // "magia/arcana/Anular (6)" -> "magia/arcana/Anular"
+    function baseId(id) { return (id || '').replace(/\s*\(\d+\)$/, ''); }
+
+    // Busca la carta actual por id exacto; si la versión exacta ya no existe,
+    // devuelve la versión más reciente (mayor número) con la misma ruta base.
+    function findCardByAnyId(cardId) {
+      if (!cardId) return null;
+      const exact = allCards.value.find(c => c.id === cardId);
+      if (exact) return exact;
+      const base = baseId(cardId);
+      const candidates = allCards.value.filter(c => baseId(c.id) === base);
+      if (!candidates.length) return null;
+      return candidates.slice().sort((a, b) => b.copies - a.copies)[0];
+    }
+
     function startHover(card, e) { hoveredCard.value = card; hoverX.value = e.clientX; hoverY.value = e.clientY; }
     function startHoverById(cardId, e) {
-      const card = allCards.value.find(c => c.id === cardId);
+      const card = findCardByAnyId(cardId);
       if (card) startHover(card, e);
     }
     function moveHover(e)        { hoverX.value = e.clientX; hoverY.value = e.clientY; }
@@ -453,9 +469,16 @@ createApp({
     }
 
     function toTTSEntries(cards) {
-      return cards.map(e => ({ path: e.card ? e.card.path : 'cartas/' + e.cardId + '.png',
-        nombre: e.card ? e.card.nombre : e.nombre,
-        tipo: e.card ? e.card.tipo : e.tipo, count: e.count }));
+      return cards.map(e => {
+        if (e.card) return { path: e.card.path, nombre: e.card.nombre, tipo: e.card.tipo, count: e.count };
+        const current = findCardByAnyId(e.cardId);
+        return {
+          path:   current ? current.path   : 'cartas/' + e.cardId + '.png',
+          nombre: current ? current.nombre : e.nombre,
+          tipo:   current ? current.tipo   : e.tipo,
+          count:  e.count,
+        };
+      });
     }
 
     function makePiles(deck) {
