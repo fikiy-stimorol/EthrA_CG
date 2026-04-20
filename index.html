@@ -187,7 +187,10 @@
                 <div v-if="!activeCards.length" class="deck-empty-msg">
                   Pulsa + en una carta<br>para añadirla a {{ RULES[activeSection].label }}
                 </div>
-                <div v-for="entry in activeCards" :key="entry.card.id" class="deck-row">
+                <div v-for="entry in activeCards" :key="entry.card.id" class="deck-row"
+                  @mouseenter="startHover(entry.card, $event)"
+                  @mousemove="moveHover($event)"
+                  @mouseleave="endHover">
                   <span class="deck-row-count" :class="'count-'+activeSection">{{ entry.count }}x</span>
                   <span class="deck-row-name" :title="entry.card.nombre">{{ entry.card.nombre }}</span>
                   <div class="deck-row-btns">
@@ -265,10 +268,16 @@
           </div>
           <ul class="deck-card-list">
             <template v-if="deck.party !== undefined">
-              <li v-for="entry in (deck.party||[]).slice(0,4)" :key="'p'+entry.cardId">
+              <li v-for="entry in (deck.party||[]).slice(0,4)" :key="'p'+entry.cardId"
+                @mouseenter="startHoverById(entry.cardId, $event)"
+                @mousemove="moveHover($event)"
+                @mouseleave="endHover">
                 <span class="entry-count party">{{ entry.count }}x</span> {{ entry.nombre }}
               </li>
-              <li v-for="entry in (deck.mazo||[]).slice(0,3)" :key="'m'+entry.cardId">
+              <li v-for="entry in (deck.mazo||[]).slice(0,3)" :key="'m'+entry.cardId"
+                @mouseenter="startHoverById(entry.cardId, $event)"
+                @mousemove="moveHover($event)"
+                @mouseleave="endHover">
                 <span class="entry-count mazo">{{ entry.count }}x</span> {{ entry.nombre }}
               </li>
               <li v-if="(deck.party||[]).length + (deck.mazo||[]).length > 7" class="more-hint">
@@ -276,7 +285,10 @@
               </li>
             </template>
             <template v-else>
-              <li v-for="entry in (deck.cards||[]).slice(0,8)" :key="entry.cardId">
+              <li v-for="entry in (deck.cards||[]).slice(0,8)" :key="entry.cardId"
+                @mouseenter="startHoverById(entry.cardId, $event)"
+                @mousemove="moveHover($event)"
+                @mouseleave="endHover">
                 <span class="entry-count">{{ entry.count }}x</span> {{ entry.nombre }}
               </li>
             </template>
