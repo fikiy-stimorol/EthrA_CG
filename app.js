@@ -380,6 +380,10 @@ createApp({
     const hoveredCard = ref(null);
     const hoverX = ref(0), hoverY = ref(0);
     function startHover(card, e) { hoveredCard.value = card; hoverX.value = e.clientX; hoverY.value = e.clientY; }
+    function startHoverById(cardId, e) {
+      const card = allCards.value.find(c => c.id === cardId);
+      if (card) startHover(card, e);
+    }
     function moveHover(e)        { hoverX.value = e.clientX; hoverY.value = e.clientY; }
     function endHover()          { hoveredCard.value = null; }
     const ZOOM_W = 260, ZOOM_H = 364, PAD = 12;
@@ -562,7 +566,7 @@ createApp({
       clearDeck, newDeck, loadDeck, editingDeckId,
       savedDecks, deckFilter, filteredSavedDecks, myDecks,
       saveDeck, deleteDeck, deckCardCount, sectionCount,
-      hoveredCard, zoomStyle, startHover, moveHover, endHover,
+      hoveredCard, zoomStyle, startHover, startHoverById, moveHover, endHover,
       exportCurrentToTTS, exportSavedToTTS,
       exportDecksJson, importDecksJson, importMsg,
       formatDate, cardUrl, webUrl,
