@@ -160,7 +160,9 @@ createApp({
 
     async function loadCards() {
       try {
-        const res = await fetch('cards.json');
+        // Cache-bust: el CDN de GitHub Pages cachea hasta 10 min. Query único
+        // garantiza que el catálogo se actualice nada más terminar el deploy.
+        const res = await fetch('cards.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error();
         const paths = await res.json();
         allCards.value = paths.map(parseCard).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
