@@ -43,20 +43,27 @@ jobs:
 
       - name: Generar WebP para cartas nuevas o modificadas
         run: |
+          # PNGs modificados en este push (ignorar error si HEAD~1 no existe)
           changed=$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
             | grep -E '^cartas/.*\.png$' || true)
-          missing=$(find cartas -name "*.png" -type f | while read src; do
-            out="web/${src#cartas/}"; out="${out%.png}.webp"
-            [ ! -f "$out" ] && echo "$src"
-          done)
+
+          # PNGs sin WebP asociado
+          missing=$(find cartas -name "*.png" -type f | while IFS= read -r src; do
+            out="web/${src#cartas/}"
+            out="${out%.png}.webp"
+            if [ ! -f "$out" ]; then echo "$src"; fi
+          done || true)
+
+          # Unir, deduplicar y quitar líneas vacías (sed no falla si no hay match)
           to_process=$(printf '%s\n%s\n' "$changed" "$missing" \
-            | sort -u | grep -v '^[[:space:]]*$')
+            | sort -u | sed '/^[[:space:]]*$/d')
 
           if [ -z "$to_process" ]; then
             echo "No hay imágenes que procesar."
           else
-            echo "$(echo "$to_process" | wc -l) imagen(es) a procesar."
-            echo "$to_process" | while IFS= read -r src; do
+            count=$(printf '%s\n' "$to_process" | wc -l)
+            echo "$count imagen(es) a procesar."
+            printf '%s\n' "$to_process" | while IFS= read -r src; do
               [ -z "$src" ] && continue
               rel="${src#cartas/}"
               out="web/${rel%.png}.webp"
@@ -68,8 +75,9 @@ jobs:
           fi
 
           # Eliminar WebP huérfanos (cartas borradas)
-          find web -name "*.webp" -type f | while read webp; do
-            original="cartas/${webp#web/}"; original="${original%.webp}.png"
+          find web -name "*.webp" -type f | while IFS= read -r webp; do
+            original="cartas/${webp#web/}"
+            original="${original%.webp}.png"
             if [ ! -f "$original" ]; then
               rm "$webp"
               echo "✗ borrado huérfano: $webp"
