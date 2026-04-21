@@ -31,9 +31,8 @@ firebase.initializeApp({
   appId:             "1:772205753962:web:deb07f35f52a1df811bc13"
 });
 
-window.db      = firebase.firestore();
-window.auth    = firebase.auth();
-window.storage = firebase.storage();
+window.db   = firebase.firestore();
+window.auth = firebase.auth();
 
 // ── Emails autorizados ────────────────────────────────────────────
 // Solo estas personas pueden registrarse y acceder a la app.

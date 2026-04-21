@@ -468,57 +468,6 @@ body {
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
-/* ── Modal: acciones y texto extra ────────── */
-.modal-efecto {
-  font-size: 13px; color: var(--text); line-height: 1.45;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 6px; padding: 8px 10px; white-space: pre-wrap;
-}
-.modal-stats { display: flex; gap: 14px; font-size: 14px; color: var(--text); }
-.modal-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-
-/* ── Nueva carta button ───────────────────── */
-.new-card-btn { margin-left: auto; }
-
-/* ── Editor de carta ──────────────────────── */
-.editor-bg { z-index: 250; }
-.editor-modal {
-  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-  padding: 24px; max-width: 900px; width: 100%; position: relative;
-  max-height: 92vh; overflow-y: auto;
-}
-.editor-body { display: grid; grid-template-columns: 300px 1fr; gap: 24px; }
-.editor-preview {
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 10px; padding: 12px;
-  display: flex; align-items: center; justify-content: center;
-  min-height: 420px;
-}
-.editor-preview img { max-width: 100%; max-height: 560px; border-radius: 6px; }
-.editor-preview-empty { color: var(--muted); font-size: 13px; }
-.editor-form { display: flex; flex-direction: column; gap: 14px; }
-.editor-form h3 { font-size: 18px; font-weight: 600; margin: 0 0 4px 0; }
-.editor-form textarea.form-input { font-family: inherit; resize: vertical; }
-.form-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-.stats-group { flex-direction: row; gap: 12px; flex-wrap: wrap; }
-.stat-line {
-  display: flex; align-items: center; gap: 8px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 6px; padding: 6px 10px; flex: 1 1 160px;
-  font-size: 13px; color: var(--text);
-}
-.stat-line input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
-.stat-input { width: 70px; padding: 6px 8px; }
-.stat-input:disabled { opacity: .4; }
-
-.editor-actions { display: flex; gap: 8px; margin-top: 6px; }
-
-@media (max-width: 720px) {
-  .editor-body { grid-template-columns: 1fr; }
-  .editor-preview { min-height: 320px; }
-}
-
 /* ── Scrollbar ────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }

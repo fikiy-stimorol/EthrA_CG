@@ -113,7 +113,6 @@
               @click="filterSubsubtipo=s.value">{{ s.label }}</button>
           </div>
           <span class="result-count">{{ filteredCards.length }} cartas</span>
-          <button class="btn btn-primary sm new-card-btn" @click="openNewCardEditor">+ Nueva carta</button>
         </div>
 
         <div class="content-layout">
@@ -125,9 +124,9 @@
               @mousemove="moveHover($event)"
               @mouseleave="endHover">
               <div class="card-img-wrap">
-                <!-- composedUrl si la carta fue editada; si no, WebP optimizado (con fallback a PNG original) -->
-                <img :src="cardImageUrl(card)" :alt="card.nombre" loading="lazy"
-                  @error="$event.target.src = cardImageUrlFallback(card)" />
+                <!-- WebP optimizado para galería; fallback al PNG original si aún no existe -->
+                <img :src="webUrl(card.path)" :alt="card.nombre" loading="lazy"
+                  @error="$event.target.src = cardUrl(card.path)" />
                 <div class="card-overlay">
                   <button class="add-to-deck-btn" @click.stop="addToDeck(card)">+</button>
                 </div>
@@ -305,9 +304,9 @@
 
     <!-- ZOOM PREVIEW -->
     <Transition name="zoom">
-      <div v-if="hoveredCard && !selectedCard && !editorOpen" class="card-zoom" :style="zoomStyle">
-        <img :src="cardImageUrl(hoveredCard)" :alt="hoveredCard.nombre"
-          @error="$event.target.src = cardImageUrlFallback(hoveredCard)" />
+      <div v-if="hoveredCard && !selectedCard" class="card-zoom" :style="zoomStyle">
+        <img :src="webUrl(hoveredCard.path)" :alt="hoveredCard.nombre"
+          @error="$event.target.src = cardUrl(hoveredCard.path)" />
         <div class="card-zoom-label">{{ hoveredCard.nombre }}</div>
       </div>
     </Transition>
@@ -317,91 +316,15 @@
       <div v-if="selectedCard" class="modal-bg" @click.self="selectedCard=null">
         <div class="modal">
           <button class="modal-close" @click="selectedCard=null">✕</button>
-          <img :src="cardImageUrl(selectedCard)" :alt="selectedCard.nombre" class="modal-img"
-            @error="$event.target.src = cardImageUrlFallback(selectedCard)" />
+          <img :src="webUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img"
+            @error="$event.target.src = cardUrl(selectedCard.path)" />
           <div class="modal-info">
             <h3>{{ selectedCard.nombre }}</h3>
             <p class="modal-type">
-              <template v-if="selectedCard.tipoLabel">{{ selectedCard.tipoLabel }}</template>
-              <template v-else>
-                {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
-              </template>
-            </p>
-            <p v-if="selectedCard.efecto" class="modal-efecto">{{ selectedCard.efecto }}</p>
-            <p v-if="selectedCard.damage!=null || selectedCard.life!=null" class="modal-stats">
-              <span v-if="selectedCard.damage!=null">⚔ {{ selectedCard.damage }}</span>
-              <span v-if="selectedCard.life!=null">❤ {{ selectedCard.life }}</span>
+              {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
             </p>
             <p v-if="selectedCard.copies > 1" class="modal-copies">Copias en el set: {{ selectedCard.copies }}</p>
-            <div class="modal-actions">
-              <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
-              <button @click="openEditor(selectedCard)" class="btn btn-ghost">✎ Editar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Transition>
-
-    <!-- EDITOR DE CARTA -->
-    <Transition name="fade">
-      <div v-if="editorOpen" class="modal-bg editor-bg" @click.self="closeEditor">
-        <div class="editor-modal">
-          <button class="modal-close" @click="closeEditor">✕</button>
-          <div class="editor-body">
-            <div class="editor-preview">
-              <img v-if="editorPreviewUrl" :src="editorPreviewUrl" alt="Vista previa" />
-              <div v-else class="editor-preview-empty">Generando preview...</div>
-            </div>
-            <div class="editor-form">
-              <h3>{{ editor.nombre ? 'Editar carta' : 'Nueva carta' }}</h3>
-
-              <div class="form-group">
-                <label>Nombre</label>
-                <input v-model="editor.nombre" class="form-input" maxlength="60" placeholder="Nombre de la carta" />
-              </div>
-
-              <div class="form-group">
-                <label>Tipo / subtipo</label>
-                <select v-model="editor.tipoLabel" class="form-input">
-                  <option v-for="t in TYPE_TAXONOMY" :key="t.code" :value="t.label">{{ t.label }}</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Arte de la carta</label>
-                <input type="file" accept="image/*" @change="onArtFileChange" class="form-input" />
-                <p v-if="editor.artUrl && !editor.artFile" class="form-hint">(ya hay un arte cargado; sube otro para reemplazarlo)</p>
-              </div>
-
-              <div class="form-group">
-                <label>Efecto</label>
-                <textarea v-model="editor.efecto" class="form-input" rows="5" placeholder="Texto del efecto de la carta"></textarea>
-              </div>
-
-              <div class="form-group stats-group">
-                <label class="stat-line">
-                  <input type="checkbox" v-model="editor.hasDamage" />
-                  <span>Daño</span>
-                  <input v-model="editor.damage" :disabled="!editor.hasDamage"
-                    type="number" min="0" class="form-input stat-input" placeholder="0" />
-                </label>
-                <label class="stat-line">
-                  <input type="checkbox" v-model="editor.hasLife" />
-                  <span>Vida</span>
-                  <input v-model="editor.life" :disabled="!editor.hasLife"
-                    type="number" min="0" class="form-input stat-input" placeholder="0" />
-                </label>
-              </div>
-
-              <p v-if="editorError" class="auth-error">{{ editorError }}</p>
-
-              <div class="editor-actions">
-                <button @click="saveCard" class="btn btn-primary" :disabled="editorSaving">
-                  {{ editorSaving ? 'Guardando...' : 'Guardar' }}
-                </button>
-                <button @click="closeEditor" class="btn btn-ghost" :disabled="editorSaving">Cancelar</button>
-              </div>
-            </div>
+            <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
           </div>
         </div>
       </div>
@@ -413,10 +336,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-<script src="cardRenderer.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,8 +1,6 @@
-const { createApp, ref, computed, watch, onMounted, reactive } = Vue;
-const db      = window.db;
-const auth    = window.auth;
-const storage = window.storage;
-const CR      = window.CardRenderer;
+const { createApp, ref, computed, watch, onMounted } = Vue;
+const db   = window.db;
+const auth = window.auth;
 
 // ── Utilidades ────────────────────────────────────────────────────
 function parseCard(path) {
@@ -18,26 +16,13 @@ function parseCard(path) {
   return { id: withoutPrefix.replace('.png', ''), path, nombre, copies, tipo, subtipo, subsubtipo };
 }
 
-function cardUrl(path) { return path ? path.split('/').map(encodeURIComponent).join('/') : ''; }
+function cardUrl(path) { return path.split('/').map(encodeURIComponent).join('/'); }
 
 // URL de la versión WebP optimizada (galería). Fallback al PNG original si no existe.
 function webUrl(path) {
-  if (!path) return '';
   const webPath = 'web/' + path.slice('cartas/'.length).replace(/\.png$/i, '.webp');
   return webPath.split('/').map(encodeURIComponent).join('/');
 }
-
-// URL efectiva: la versión compuesta (si la carta fue editada) prevalece.
-function cardImageUrl(card) {
-  if (card && card.composedUrl) return card.composedUrl;
-  return webUrl(card && card.path);
-}
-function cardImageUrlFallback(card) {
-  return cardUrl(card && card.path);
-}
-
-// Firestore doc id (no admite '/').
-function cardDocId(cardId) { return cardId.replace(/\//g, '__'); }
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function translateAuthError(code) {
@@ -169,8 +154,7 @@ createApp({
     function logout() { auth.signOut(); }
 
     // ── Cards ──────────────────────────────────
-    const rawCards  = ref([]);              // cartas derivadas del filesystem (cards.json)
-    const cardsMeta = ref({});              // cardId → metadatos de Firestore
+    const allCards  = ref([]);
     const loading   = ref(true);
     const loadError = ref(false);
 
@@ -181,57 +165,10 @@ createApp({
         const res = await fetch('cards.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error();
         const paths = await res.json();
-        rawCards.value = paths.map(parseCard);
+        allCards.value = paths.map(parseCard).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
       } catch { loadError.value = true; }
       finally { loading.value = false; }
     }
-
-    // Lista efectiva: cartas del filesystem + cartas inéditas de Firestore, con
-    // metadatos fusionados (tipoLabel, efecto, stats, artUrl, composedUrl).
-    const allCards = computed(() => {
-      const byId = {};
-      rawCards.value.forEach(c => { byId[c.id] = { ...c, hasMeta: false }; });
-      Object.values(cardsMeta.value).forEach(m => {
-        const id = m.cardId;
-        if (byId[id]) {
-          Object.assign(byId[id], {
-            nombre:      m.nombre || byId[id].nombre,
-            tipoLabel:   m.tipoLabel || null,
-            tipoCode:    m.tipoCode  || null,
-            efecto:      m.efecto || '',
-            damage:      m.damage ?? null,
-            life:        m.life   ?? null,
-            artUrl:      m.artUrl || null,
-            composedUrl: m.composedUrl || null,
-            hasMeta:     true,
-          });
-          if (m.tipo)                     byId[id].tipo       = m.tipo;
-          if (m.subtipo    !== undefined) byId[id].subtipo    = m.subtipo;
-          if (m.subsubtipo !== undefined) byId[id].subsubtipo = m.subsubtipo;
-        } else {
-          // Carta inédita (solo existe en Firestore).
-          byId[id] = {
-            id,
-            path: null,
-            nombre:      m.nombre || '(sin nombre)',
-            copies:      1,
-            tipo:        m.tipo || 'nuevas',
-            subtipo:     m.subtipo || null,
-            subsubtipo:  m.subsubtipo || null,
-            tipoLabel:   m.tipoLabel || null,
-            tipoCode:    m.tipoCode || null,
-            efecto:      m.efecto || '',
-            damage:      m.damage ?? null,
-            life:        m.life   ?? null,
-            artUrl:      m.artUrl || null,
-            composedUrl: m.composedUrl || null,
-            hasMeta:     true,
-            isCustom:    true,
-          };
-        }
-      });
-      return Object.values(byId).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
-    });
 
     // ── Gallery filters ────────────────────────
     const search           = ref('');
@@ -380,25 +317,6 @@ createApp({
       view.value = 'gallery'; showDeck.value = true;
     }
 
-    // ── Firestore: metadatos de cartas ─────────
-    let unsubscribeCards = null;
-    function subscribeToCards() {
-      if (unsubscribeCards) unsubscribeCards();
-      unsubscribeCards = db.collection('cards').onSnapshot(snap => {
-        const map = {};
-        snap.docs.forEach(doc => {
-          const data = doc.data();
-          const id = data.cardId;
-          if (id) map[id] = { ...data, docId: doc.id };
-        });
-        cardsMeta.value = map;
-      }, err => console.error('Firestore cards error:', err));
-    }
-    function unsubscribeFromCards() {
-      if (unsubscribeCards) { unsubscribeCards(); unsubscribeCards = null; }
-      cardsMeta.value = {};
-    }
-
     // ── Firestore: mazos ───────────────────────
     const savedDecks = ref([]);
     const deckFilter = ref('all');
@@ -507,8 +425,7 @@ createApp({
       const deckIds = [], customDeck = {}, containedObjects = [];
       entries.forEach((entry, i) => {
         const idx = idxOffset + i + 1, cardId = idx * 100;
-        // Si la carta tiene versión compuesta (Firebase Storage), úsala; si no, WebP optimizado.
-        const faceUrl = entry.composedUrl || (PAGES_BASE + webUrl(entry.path));
+        const faceUrl = PAGES_BASE + webUrl(entry.path);  // WebP optimizado (cartas/ no se despliega en Pages)
         customDeck[String(idx)] = { FaceURL: faceUrl, BackURL: BACK, NumWidth:1, NumHeight:1, BackIsHidden:true, UniqueBack:false, Type:0 };
         for (let c = 0; c < entry.count; c++) {
           deckIds.push(cardId);
@@ -555,17 +472,13 @@ createApp({
 
     function toTTSEntries(cards) {
       return cards.map(e => {
-        if (e.card) return {
-          path: e.card.path, nombre: e.card.nombre, tipo: e.card.tipo,
-          composedUrl: e.card.composedUrl || null, count: e.count,
-        };
+        if (e.card) return { path: e.card.path, nombre: e.card.nombre, tipo: e.card.tipo, count: e.count };
         const current = findCardByAnyId(e.cardId);
         return {
-          path:        current ? current.path        : 'cartas/' + e.cardId + '.png',
-          nombre:      current ? current.nombre      : e.nombre,
-          tipo:        current ? current.tipo        : e.tipo,
-          composedUrl: current ? current.composedUrl : null,
-          count:       e.count,
+          path:   current ? current.path   : 'cartas/' + e.cardId + '.png',
+          nombre: current ? current.nombre : e.nombre,
+          tipo:   current ? current.tipo   : e.tipo,
+          count:  e.count,
         };
       });
     }
@@ -633,193 +546,6 @@ createApp({
       reader.readAsText(file);
     }
 
-    // ── Editor de cartas ───────────────────────
-    const editorOpen       = ref(false);
-    const editorCardId     = ref(null);   // null = carta nueva
-    const editorSaving     = ref(false);
-    const editorError      = ref('');
-    const editorPreviewUrl = ref('');
-    const editor = reactive({
-      nombre:     '',
-      tipoLabel:  'Magia - Arcana',
-      efecto:     '',
-      hasDamage:  false, damage: '',
-      hasLife:    false, life:   '',
-      artUrl:     null,   // URL ya guardada en Firestore
-      artDataUrl: null,   // dataURL si el usuario subió un nuevo archivo
-      artFile:    null,   // File pendiente de subida
-    });
-    const TYPE_TAXONOMY = CR.TYPE_TAXONOMY;
-
-    function guessLabelFromCard(card) {
-      for (const t of TYPE_TAXONOMY) {
-        if (t.tipo === card.tipo &&
-            (t.subtipo    || null) === (card.subtipo    || null) &&
-            (t.subsubtipo || null) === (card.subsubtipo || null)) return t.label;
-      }
-      const byType = TYPE_TAXONOMY.find(t => t.tipo === card.tipo);
-      return byType ? byType.label : 'Magia - Arcana';
-    }
-
-    function openEditor(card) {
-      selectedCard.value    = null;
-      editorError.value     = '';
-      editorPreviewUrl.value= '';
-      editorCardId.value    = card.id;
-      editor.nombre         = card.nombre || '';
-      editor.tipoLabel   = card.tipoLabel || guessLabelFromCard(card);
-      editor.efecto      = card.efecto || '';
-      editor.hasDamage   = card.damage != null && card.damage !== '';
-      editor.damage      = card.damage != null ? String(card.damage) : '';
-      editor.hasLife     = card.life   != null && card.life   !== '';
-      editor.life        = card.life   != null ? String(card.life)   : '';
-      editor.artUrl      = card.artUrl || null;
-      editor.artDataUrl  = null;
-      editor.artFile     = null;
-      editorOpen.value   = true;
-      schedulePreview();
-    }
-
-    function openNewCardEditor() {
-      selectedCard.value    = null;
-      editorError.value     = '';
-      editorPreviewUrl.value= '';
-      editorCardId.value    = null;
-      editor.nombre         = '';
-      editor.tipoLabel   = 'Magia - Arcana';
-      editor.efecto      = '';
-      editor.hasDamage   = false; editor.damage = '';
-      editor.hasLife     = false; editor.life   = '';
-      editor.artUrl      = null;
-      editor.artDataUrl  = null;
-      editor.artFile     = null;
-      editorOpen.value   = true;
-      schedulePreview();
-    }
-
-    function closeEditor() {
-      editorOpen.value  = false;
-      editor.artFile    = null;
-      editor.artDataUrl = null;
-      editorError.value = '';
-    }
-
-    function onArtFileChange(event) {
-      const file = event.target.files[0];
-      event.target.value = '';
-      if (!file) return;
-      if (!file.type.startsWith('image/')) { editorError.value = 'Sube una imagen'; return; }
-      const reader = new FileReader();
-      reader.onload = e => {
-        editor.artDataUrl = e.target.result;
-        editor.artFile    = file;
-        schedulePreview();
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function buildRenderMeta(overrides = {}) {
-      return {
-        nombre:    editor.nombre,
-        tipoLabel: editor.tipoLabel,
-        efecto:    editor.efecto,
-        damage:    editor.hasDamage && editor.damage !== '' ? Number(editor.damage) : null,
-        life:      editor.hasLife   && editor.life   !== '' ? Number(editor.life)   : null,
-        artUrl:    editor.artDataUrl || editor.artUrl,
-        ...overrides,
-      };
-    }
-
-    let previewTimer = null;
-    function schedulePreview() {
-      clearTimeout(previewTimer);
-      previewTimer = setTimeout(runPreview, 200);
-    }
-    async function runPreview() {
-      try {
-        const canvas = await CR.renderCard(buildRenderMeta());
-        editorPreviewUrl.value = canvas.toDataURL('image/png');
-      } catch (e) { console.error('preview error', e); }
-    }
-
-    watch(
-      () => [editor.nombre, editor.tipoLabel, editor.efecto,
-             editor.hasDamage, editor.damage, editor.hasLife, editor.life,
-             editor.artUrl, editor.artDataUrl],
-      schedulePreview
-    );
-
-    function fileExt(name) {
-      const m = /\.([a-zA-Z0-9]+)$/.exec(name || '');
-      return m ? m[1].toLowerCase() : 'png';
-    }
-
-    async function saveCard() {
-      editorError.value = '';
-      const nombre = editor.nombre.trim();
-      if (!nombre)                         { editorError.value = 'Pon un nombre.';   return; }
-      const entry = CR.TAXONOMY_BY_LABEL[editor.tipoLabel];
-      if (!entry)                          { editorError.value = 'Tipo inválido.';   return; }
-      if (!editor.artUrl && !editor.artFile) {
-        editorError.value = 'Sube una imagen de arte.'; return;
-      }
-      editorSaving.value = true;
-      try {
-        // 1. cardId (si es nueva, la derivamos del tipo + nombre)
-        let cardId = editorCardId.value;
-        if (!cardId) {
-          const parts = [entry.tipo, entry.subtipo, entry.subsubtipo, nombre].filter(Boolean);
-          cardId = parts.join('/');
-          if (cardsMeta.value[cardId]) {
-            editorError.value = 'Ya existe una carta con ese nombre y tipo.';
-            editorSaving.value = false; return;
-          }
-        }
-        const docId = cardDocId(cardId);
-
-        // 2. Subir arte si el usuario cargó archivo nuevo
-        let artUrl = editor.artUrl;
-        if (editor.artFile) {
-          const ext = fileExt(editor.artFile.name);
-          const artRef = storage.ref(`cards/${docId}/art-${Date.now()}.${ext}`);
-          await artRef.put(editor.artFile, { contentType: editor.artFile.type });
-          artUrl = await artRef.getDownloadURL();
-        }
-
-        // 3. Componer PNG final y subirlo
-        const composedBlob = await CR.renderCardBlob(buildRenderMeta({ artUrl }), 'image/png');
-        const composedRef  = storage.ref(`cards/${docId}/composed-${Date.now()}.png`);
-        await composedRef.put(composedBlob, { contentType: 'image/png' });
-        const composedUrl  = await composedRef.getDownloadURL();
-
-        // 4. Guardar documento en Firestore
-        await db.collection('cards').doc(docId).set({
-          cardId,
-          nombre,
-          tipoLabel:  editor.tipoLabel,
-          tipoCode:   entry.code,
-          tipo:       entry.tipo,
-          subtipo:    entry.subtipo    || null,
-          subsubtipo: entry.subsubtipo || null,
-          efecto:     editor.efecto || '',
-          damage:     editor.hasDamage && editor.damage !== '' ? Number(editor.damage) : null,
-          life:       editor.hasLife   && editor.life   !== '' ? Number(editor.life)   : null,
-          artUrl,
-          composedUrl,
-          updatedAt:      firebase.firestore.FieldValue.serverTimestamp(),
-          updatedBy:      currentUser.value.uid,
-          updatedByEmail: currentUser.value.email,
-        }, { merge: true });
-
-        closeEditor();
-      } catch (e) {
-        console.error('save error', e);
-        editorError.value = 'Error guardando: ' + (e.message || e);
-      } finally {
-        editorSaving.value = false;
-      }
-    }
-
     // ── Helpers ────────────────────────────────
     function formatDate(ts) {
       if (!ts) return '';
@@ -844,13 +570,8 @@ createApp({
         if (user && !isAllowed(user.email)) { auth.signOut(); return; }
         currentUser.value = user;
         authLoading.value = false;
-        if (user) { loadCards(); subscribeToDecks(); subscribeToCards(); }
-        else {
-          unsubscribeFromDecks();
-          unsubscribeFromCards();
-          rawCards.value = [];
-          loading.value = true;
-        }
+        if (user) { loadCards(); subscribeToDecks(); }
+        else { unsubscribeFromDecks(); allCards.value = []; loading.value = true; }
       });
     });
 
@@ -873,13 +594,9 @@ createApp({
       hoveredCard, zoomStyle, startHover, startHoverById, moveHover, endHover,
       exportCurrentToTTS, exportSavedToTTS,
       exportDecksJson, importDecksJson, importMsg,
-      formatDate, cardUrl, webUrl, cardImageUrl, cardImageUrlFallback,
+      formatDate, cardUrl, webUrl,
       visibleCards, hasMore, loadMore,
       RULES,
-      // Editor de cartas
-      editorOpen, editor, editorPreviewUrl, editorSaving, editorError,
-      TYPE_TAXONOMY,
-      openEditor, openNewCardEditor, closeEditor, onArtFileChange, saveCard,
     };
   }
 }).mount('#app');
