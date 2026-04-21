@@ -49,11 +49,6 @@
   const STAT_LEFT  = 'thumb-statBoxLeft.png';
   const STAT_RIGHT = 'thumb-statBoxRight.png';
 
-  // Dimensiones de salida del PNG compuesto. Igualamos la resolución de
-  // las cartas existentes (1500x2100) para que la calidad sea consistente.
-  const TARGET_W = 1500;
-  const TARGET_H = 2100;
-
   // ── Cache de imágenes y de detección de hueco ─────────────────────
   const imageCache = new Map();
   const holeCache  = new Map();
@@ -195,24 +190,14 @@
   async function renderCard(meta) {
     const entry = TAXONOMY_BY_LABEL[meta.tipoLabel] || TYPE_TAXONOMY[0];
     const frameImg = await loadImage(FRAME_URLS[entry.frame]);
-    const holeSrc = detectArtHole(frameImg, entry.frame);
-
-    const W = TARGET_W, H = TARGET_H;
-    const scaleX = W / frameImg.naturalWidth;
-    const scaleY = H / frameImg.naturalHeight;
-    const hole = {
-      x: Math.round(holeSrc.x * scaleX),
-      y: Math.round(holeSrc.y * scaleY),
-      w: Math.round(holeSrc.w * scaleX),
-      h: Math.round(holeSrc.h * scaleY),
-    };
+    const hole = detectArtHole(frameImg, entry.frame);
+    const W = frameImg.naturalWidth;
+    const H = frameImg.naturalHeight;
 
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
     const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
 
     // Fondo del hueco (por si el arte no cubre del todo)
     ctx.fillStyle = '#111';
@@ -226,8 +211,8 @@
       } catch (e) { /* noop */ }
     }
 
-    // Marco encima, escalado a la resolución de salida
-    ctx.drawImage(frameImg, 0, 0, W, H);
+    // Marco encima
+    ctx.drawImage(frameImg, 0, 0);
 
     // Banner semitransparente para el nombre (dentro del área de arte, arriba)
     const nameBandH = Math.round(hole.h * 0.14);
@@ -240,7 +225,7 @@
     const fittedName = fitText(ctx, meta.nombre || '', hole.w * 0.92, nameSize, 700);
     drawText(ctx, meta.nombre || '', W / 2, nameY, {
       size: fittedName, weight: 700, color: '#fff',
-      stroke: '#000', strokeW: Math.max(3, Math.round(H * 0.003)), align: 'center',
+      stroke: '#000', strokeW: 3, align: 'center',
     });
 
     // Área inferior: del fin del hueco al final de la carta
@@ -251,8 +236,7 @@
     const typeSize = Math.round(H * 0.024);
     const typeY = bandTop + Math.round(bandH * 0.10);
     drawText(ctx, meta.tipoLabel || '', W / 2, typeY + typeSize, {
-      size: typeSize, weight: 700, color: '#ffe9a8', stroke: '#000',
-      strokeW: Math.max(2, Math.round(H * 0.002)), align: 'center',
+      size: typeSize, weight: 700, color: '#ffe9a8', stroke: '#000', strokeW: 2, align: 'center',
     });
 
     // Efecto (wrap)
@@ -275,7 +259,7 @@
       ctx.drawImage(thumb, tx, ty, tw, th);
       drawText(ctx, String(meta.damage), tx + tw / 2, ty + th / 2, {
         size: Math.round(th * 0.62), weight: 800, color: '#fff',
-        stroke: '#000', strokeW: Math.max(3, Math.round(H * 0.003)), align: 'center', baseline: 'middle',
+        stroke: '#000', strokeW: 3, align: 'center', baseline: 'middle',
       });
     }
     if (meta.life != null && meta.life !== '') {
@@ -287,7 +271,7 @@
       ctx.drawImage(thumb, tx, ty, tw, th);
       drawText(ctx, String(meta.life), tx + tw / 2, ty + th / 2, {
         size: Math.round(th * 0.62), weight: 800, color: '#fff',
-        stroke: '#000', strokeW: Math.max(3, Math.round(H * 0.003)), align: 'center', baseline: 'middle',
+        stroke: '#000', strokeW: 3, align: 'center', baseline: 'middle',
       });
     }
 
