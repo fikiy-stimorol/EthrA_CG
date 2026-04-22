@@ -1,6 +1,15 @@
-const { createApp, ref, computed, watch, onMounted } = Vue;
+const { createApp, ref, reactive, computed, watch, onMounted } = Vue;
 const db   = window.db;
 const auth = window.auth;
+
+// Firestore doc id ← cardId ("magia/arcana/Anular (6)" → "magia__arcana__Anular (6)")
+function metaDocId(cardId)   { return cardId.replace(/\//g, '__'); }
+function cardIdFromDoc(docId) { return docId.replace(/__/g, '/'); }
+
+// "cartas/magia/arcana/Anular (6).png" → "magia/arcana/Anular (6)"
+function pathToCardId(path) {
+  return path.replace(/^cartas\//, '').replace(/\.png$/i, '');
+}
 
 // ── Utilidades ────────────────────────────────────────────────────
 function parseCard(path) {
@@ -154,9 +163,11 @@ createApp({
     function logout() { auth.signOut(); }
 
     // ── Cards ──────────────────────────────────
-    const allCards  = ref([]);
-    const loading   = ref(true);
-    const loadError = ref(false);
+    const rawCards       = ref([]);   // de cards.json (paths)
+    const seedMeta       = ref({});   // de cards-meta.json (semilla OCR)
+    const metaOverrides  = ref({});   // de Firestore /cards-meta (ediciones manuales)
+    const loading        = ref(true);
+    const loadError      = ref(false);
 
     async function loadCards() {
       try {
@@ -165,10 +176,41 @@ createApp({
         const res = await fetch('cards.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error();
         const paths = await res.json();
-        allCards.value = paths.map(parseCard).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+        rawCards.value = paths.map(parseCard);
       } catch { loadError.value = true; }
       finally { loading.value = false; }
     }
+
+    // Semilla de metadatos (OCR) — si el fichero no existe aún, simplemente
+    // arrancamos con todo vacío. No es fatal.
+    async function loadCardsMeta() {
+      try {
+        const res = await fetch('cards-meta.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        const byId = {};
+        for (const [p, meta] of Object.entries(json)) byId[pathToCardId(p)] = meta;
+        seedMeta.value = byId;
+      } catch { /* ignoramos; la web funciona igual sin semilla */ }
+    }
+
+    // Lista efectiva: cartas con efecto/ataque/vida fusionados.
+    // Orden de prioridad: Firestore override > semilla JSON > vacío.
+    const allCards = computed(() => {
+      const list = rawCards.value.map(card => {
+        const seed = seedMeta.value[card.id] || {};
+        const ov   = metaOverrides.value[card.id] || {};
+        const pick = (k) => ov[k] !== undefined ? ov[k] : (seed[k] !== undefined ? seed[k] : null);
+        return {
+          ...card,
+          efecto: pick('efecto') || '',
+          ataque: pick('ataque'),
+          vida:   pick('vida'),
+          metaEdited: Boolean(metaOverrides.value[card.id]),
+        };
+      });
+      return list.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    });
 
     // ── Gallery filters ────────────────────────
     const search           = ref('');
@@ -201,7 +243,10 @@ createApp({
       if (filterSubsubtipo.value !== 'todos') cards = cards.filter(c => c.subsubtipo === filterSubsubtipo.value);
       if (search.value.trim()) {
         const q = search.value.toLowerCase();
-        cards = cards.filter(c => c.nombre.toLowerCase().includes(q));
+        cards = cards.filter(c =>
+          c.nombre.toLowerCase().includes(q) ||
+          (c.efecto || '').toLowerCase().includes(q)
+        );
       }
       return cards;
     });
@@ -315,6 +360,25 @@ createApp({
         benchCards.value = []; fichaCards.value = [];
       }
       view.value = 'gallery'; showDeck.value = true;
+    }
+
+    // ── Firestore: metadatos de cartas ─────────
+    let unsubscribeMeta = null;
+    function subscribeToCardsMeta() {
+      if (unsubscribeMeta) unsubscribeMeta();
+      unsubscribeMeta = db.collection('cards-meta').onSnapshot(snap => {
+        const map = {};
+        snap.docs.forEach(doc => {
+          const d = doc.data();
+          const cardId = d.cardId || cardIdFromDoc(doc.id);
+          map[cardId] = d;
+        });
+        metaOverrides.value = map;
+      }, err => console.error('Firestore cards-meta error:', err));
+    }
+    function unsubscribeFromCardsMeta() {
+      if (unsubscribeMeta) { unsubscribeMeta(); unsubscribeMeta = null; }
+      metaOverrides.value = {};
     }
 
     // ── Firestore: mazos ───────────────────────
@@ -546,6 +610,73 @@ createApp({
       reader.readAsText(file);
     }
 
+    // ── Editor inline de metadatos (modal) ─────
+    const editingMeta    = reactive({ efecto: '', ataque: '', vida: '' });
+    const savingMeta     = ref(false);
+    const saveMetaStatus = ref('');   // '', 'saved', 'error'
+    const saveMetaError  = ref('');
+
+    // Al abrir una carta, copiamos sus metadatos al formulario.
+    watch(selectedCard, (card, prev) => {
+      if (!card) return;
+      // Si es la misma carta (solo cambió la referencia por recompute), no
+      // pisar cambios no guardados del usuario.
+      if (prev && prev.id === card.id && metaDirty.value) return;
+      editingMeta.efecto = card.efecto || '';
+      editingMeta.ataque = card.ataque != null ? String(card.ataque) : '';
+      editingMeta.vida   = card.vida   != null ? String(card.vida)   : '';
+      saveMetaStatus.value = '';
+      saveMetaError.value  = '';
+    });
+
+    // Cuando allCards recompute (p. ej. tras un snapshot de Firestore),
+    // refresca selectedCard para que muestre los valores actualizados.
+    watch(allCards, (cards) => {
+      if (!selectedCard.value) return;
+      const updated = cards.find(c => c.id === selectedCard.value.id);
+      if (updated && updated !== selectedCard.value) selectedCard.value = updated;
+    });
+
+    // ¿Hay cambios respecto a lo actualmente cargado?
+    const metaDirty = computed(() => {
+      const c = selectedCard.value;
+      if (!c) return false;
+      const normNum = s => s === '' ? null : Number(s);
+      return editingMeta.efecto !== (c.efecto || '')
+          || normNum(editingMeta.ataque) !== c.ataque
+          || normNum(editingMeta.vida)   !== c.vida;
+    });
+
+    async function saveCardMeta() {
+      if (!selectedCard.value || !currentUser.value) return;
+      const atkStr = editingMeta.ataque.trim();
+      const vidStr = editingMeta.vida.trim();
+      if (atkStr !== '' && isNaN(Number(atkStr))) { saveMetaError.value = 'Ataque debe ser un número.'; return; }
+      if (vidStr !== '' && isNaN(Number(vidStr))) { saveMetaError.value = 'Vida debe ser un número.';   return; }
+      savingMeta.value = true;
+      saveMetaStatus.value = '';
+      saveMetaError.value  = '';
+      try {
+        const cardId = selectedCard.value.id;
+        await db.collection('cards-meta').doc(metaDocId(cardId)).set({
+          cardId,
+          efecto: editingMeta.efecto,
+          ataque: atkStr === '' ? null : Number(atkStr),
+          vida:   vidStr === '' ? null : Number(vidStr),
+          updatedAt:      firebase.firestore.FieldValue.serverTimestamp(),
+          updatedBy:      currentUser.value.uid,
+          updatedByEmail: currentUser.value.email,
+        }, { merge: true });
+        saveMetaStatus.value = 'saved';
+        setTimeout(() => { if (saveMetaStatus.value === 'saved') saveMetaStatus.value = ''; }, 2500);
+      } catch (e) {
+        console.error('save meta error', e);
+        saveMetaError.value = 'No se pudo guardar: ' + (e.message || e);
+      } finally {
+        savingMeta.value = false;
+      }
+    }
+
     // ── Helpers ────────────────────────────────
     function formatDate(ts) {
       if (!ts) return '';
@@ -570,8 +701,18 @@ createApp({
         if (user && !isAllowed(user.email)) { auth.signOut(); return; }
         currentUser.value = user;
         authLoading.value = false;
-        if (user) { loadCards(); subscribeToDecks(); }
-        else { unsubscribeFromDecks(); allCards.value = []; loading.value = true; }
+        if (user) {
+          loadCards();
+          loadCardsMeta();
+          subscribeToDecks();
+          subscribeToCardsMeta();
+        } else {
+          unsubscribeFromDecks();
+          unsubscribeFromCardsMeta();
+          rawCards.value = [];
+          seedMeta.value = {};
+          loading.value  = true;
+        }
       });
     });
 
@@ -597,6 +738,9 @@ createApp({
       formatDate, cardUrl, webUrl,
       visibleCards, hasMore, loadMore,
       RULES,
+      // Editor inline de metadatos
+      editingMeta, savingMeta, saveMetaStatus, saveMetaError, metaDirty,
+      saveCardMeta,
     };
   }
 }).mount('#app');

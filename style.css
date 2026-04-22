@@ -468,6 +468,20 @@ body {
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
+/* ── Modal: editor de metadatos ───────────── */
+.meta-editor { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.meta-efecto { font-family: inherit; resize: vertical; min-height: 90px; font-size: 13px; line-height: 1.4; }
+.meta-stats { display: flex; gap: 10px; }
+.meta-stats .form-group { flex: 1; }
+.meta-saved-msg { font-size: 13px; color: #4ade80; }
+.modal-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.meta-badge {
+  display: inline-block; background: var(--accent); color: white;
+  padding: 1px 6px; border-radius: 4px; font-size: 11px; margin-left: 6px;
+}
+.modal { max-width: 620px; }
+.modal-info { flex: 1; }
+
 /* ── Scrollbar ────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
