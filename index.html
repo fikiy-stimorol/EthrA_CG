@@ -96,7 +96,7 @@
 
       <template v-else>
         <div class="filters-bar">
-          <input v-model="search" class="search" type="text" placeholder="Buscar carta..." />
+          <input v-model="search" class="search" type="text" placeholder="Buscar por nombre o palabra clave del efecto..." />
           <div class="filter-row">
             <button v-for="t in tipoOptions" :key="t.value"
               class="pill" :class="['tipo-'+t.value, {active: filterTipo===t.value}]"
@@ -322,9 +322,40 @@
             <h3>{{ selectedCard.nombre }}</h3>
             <p class="modal-type">
               {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
+              <span v-if="selectedCard.metaEdited" class="meta-badge" title="Metadatos editados manualmente">✎</span>
             </p>
             <p v-if="selectedCard.copies > 1" class="modal-copies">Copias en el set: {{ selectedCard.copies }}</p>
-            <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
+
+            <!-- Editor de metadatos: efecto, ataque, vida -->
+            <div class="meta-editor">
+              <div class="form-group">
+                <label>Efecto</label>
+                <textarea v-model="editingMeta.efecto" class="form-input meta-efecto"
+                  rows="5" placeholder="Texto del efecto..."></textarea>
+              </div>
+              <div class="meta-stats">
+                <div class="form-group">
+                  <label>Ataque</label>
+                  <input v-model="editingMeta.ataque" type="number" class="form-input"
+                    placeholder="—" />
+                </div>
+                <div class="form-group">
+                  <label>Vida</label>
+                  <input v-model="editingMeta.vida" type="number" class="form-input"
+                    placeholder="—" />
+                </div>
+              </div>
+              <p v-if="saveMetaError" class="auth-error">{{ saveMetaError }}</p>
+              <p v-if="saveMetaStatus === 'saved'" class="meta-saved-msg">Guardado ✓</p>
+            </div>
+
+            <div class="modal-actions">
+              <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
+              <button @click="saveCardMeta" class="btn btn-ghost"
+                :disabled="savingMeta || !metaDirty">
+                {{ savingMeta ? 'Guardando...' : 'Guardar cambios' }}
+              </button>
+            </div>
           </div>
         </div>
       </div>

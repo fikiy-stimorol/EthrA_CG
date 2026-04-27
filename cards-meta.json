@@ -1,0 +1,3292 @@
+{
+  "cartas/fichas/Aldeano.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Asentamiento.png": {
+    "efecto": "El Personaje Activo Aliado obtiene +1 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Cría de Dragón (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Demonio (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Diablillo (2).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Elemental (1).png": {
+    "efecto": "Este Personaje obtiene +1 de ataque por cada Base en el Campo de Batalla.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Enfermedad.png": {
+    "efecto": "Acción Rápida: Haz 1 punto de daño al Personaje Equipado. Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/fichas/Ent.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Espada de Madera.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 1
+  },
+  "cartas/fichas/Esqueleto (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Familiar.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Fúngico (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Goblin (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Huevo (1).png": {
+    "efecto": "Acción Normal: Retira del Juego este Personaje. Pon una Gallina de tu Descarte en este espacio. Derrotado: Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Lobo.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Montaña.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 8
+  },
+  "cartas/fichas/Núcleo de Cristal.png": {
+    "efecto": "Destruido: Haz 1 punto de daño a cada Personaje en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Presa (1).png": {
+    "efecto": "Derrotado: Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Raíz (2).png": {
+    "efecto": "Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Slime Pequeño.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Telaraña (1).png": {
+    "efecto": "El Personaje Equipado no puede Intercambiarse. Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/fichas/Veil.png": {
+    "efecto": "Mientras este Personaje esté en el Puesto Activo, Potencia las Magias que Juegues. Acción Rápida: Pon a Bob, Protagonista en tu Puesto Activo. Derrotado: Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/fichas/Volcán.png": {
+    "efecto": "Destruido: Haz 2 puntos de daño a cada Personaje y Base.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Chorro de Agua (1).png": {
+    "efecto": "Haz 2 puntos de daño al Personaje Objetivo. Mueve a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Congelar (1).png": {
+    "efecto": "N Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. El Esbirro Anexado obtiene -2 de ataque. Cuando el Esbirro Anexado sea Intercambiado o movido, Retíralo del Juego.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Corriente (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Mueve hasta 2 cartas de la Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Geiser (4).png": {
+    "efecto": "Elige una opción: - Haz 1 punto de daño al Personaje Objetivo. - Mueve al Personaje Objetivo. - Pon al Personaje Objetivo de la Banca del Rival en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Impacto Helado (1).png": {
+    "efecto": "Haz 2 puntos de daño al Personaje Objetivo. Ese Personaje no puede ser Intercambiado durante el siguiente turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Oleaje (1).png": {
+    "efecto": "Haz 1 punto de daño a cada Personaje de la Banca. Pon a cada Personaje de la Banca en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Pompa (5).png": {
+    "efecto": "N Anexa esta carta a un espacio de la Banca. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Anexa el Esbirro Objetivo a esta carta. Siempre que un Esbirro sea puesto en este espacio, Anéxalo a esta carta. (Pierden todos sus efectos) Acción Normal: Destruye esta carta. Destruido: Pon cada Personaje Anexado en la Banca de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Remolino (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Mueve a cada Personaje Activo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Terreno Resbaladizo (2).png": {
+    "efecto": "N Anexa esta carta a un espacio de la Banca del Rival. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Cuando un Personaje se ponga en este espacio, haz 1 punto de daño a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/agua/Ventisca (1).png": {
+    "efecto": "N (Solo puedes Jugar esta carta como una Acción Normal). Haz 2 puntos de daño a cada Personaje. Durante el siguiente turno, no se pueden hacer Intercambios.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Anular (6).png": {
+    "efecto": "N Reacción: Cuando se fuese a Activar una Acción de carta, Reacción, efecto de Jugar o Derrotado de un Personaje, niega ese efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Control Mental (4).png": {
+    "efecto": "(Solo puedes Jugar esta carta como una Acción Rápida al Comienzo del turno del Rival). Elige una Acción Normal que no sea Pasar: Tu Rival debe hacer la Acción Normal elegida este turno (si puede).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Deshacer (5).png": {
+    "efecto": "Reacción: Cuando tu Rival fuese a Jugar una carta de su Mano, niega el efecto de esa carta y Retírala del Juego. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Distorsión Planar (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del turno del Rival). Pon la Base Objetivo Aliada en la Banca e[-INPINCIA Pon la Base Objetivo del Rival en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Doblegar.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del turno del Rival). Pon al Esbirro Objetivo Aliado que no sea Ficha en la Banca del Rival. Pon al Esbirro Objetivo del Rival que no sea Ficha en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Expandir la Mente (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del turno del Rival). Pon | Magia de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Ilusión.png": {
+    "efecto": "Pon una Ficha que es una Copia del Esbirro Objetivo en tu Banca y obtiene este efecto: Derrotado: Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Polimorfia (2).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del turno del Rival). Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. El Esbirro Anexado obtiene -2/-2 pierde todos sus efectos y obtiene el siguiente efecto: Tu Rival no recibe un Punto de Victoria cuando este Personaje es Derrotado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Redirigir (4).png": {
+    "efecto": "Reacción: Cuando tu Rival elija uno o más Objetivos para un efecto, cambia el/los Objetivos de ese efecto. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/arcana/Teleportar (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Final de tu turno o del Rival). Juega 1 Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/basica/Descarga.png": {
+    "efecto": "(Cuando Juegues esta carta elige un Tipo de Magia. Esta carta se considera como ese Tipo de Magia). Haz 3 puntos de daño al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/basica/Invocación Menor.png": {
+    "efecto": "(Cuando Juegues esta carta elige un Tipo de Magia. Esta carta se considera como ese Tipo de Magia). Pon una Ficha Familiar en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/basica/Maleficio.png": {
+    "efecto": "N (Cuando Juegues esta carta elige un Tipo de Magia. Esta carta se considera como ese Tipo de Magia). Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. El Esbirro Anexado obtiene -2/-1.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/basica/Reestablecer Energía.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). (Cuando Juegues esta carta elige un Tipo de Magla. Esta carta se considera como ese Tipo de Magia). Cura 3 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/basica/Sentidos Agudizados (1).png": {
+    "efecto": "(Cuando Juegues esta carta elige un Tipo de Magia. Esta carta se considera como este Tipo de Magia). El Jugador Objetivo Roba 2 cartas. Luego, Descarta 1 carta de la Mano de ese Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Avivar las Ascuas.png": {
+    "efecto": "Haz X puntos de daño al Personaje Objetivo donde X es el número de Puntos de Victoria que te faltan para Ganar la Partida.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Bola de Fuego (1).png": {
+    "efecto": "Haz 2 puntos de daño al Personaje Activo Aliado. Haz 5 puntos de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Bombardeo (2).png": {
+    "efecto": "Haz 3 puntos de daño a dos Bases o Personajes Objetivos Aliados. Haz 3 puntos de daño a dos Bases o Personajes Objetivos del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Calentar Metal.png": {
+    "efecto": "Haz 4 puntos de daño al Personaje Equipado Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Freir (2).png": {
+    "efecto": "Haz 2 puntos de daño al Personaje Objetivo. Si se fuesen a Activar efectos de Derrotado de ese Personaje, en su lugar, niega ese efecto y Retira del Juego ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Ira Ardiente (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz X puntos de daño al Personaje Activo del Rival donde X es el número de Personajes dañados en el Campo de Batalla.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Llamas Danzantes (3).png": {
+    "efecto": "Haz 1 punto de daño a cada Personaje Aliado. Haz 4 puntos de daño a la Base o Personaje Objetivo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Pira (1).png": {
+    "efecto": "Destruye la Base Objetivo Aliada. Haz X puntos de daño al Personaje Objetivo donde X es la salud máxima de la Base Destruida por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Prender (2).png": {
+    "efecto": "N Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Al Comienzo de tu turno, haz 2 puntos de daño al Esbirro Anexado. Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/fuego/Tornado de Llamas (2).png": {
+    "efecto": "N Anexa esta carta al Puesto Activo Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Reacción: Cuando tu Rival fuese a hacer un Ataque o Intercambio, haz 2 puntos de daño al Personaje Activo del Rival. Cuando fueses a hacer un Ataque o Intercambio, haz 2 puntos de daño al Personaje Activo Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Ascenso Infernal (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Derrota al Esbirro Aliado Objetivo que no sea Ficha. Pon una Ficha Demonio en el espacio en el que estaba el Esbirro Derrotado por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Destierro (3).png": {
+    "efecto": "(Solo puedes Jugar esta carta como una Acción Normal). Retira al Esbirro Objetivo de la Banca. Descarta 1 carta de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Extinción Masiva (1).png": {
+    "efecto": "N Derrota a cada Esbirro con 3 o menos de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Marchitar (1).png": {
+    "efecto": "Derrota al Esbirro Objetivo con 30 menos de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Plaga (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Cada Jugador elige 1 Esbirro de su Party y lo pone en su Descarte.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Retorcer la Mente (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Descarta 2 cartas de la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Retorno Macabro (1).png": {
+    "efecto": "Pon un Esbirro de un Descarte en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Saber Prohibido (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Busca en tu Mazo una carta, muéstrala y ponla en tu Mano. Baraja tu Mazo. Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Sentencia (3).png": {
+    "efecto": "Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Al Final del 4to turno desde que se Jugó esta carta, Destruye al Esbirro Anexado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/muerte/Visión Maléfica (1).png": {
+    "efecto": "Pon las 5 primeras cartas del Mazo del Jugador Objetivo en su Descarte.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Alterar el Terreno (1).png": {
+    "efecto": "Destruye la Base Objetivo. Anexa esta carta a la Base Objetivo Aliada. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. La Base Anexada obtiene +4 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Avalancha (1).png": {
+    "efecto": "Haz X puntos de daño a cada Base y Personaje en la Banca del Rival donde Xx es el número de Bases en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Conexión Natural (3).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). Anexa esta carta a la Ficha Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. La Ficha Anexada obtiene +1/+1. Destruido: Pon esta carta en tu Mazo. Baraja tu mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Dominio Elemental (2).png": {
+    "efecto": "Destruye la Base Objetivo Aliada. Elige una opción. - Haz 3 puntos de daño al Personaje Activo del Rival. - Cura 3 puntos de salud al Personaje Activo Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Enraizar (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida) Pon hasta 2 Fichas Raíz en la Banca del PINCIA",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Infestación Fúngica (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida) Pon hasta 2 Fichas Fúngico en la Banca de cada Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Invocar Elemental (1).png": {
+    "efecto": "Pon una Ficha Elemental en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Otorgar Vida (3).png": {
+    "efecto": "N Anexa esta carta a la Base Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. La carta Anexada se considera como un Esbirro y obtiene +3 de ataque (deja de considerarse como una Base). Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Poder del Bosque (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). El Personaje Objetivo obtiene +1 de ataque por cada Ficha en el Campo de Batalla este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/naturaleza/Restauración (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Destruye la Base Objetivo Aliada. Roba 3 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Campo Estático (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz 1 punto de daño a cada Esbirro.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Cargar de Chispas (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Potencia tu siguiente Magia este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Chisporroteo (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz 1 punto de daño al Personaje Activo del Rival. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Descarga Máxima (1).png": {
+    "efecto": "Haz X puntos de daño al Personaje Objetivo donde X es el número de cartas que has Jugado este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Impacto con Letargo.png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). Anexa esta carta a un espacio de la Banca del Rival. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Al Final de tu turno, Destruye esta carta y haz 4 puntos de daño al Personaje que esté en este espacio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Llegada estruendosa (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz un Intercambio. Haz 1 punto de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Rayo Fragmentado.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz 1 punto de daño a dos Esbirros Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Relámpago (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz 2 puntos de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Sobrecarga (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Puedes hacer tu siguiente Acción Normal como una Acción Rápida este turno. Durante tu siguiente turno, debes hacer la Acción Normal de Pasar.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/rayo/Velocidad Extrema (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Pon un Esbirro de tu Party en tu Puesto Activo. Haz 2 puntos de daño a tu Personaje Activo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Armas Sagradas (1).png": {
+    "efecto": "El Esbirro Objetivo obtiene +2 de ataque. Cuando ese Personaje haga daño este turno, cura esa misma cantidad de salud a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Bendición (1).png": {
+    "efecto": "Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. El Esbirro Anexado obtiene +1/+3.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Curar (2).png": {
+    "efecto": "Cura 3 puntos de salud al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Escudo Protector.png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). Los Personajes no pueden recibir daño este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Guardia de Muerte (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). Cuando el Personaje Objetivo fuese a ser Derrotado este turno, en su lugar, no lo es y cura 1 punto de salud a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Humildad (3).png": {
+    "efecto": "Anexa esta carta al Esbirro Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. El Esbirro Anexado pierde todos sus efectos.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Meditación (4).png": {
+    "efecto": "(Solo puedes Jugar esta carta como una Acción Normal). Cura 2 puntos de salud al Personaje Activo Aliado. Roba 2 cartas. Puedes Jugar o Preparar una carta de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Ola de Sanación (1).png": {
+    "efecto": "Cura 2 puntos de salud a cada Esbirro. Puedes Robar 1 carta por cada Esbirro del Rival que haya sido curado por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Restricción (2).png": {
+    "efecto": "N Anexa esta carta al Personaje Objetivo. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. No puedes hacer Ataques con el Personaje Anexado. Acción Normal: Pon al Personaje Anexado en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/vida/Resurrección.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Pon hasta 2 Esbirros de tu Descarte en tu Party.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Elevar hasta los Cielos (2).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). Pon todas las cartas Permanentes que no sean Personajes en las Manos de sus Propietarios.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Huracán (1).png": {
+    "efecto": "Destruye todas las Bases y cartas Preparadas. Puedes Preparar una carta por cada carta Aliada Destruida por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Llamar a la Tormenta (2).png": {
+    "efecto": "Elige una opción: - Potencia tu siguiente Magia de Tipo Agua o Tipo Rayo este turno. - Busca en tu Mazo una Magia de Tipo Agua o Tipo Rayo, muéstrala y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Niebla (2).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). Pon hasta 3 cartas Permanentes Aliadas que no sean Personajes en la Mano de su Propietario. Puedes Preparar una carta por cada carta que hayas puesto en tu Mano por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Onda de Choque (1).png": {
+    "efecto": "Destruye la Base Objetivo. Haz 1 punto de daño a cada Base o Personaje adyacente a la Base Destruida por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Ráfaga de Viento (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Elige una opción: - Destruye el Equipo Objetivo. - Destruye la carta Anexada Objetivo. - Descarta 1 carta de la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Tormenta Eléctrica.png": {
+    "efecto": "Haz 2 puntos de daño al Personaje Equipado Objetivo. Destruye todos sus Equipos Equipados.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Tormenta de Arena (2).png": {
+    "efecto": "Destruye todos los Equipos. Haz 1 punto de daño a cada Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Tornado (1).png": {
+    "efecto": "Destruye la Base o carta Preparada Objetivo. Puedes Preparar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/magia/viento/Vendaval (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). No se pueden Preparar cartas ni Jugar cartas Preparadas este turno. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/A Dos Manos.png": {
+    "efecto": "Haz dos Ataques.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Actuar (1).png": {
+    "efecto": "Puedes Jugar un Personaje. Puedes Jugar una carta de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Aprender (2).png": {
+    "efecto": "Roba hasta tener 6 cartas en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Arremeter.png": {
+    "efecto": "Haz un Intercambio. Haz un Ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/As en la Manga (2).png": {
+    "efecto": "Juega hasta dos cartas de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Cargar (1).png": {
+    "efecto": "Juega un Personaje. Haz un Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Comandar (1).png": {
+    "efecto": "Haz el efecto de la Acción de carta de la carta Aliada Objetivo dos veces. (Si la Acción de carta fuese a Destruir esa carta, haz el efecto solo una vez).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Conquistar.png": {
+    "efecto": "Pon la Base Objetivo del Rival en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Dos Pasos por Delante (1).png": {
+    "efecto": "Prepara hasta dos cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Entrada Triunfal.png": {
+    "efecto": "N El siguiente efecto de Jugar de un Personaje se Activa una vez adicional este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Explorar.png": {
+    "efecto": "Roba 2 cartas. Juega un Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Planificar.png": {
+    "efecto": "Roba 2 cartas. Puedes Preparar o Jugar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Refuerzos (2).png": {
+    "efecto": "Juega hasta dos Personajes.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Retirada (4).png": {
+    "efecto": "Pon al Personaje Objetivo Aliado en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Sabotear (2).png": {
+    "efecto": "Muestra la Mano y cartas Preparadas del Rival. Elige una de esas cartas y ponla en el Descarte de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Normales/Sobornar (3).png": {
+    "efecto": "N Pon al Esbirro Objetivo del Rival en tu Banca. Al Final del turno, pon ese Esbirro en la Banca de su Propietario. (Solo puedes Jugar esta carta mientras haya uno o Más espacios libres en tu Banca).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Ataque Cargado (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). El Personaje Objetivo obtiene +2 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Ataque de Barrido (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz 1 punto de daño al Personaje Objetivo y a cada Personaje adyacente.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Comerciar (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Pon hasta 5 cartas de tu Mano en tu Mazo. Baraja tu Mazo. Roba esa misma cantidad de cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Consultar el Grimorio (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Muestra cartas de la parte superior de tu Mazo hasta que muestres una Magia y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Consultar el Inventario (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Muestra cartas de la parte superior de tu Mazo hasta que muestres un Objeto Desechable o Equipo y ponlo en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Correr (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz un Intercambio. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Cuerpo a Cuerpo (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz un Ataque. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Emboscada (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Juega un Personaje. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Empujar (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Mueve al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Fijar (4).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Puedes hacer Ataques al Esbirro Objetivo en la Banca del Rival este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Preparación (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Prepara una carta. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Rearmarse (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Equipa hasta $ Equipos Aliados al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Regalar.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Pon una carta Permanente Aliada que no sea Personaje en la Banca del Rival (SI es uN Equipo o carta anexada, puedes equiparla o anexarla a un Objetivo válido).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Reparar (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Pon una Base de tu Dbescarte en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Sigilo (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). TU Rival no puede Jugar cartas ni Activar Reacciones este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Rapidas/Tregua (4).png": {
+    "efecto": "N (Solo puedes Jugar esta carta como una Acción Rápida y solo si hay uno o más Personajes en el Puesto Activo o Banca del Rival). Durante el siguiente turno del Rival, la primera Acción Normal debe ser Pasar. Pasa el turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Atrasar (4).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Jugar una carta que no sea Personaje, en su lugar, tu Rival Prepara esa carta (si puede).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Bloquear (5).png": {
+    "efecto": "Reacción: Cuando tu Rival fuese a hacer un Atague, reduce en 5 el daño que fuese a recibir tu Personaje Activo por Ataques este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Compartir Riquezas (1).png": {
+    "efecto": "N Reacción: Cuando tu Rival Robe una 0 más cartas, tú también Robas esa misma cantidad de cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Contragolpe (3).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Jugar una Maniobra, niega el efecto de esa Maniobra.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Copiar.png": {
+    "efecto": "Reacción: Cuando tu Rival fuese a hacer una Acción Normal, puedes hacer esa Acción.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Denegar (6).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Activar una Acción de carta o una Reacción de una carta Permanente, niega el efecto de esa Acción.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Estar Alerta (3).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Jugar una carta Preparada, niega el efecto de esa carta y ponla en el Descarte de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Interceptar (2).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a hacer un Ataque, haz un Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Parry (5).png": {
+    "efecto": "Reacción: Cuando tu Rival fuese a hacer un Ataque, haz 2 puntos de daño al Personaje Activo del Rival. Reduce en 2 el daño que fuese a recibir tu Personaje Activo por Ataques este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Provocar (2).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a hacer una Acción Normal que no sea Atacar, en su lugar, Ataca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Resguardarse (2).png": {
+    "efecto": "Reacción: Cuando tu Rival haga un Ataque a una Base, haz un Ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Rodear (1).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a hacer un Intercambio, niega ese Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Romper el Combo (3).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Jugar una carta como Acción Rápida o hacer una Acción de carta como Acción Rápida, en su lugar se considera como Acción Normal.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Saquear (2).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a Robar a Robar una o más cartas, en su lugar, no Roba cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Señuelo (2).png": {
+    "efecto": "Reacción: Cuando tu Rival reciba uno o más Puntos de Victoria, tu Rival pierde un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/maniobras/Reacciones/Stun (3).png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a hacer un Ataque, un Intercambio o Active una Acción de carta de un Personaje, si es una Acción Rápida, niega esa Acción.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Academia.png": {
+    "efecto": "Tu Mano no tiene tamaño máximo. Acción Normal: Roba 3 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Aldea Fortificada (1).png": {
+    "efecto": "Los Personajes Aliados obtienen +1 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Almacén (4).png": {
+    "efecto": "Reacción: Cuando un Objeto Desechable o Equipo sea puesto en tu Descarte, puedes Anexarlo a esta carta (pierde todos sus efectos). Destruido: Pon todas las cartas Anexadas a esta carta en tu Mazo. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Archivo.png": {
+    "efecto": "Acción Normal: Pon todas las cartas de tu Descarte que no sean Personaje en tu Mazo. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Ayuntamiento.png": {
+    "efecto": "N Acción Normal: Roba | carta, luego puedes Preparar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Base de Bandidos (1).png": {
+    "efecto": "N Reacción: Al Final del turno del Rival, si has Jugado una o más cartas este turno, puedes Preparar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Biblioteca (3).png": {
+    "efecto": "Acción Rápida: Puedes Jugar tu siguiente Magia como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Bosque (2).png": {
+    "efecto": "Las Fichas Esbirro obtienen +1/+1.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Campamento Goblin (1).png": {
+    "efecto": "Acción Rápida: Pon una Ficha Goblin en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Campo de Entrenamiento (3).png": {
+    "efecto": "Puedes Jugar una Maniobra adicional en cada turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Catapulta.png": {
+    "efecto": "Acción Rápida: Destruye la Base Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Centro de Vigilancia (1).png": {
+    "efecto": "Acción Rápida: Muestra las cartas Preparadas y la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Cripta (1).png": {
+    "efecto": "Si se fuese a Activar un efecto de Derrotado, ese efecto es Activado una vez adicional.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Cuartel de la Guardia (2).png": {
+    "efecto": "N Reacción: Al Final de tu turno, si has Jugado un Personaje como Acción Normal, puedes hacer un Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Cumbres Montañosas (3).png": {
+    "efecto": "Los Esbirros con 5 0 más de ataque obtienen +2 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Desierto (3).png": {
+    "efecto": "Al Final de tu turno, Descarta 1 carta de tu Mano. Al Final del turno del Rival, Descarta 1 carta de la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Edificio Abandonado (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Jugar: Pon esta Base en la Banca del Rival. Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Forja (2).png": {
+    "efecto": "Acción Rápida: Puedes Jugar tu siguiente Equipo como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Iglesia solemne.png": {
+    "efecto": "Niega todos los efectos de Jugar y Derrotado de cada Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Laboratorio de Alquimia.png": {
+    "efecto": "Acción Rápida: Potencia tu siguiente Poción este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Mercadillo Callejero (2).png": {
+    "efecto": "Acción Rápida: Roba 1 carta. Descarta 1 carta de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Mina de Cristal (1).png": {
+    "efecto": "Al Final de tu turno, Roba | carta por cada carta que has Jugado desde tu Mano este turno. Si no has Jugado cartas desde tu Mano este turno, Destruye esta carta y Descarta todas las cartas de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Molino (2).png": {
+    "efecto": "Acción Rápida: Pon las 2 primeras cartas del Mazo del Jugador Objetivo en su Descarte.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de Piedra (2).png": {
+    "efecto": "N Reacción: Al Final de tu turno, si has Jugado una o más Magias de Tipo Naturaleza y has puesto una o más Fichas en tu Banca o en la del Rival este turno, puedes elegir una de esas Fichas y poner una copia en esa Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de la Cripta (4).png": {
+    "efecto": "Reacción: Al Final de tu turno, si has Jugado una o más Magias de Tipo Muerte y has Derrotado a uno o más Personajes, puedes poner una Ficha Esqueleto en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de la Iluminación (4).png": {
+    "efecto": "Reacción: Al Final de tu turno, si has Jugado una o más Maglas de Tipo Vida y no has hecho daño ni has Derrotado a uno 0 Más Personajes este turno, puedes curar 4 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de la Llama (1).png": {
+    "efecto": "Reacción: Al Final de tu turno, si has Jugado una o más Magias de Tipo Fuego y has hecho 10 0 más puntos de daño este turno, puedes poner una Magia de Tipo Fuego de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de las Corrientes (3).png": {
+    "efecto": "Reacción: Al Final de tu turno, si has Jugado una o más Magias de Tipo Agua y has movido uno o más Personajes del Rival este turno, puedes poner a uno de esos Personajes en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito de las Nubes (4).png": {
+    "efecto": "N Reacción: Al Final de tu turno, si has Jugado una o más Magias de Tipo Viento y has Destruido una o más cartas del Rival este turno, puedes poner en su Descarte todas las cartas con el mismo nombre que esas cartas de su Mano y/o Mazo. Baraja el Mazo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito del Pensamiento (3).png": {
+    "efecto": "Reacción: Al Final del turno del Rival, si has Jugado una o más Magias de Tipo Arcana, puedes Robar hasta tener 4 cartas en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Monolito del Relámpago (4).png": {
+    "efecto": "Reacción: Al Final de tu turno, si has Jugado dos o más Magias de Tipo Rayo, puedes hacer 3 puntos de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Muralla (5).png": {
+    "efecto": "N Acción Normal: Pon esta carta en tu Puesto Activo. Mientras esta carta esté en tu Puesto Activo, se considera como un Esbirro y tiene O de ataque (deja de considerarse como una Base).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 10
+  },
+  "cartas/objetos/bases/Nido de Dragón (3).png": {
+    "efecto": "Destruido: Pon una Ficha Cría de Dragón en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Pantano.png": {
+    "efecto": "Los Personajes Activos obtienen -1 de salud máxima.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Pasadizo Secreto.png": {
+    "efecto": "Acción Rápida: Haz un Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Plaza Pública.png": {
+    "efecto": "Acción Rápida: Roba 1 carta. Pon esta Base en la Banca del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Polvorín.png": {
+    "efecto": "Destruido: Haz 2 puntos de daño a cada Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Portal (5).png": {
+    "efecto": "N Cuando un Jugador fuese hacer la Acción Normal de Jugar un Personaje, en su lugar, pon un Personaje al azar de la Party de ese Jugador en su Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Posada.png": {
+    "efecto": "Acción Rápida: Cura 1 punto de salud al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Pozo (4).png": {
+    "efecto": "Acción Rápida: Descarta 1 carta de tu Mano. Destruido: El Jugador Objetivo Roba 3 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Profundidades (1).png": {
+    "efecto": "Al Final de tu turno, haz 1 punto de daño al Esbirro Objetivo Aliado. Al Final del turno del Rival, haz 1 punto de daño al Esbirro Objetivo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Puertas de la Ciudad.png": {
+    "efecto": "Acción Rápida: El siguiente efecto de Jugar de un Personaje se Activa una vez adicional este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Salón del Trono (1).png": {
+    "efecto": "Tu Héroe obtiene +1 de ataque. Al Final de tu turno, si tu Héroe está en el Puesto Activo, Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Torre Aislada (4).png": {
+    "efecto": "Jugar: Anexa el Esbirro Objetivo a esta carta (pierde todos sus efectos). Destruido: Pon al Personaje Anexado en la Banca de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/bases/Trebuchet.png": {
+    "efecto": "Acción Rápida: Haz | punto de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Barril de Pólvora.png": {
+    "efecto": "Haz 3 puntos de daño a la Base Objetivo. Reacción: Cuando esta carta sea puesta en el Descarte, si no se ha Jugado, haz 1 punto de daño a cada Esbirro y Base.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Bola de Slime (5).png": {
+    "efecto": "N Anexa esta carta al Puesto Activo del Rival. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. No puedes hacer Intercambios. Al Final de tu Ser turno desde que se Jugó esta carta, Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Bomba de Humo (1).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando tu Rival fuese a hacer un Ataque, niega ese Ataque. Puedes hacer un Intercambio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Bomba.png": {
+    "efecto": "N Anexa esta carta a un espacio de la Banca del Rival. Mientras esta carta esté en el Campo de Batalla se considera como una carta Permanente. Al Final del 2do turno desde que se Jugó esta carta, Destruye esta carta. Haz 4 puntos de daño a cada Personaje que esté en este espacio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Caldero (3).png": {
+    "efecto": "Busca en tu Mazo una Poción y Juégala. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Catalejo (4).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Muestra las cartas Preparadas y Mano del Rival. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cepo (5).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando se ponga un Personaje en el Puesto Activo del Rival, haz 3 puntos de daño a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cofre Trampa (8).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando tu Rival Robe una o más cartas, haz X puntos de daño al Personaje Activo del Rival donde X es el número de cartas que ha Robado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cofre.png": {
+    "efecto": "Roba hasta tener 4 cartas en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cristal Inestable (4).png": {
+    "efecto": "Haz 1 punto de daño al Esbirro Objetivo. Reacción: Cuando esta carta sea puesta en el Descarte, si no se ha Jugado, haz 3 puntos de daño al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cristal de Ethra (4).png": {
+    "efecto": "N Busca en tu Mazo una Magia, Mmuéstrala y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Cuerda.png": {
+    "efecto": "N Pon una carta que no sea Personaje de tu Descarte en la parte superior de tu Mazo. Reacción: Cuando esta carta sea puesta en el Descarte, si no se ha Jugado, Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Dardo Envenenado.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo del turno del Rival). Haz 1 punto de daño al Personaje Activo del Rival. Tu Rival no puede hacer Ataques con ese Personaje este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Disfraz (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). El Esbirro Aliado Objetivo tiene el nombre y todos los efectos del Esbirro Objetivo del Rival este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Explosivo (2).png": {
+    "efecto": "Destruye la carta Permanente Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Fogata (2).png": {
+    "efecto": "Cura 1 punto de salud a cada Personaje Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Foso con Pinchos (1).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando se ponga uno o más Personajes en la Banca del Rival, haz 2 puntos de daño a esos Personajes.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Grimorio.png": {
+    "efecto": "Pon una Magia de un Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Herramientas (5).png": {
+    "efecto": "Busca en tu Mazo un Objeto Desechable, muéstralo y ponlo en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Libro (1).png": {
+    "efecto": "El Jugador Objetivo Roba 2 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Mercancía.png": {
+    "efecto": "Pon hasta 3 cartas que no sean Personaje de tu Descarte en tu Mazo. Baraja tu Mazo. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Metales (3).png": {
+    "efecto": "Busca en tu Mazo un Equipo, Mmuéstralo y ponlo en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Mina (3).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando tu Rival fuese a Jugar un Objeto, niega el efecto de ese Objeto y Destrúyelo si es una Base o Equipo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Orden de detención.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo del turno del Rival). El Personaje Objetivo pierde todos sus efectos este turno. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Planos de Edificación (1).png": {
+    "efecto": "N Pon una Base de un Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Poción Elemental (4).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). (Cuando Juegues esta carta elige un Tipo de Magia. Esta carta se considera como una Magia de ese Tipo). Mientras esta carta esté en tu Descarte, si la has Jugado, se considera como una Magia de ese Tipo. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Poción de Curación (5).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Cura 2 puntos de salud al Esbirro Objetivo. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Poción de Estamina (4).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Haz un Intercambio. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Poción de Maná (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Puedes Jugar tu siguiente Magia como una Acción Rápida este turno. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Poción de Vigor.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). El Esbirro Objetivo obtiene +1/+1 este turno. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Ración de Comida (3).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Cura 4 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Red (2).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras está Preparada). Reacción: Cuando se ponga un Personaje en la Banca del Rival desde su Party, ponlo en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Suministros para Campamento (2).png": {
+    "efecto": "N Busca en tu Mazo una Base, muéstrala y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Tótem de la Destrucción (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Potencia tu siguiente Magia de Tipo Fuego o Tipo Rayo este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Tótem de la Ventisca (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Potencia tu siguiente Magia de Tipo Agua o Tipo Viento este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Tótem del Génesis (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Potencia tu siguiente Magia de Tipo Arcana o Tipo Naturaleza este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Tótem del Umbral.png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Potencia tu siguiente Magia de Tipo Muerte o Tipo Vida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Urna Ocupada (1).png": {
+    "efecto": "Pon dos Fichas Diablillo en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Vial de Veneno (4).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo de tu turno o del Rival). El Esbirro Objetivo obtiene -1/-1 este turno. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/desechables/Vial de Ácido (2).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Destruye el Equipo Objetivo. Roba | carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/objetos/equipos/Antorcha (2).png": {
+    "efecto": "Acción Rápida: Destruye esta carta. Destruye la carta Preparada Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Arco (6).png": {
+    "efecto": "Reacción: Cuando tu Rival Juegue un Personaje, puedes hacer 2 puntos de daño a ese Personaje. (Solo puedes Activar esta Reacción mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Armadura de Pinchos (2).png": {
+    "efecto": "Reacción: Cuando el Personaje Equipado reciba un Ataque, puedes hacer 1 punto de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Armadura de Placas (5).png": {
+    "efecto": "Reduce en 1 el daño que fuese a recibir el Personaje Equipado por Ataques.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Armas Duales (6).png": {
+    "efecto": "Acción Rápida: El Personaje Equipado obtiene -2 de ataque este turno. Haz un Ataque. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Artefacto del Gremio.png": {
+    "efecto": "Acción Rápida: haz 1 punto de daño al Personaje Activo del Rival. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Ballesta Ligera (1).png": {
+    "efecto": "Acción Rápida : Tu Rival no puede Activar Reacciones este turno. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Ballesta Pesada (5).png": {
+    "efecto": "Acción Rápida: El Personaje Equipado obtiene +3 de ataque este turno. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo y solo mientras que el Personaje Activo del Rival tenga 8 o más salud máxima).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Botas de Aventurero (1).png": {
+    "efecto": "Acción Rápida : Haz un Intercambio. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Canalizador de Ethra.png": {
+    "efecto": "Acción Normal: Haz x puntos de daño al Personaje Activo del Rival donde X es el número de cartas que has Robado este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Casco (7).png": {
+    "efecto": "Reacción: Cuando el Personaje Equipado fuese a ser Derrotado, en su lugar puedes Destruir esta carta. (Si la salud del Personaje es 1 0 menos, en su lugar, tiene 1 de salud).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Caña de Pesca (8).png": {
+    "efecto": "Acción Normal: Muestra la Party del Rival. Puedes elegir un Personaje de la Party del Rival y ponerlo en un espacio libre de su Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Coraza de Ehtra (1).png": {
+    "efecto": "El Personaje Equipado no puede ser Objetivo de Magias. Reduce en 1 el daño que fuese a recibir el Personaje Equipado por Magias.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Corona Real.png": {
+    "efecto": "Esta carta solo puede ser Equipada a un Héroe.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 42,
+    "vidaOcr": null
+  },
+  "cartas/objetos/equipos/Cuerno de Guerra (2).png": {
+    "efecto": "Acción Rápida: Puedes Jugar tu siguiente Personaje como una Acción Rápida este turno. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Daga Arrojadiza (2).png": {
+    "efecto": "Acción Rápida: Destruye esta carta. Haz 1 punto de daño al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Equipo Completo (3).png": {
+    "efecto": "Mientras el Personaje Equipado tenga tres o más Equipos Equipados, obtiene +27.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Escudo (6).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": null
+  },
+  "cartas/objetos/equipos/Espada (2).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Espadón (2).png": {
+    "efecto": "Jugar: No puedes hacer Ataques con el Personaje Equipado este turno. Solo puedes hacer Ataques con el Personaje Equipado una vez por turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 43,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Flagelo.png": {
+    "efecto": "Cuando hagas un Ataque con el Personaje Equipado, haz 2 puntos de daño al Personaje Equipado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 42,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Hacha.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 42,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Kit de Explorador (4).png": {
+    "efecto": "Acción Rápida: Haz el efecto de la Acción de carta del Personaje Equipado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Kit de Explosivos.png": {
+    "efecto": "N Acción Normal: haz 3 puntos de daño a cada Personaje Activo. Cuando el Personaje Equipado sea Derrotado, haz 1 punto de daño a cada Personaje. (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Kit de Medicinas.png": {
+    "efecto": "Acción Normal: Cura 1 punto de salud al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Lanza (1).png": {
+    "efecto": "Acción Normal: Haz un Ataque al Personaje Objetivo en la Banca del INCA (Solo puedes Activar esta Acción de carta mientras el Personaje Equipado esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Manto del Asesino (2).png": {
+    "efecto": "Mientras el Personaje Equipado esté en el Puesto Activo, tu Rival no puede Jugar Maniobras ni Objetos Desechables.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Maza (2).png": {
+    "efecto": "Acción Rápida: Destruye esta carta. Destruye el Equipo Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Medallón Bendito.png": {
+    "efecto": "N Potencia las curaciones que fuese a recibir el Esbirro Equipado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Medallón Maldito.png": {
+    "efecto": "Potencia el daño que fuese a recibir el Esbirro Equipado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Patata Caliente.png": {
+    "efecto": "Al Final de tu turno, Destruye esta carta. Haz 4 puntos de daño al Personaje equipado. Acción Normal: Equipa este Equipo al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Peso Muerto.png": {
+    "efecto": "Solo puedes hacer Ataques con el Personaje Equipado una vez por turno. No puedes Activar Acciones de carta con el Personaje Equipado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Red Arrojadiza (3).png": {
+    "efecto": "El Personaje Equipado no puede Intercambiarse. Acción Normal: Destruye esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 0
+  },
+  "cartas/objetos/equipos/Talismán (1).png": {
+    "efecto": "Cuando el Personaje Equipado sea Derrotado, ponlo en la Banca de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 1
+  },
+  "cartas/objetos/equipos/Tomo del Necromante (3).png": {
+    "efecto": "N Mientras haya tres o más cartas en tu Mano, el Personaje Equipado obtiene +3 de salud. Al Final de tu turno, si no hay cartas en tu Mano, Derrota al Personaje Equipado. (Esta carta no puede ser Equipada a un Héroe).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 40,
+    "vidaOcr": 0
+  },
+  "cartas/personajes/Esbirros/animales/Araña Gigante (2).png": {
+    "efecto": "Acción Normal: Pon una Ficha Telaraña Equipada al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Caballo Salvaje (2).png": {
+    "efecto": "N Acción Normal: Anexa este Personaje al Personaje Objetivo. Mientras esta carta esté Anexada, no se considera como un Personaje. El Personaje Anexado obtiene +2 de salud. Cuando el Personaje Anexado sea Derrotado, pon esta carta en tu Banca (vuelve a considerarse como un Personaje).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Carnero.png": {
+    "efecto": "Acción Normal: Haz 1 punto de daño al Personaje Activo del Rival. Mueve a ese Personaje. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Cerdito (3).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida). Acción Normal: Cura 1 punto de salud a este Personaje. Derrotado: Puedes buscar en tu Mazo una Ración de Comida, muéstrala y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Gallina (2).png": {
+    "efecto": "Tu Rival no recibe un Punto de Victoria cuando este Personaje es Derrotado. Derrotado: Pon una Ficha Huevo en este espacio.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Jabalí (2).png": {
+    "efecto": "N Jugar: Puedes poner este Personaje en tu Puesto Activo. Acción Normal: Haz 2 puntos de daño ala Base Objetivo del Rival. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Manada de Lobos (3).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida al Comienzo del turno del Rival). Acción Normal: Pon una Ficha Lobo en tu Banca. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Oso Pardo.png": {
+    "efecto": "Acción Normal: Haz un Ataque. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/animales/Puma.png": {
+    "efecto": "Acción Normal: Destruye la carta Preparada Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Alquimista (1).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo hasta dos Pociones, muéstralas y ponlas en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Artífice Experimental (1).png": {
+    "efecto": "Acción Normal: Haz X puntos de daño al Personaje Activo del Rival donde X es el número de cartas que has Jugado este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Carromato del Gremio (2).png": {
+    "efecto": "Acción Rápida: Puedes Jugar tu siguiente Objeto Desechable como una Acción Rápida este turno. Mientras esta carta esté en el Descarte, se considera como un Objeto Desechable.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Creación del Gremio (2).png": {
+    "efecto": "(Solo puedes Jugar esta carta mientras hayas Jugado tres o más cartas que no sean Personaje este turno).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Inventor (1).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Objeto Desechable, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Acción Rápida: Prepara un Objeto Desechable.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Investigador Ermitaño (4).png": {
+    "efecto": "Reacción: Cuando busques una o más cartas en tu Mazo, puedes Robar 1 una carta. Derrotado: Busca un Objeto Desechable en tu Mazo, muéstralo y ponlo en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Mercader de Pociones (3).png": {
+    "efecto": "N Reacción: Cuando Juegues una Poción Preparada, puedes buscar en tu Mazo una Poción con el mismo nombre, Mmuéstrala y ponla en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Pirotécnico (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Explosivo, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Reacción: Cuando busques cartas en tu Mazo, puedes hacer 1 punto de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/artífices/Proveedor del Gremio (1).png": {
+    "efecto": "Acción Rápida: Pon hasta tres Objetos Desechables de tu Descarte en tu Mazo. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Arcanólogo de la Banda.png": {
+    "efecto": "Acción Rápida: Potencia tu siguiente Magia Preparada este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Asaltante.png": {
+    "efecto": "Reacción: Cuando Juegues una Trampa, puedes hacer un Ataque. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Bandidos.png": {
+    "efecto": "N Jugar: Puedes Preparar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Curandero de la Banda (2).png": {
+    "efecto": "Reacción: Cuando Juegues una carta Preparada, puedes curar 2 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Informante (2).png": {
+    "efecto": "N Reacción: Cuando Prepares una carta, puedes mostrar la Mano del Rival. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Mascota de la Banda (1).png": {
+    "efecto": "Acción Rápida: Anexa una carta Preparada Aliada a este Personaje. Reacción: Al Comienzo de tu turno, puedes Jugar una carta Preparada Anexada a esta carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Saboteadores.png": {
+    "efecto": "Acción Rápida: Destruye una carta Preparada Aliada. Elige una opción: - Prepara una carta. - Destruye la carta Preparada Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Timador (1).png": {
+    "efecto": "N Reacción: Cuando Juegues una carta Preparada, puedes Preparar una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bandidos/Trampero.png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo hasta dos Trampas, muéstralas y ponlas en tu Mano. Baraja tu Mazo. Acción Normal: Pon una Trampa de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Cambiapaisajes (1).png": {
+    "efecto": "Jugar: Pon todas las Bases del Descarte de cada Jugador en la Banca de ese Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Cristal Viviente (1).png": {
+    "efecto": "Derrotado: Pon una Ficha Núcleo de Cristal en la Banca del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Equipo de Demoliciones (2).png": {
+    "efecto": "Reacción: Cuando se Destruya una carta Permanente, puedes hacer 1 punto de daño al Personaje Activo del PINCIA (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Explorador (1).png": {
+    "efecto": "Jugar: Pon una Ficha Asentamiento en tu Banca o en la Banca del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Gólem Chiquito (2).png": {
+    "efecto": "N (Puedes Jugar esta carta como una Acción Rápida mientras tengas una o más Bases).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Gólem Enfurecido.png": {
+    "efecto": "Jugar: Destruye todas las Bases. Haz X puntos de daño al Personaje Activo del Rival donde X es el número de Bases Destruidas por este efecto.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Gólem Guardián.png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras controles una o más Bases) Mientras este Personaje esté en el Puesto Activo, no se pueden hacer Ataques a las Bases.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Montaña Móvil.png": {
+    "efecto": "N Jugar: Pon una Ficha Montaña en tu Banca. Mientras esta carta esté en el Descarte, se considera como una Base.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bioma alto/Águila Gigante.png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Viento, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Viento como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Brigada de Asalto Fungus (1).png": {
+    "efecto": "N Reacción: Cuando este Personaje reciba daño, puedes poner una Ficha Fúngico en la Banca del Rival. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Clérigo Fungus.png": {
+    "efecto": "Acción Rápida: Cura 1 punto de saluda cada Ficha Esbirro.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Driada (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Naturaleza, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Naturaleza como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Ent Protector.png": {
+    "efecto": "Las Fichas Esbirro obtienen +1/+1.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Guardian del Bosque (1).png": {
+    "efecto": "Cuando una Ficha Esbirro sea Derrotada, este Personaje obtiene +1 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Hombre Fungus.png": {
+    "efecto": "Acción Rápida: Pon una Ficha Fúngico en tu Banca. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Pimpollito.png": {
+    "efecto": "Derrotado: Pon una Ficha Ent en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Planta Carnívora.png": {
+    "efecto": "Jugar: Derrota a cada Ficha Esbirro.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/bosque/Serpientemadera.png": {
+    "efecto": "Derrotado: Pon una Ficha Espada de Madera Equipada al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Archidemonio de la Abadía (3).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras tengas cuatro o más Magias de Tipo Muerte y/o Tipo Vida en tu Descarte). Jugar: Pon este Personaje en tu Puesto Activo. Derrotado: Tu Rival recibe un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Arcángel de la Abadía (2).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras tu Rival tenga tres o más Puntos de Victoria). Jugar: Pon este Personaje en tu Puesto Activo. Mientras esta carta esté en tu Puesto Activo, tu Rival no recibe Puntos de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Cultista (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Vida, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Vida como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Espectro de la Abadía.png": {
+    "efecto": "N Cuando fueses a curar puntos de salud a un Personaje, en su lugar, haz esa cantidad de puntos de daño a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Ghouls Sirvientes.png": {
+    "efecto": "Jugar: haz 4 puntos de daño a este Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Mártir de la Abadía.png": {
+    "efecto": "Derrotado: Pon un Esbirro de un Descarte en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Obispo.png": {
+    "efecto": "Reacción: Cuando este Personaje sea puesto en tu Descarte, elige una opción: - Cura 2 puntos de salud a cada Esbirro. - Haz 2 puntos de daño a cada Esbirro.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Ritualista (1).png": {
+    "efecto": "Acción Normal: Pon un Personaje de tu Party en tu Descarte. Cura 5 puntos de salud al Esbirro Objetivo Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/cultistas/Zelote.png": {
+    "efecto": "Jugar: Cura 3 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Bandidos de las Arenas (2).png": {
+    "efecto": "N Acción Normal: Descarta 1 carta de la Mano del Rival. Reacción: Cuando tu Rival Descarte una o más cartas de su Mano, Retira del Juego esas cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Buitre (1).png": {
+    "efecto": "Reacción: Cuando tu Rival fuese a Activar un efecto de Derrotado o Destruido, en su lugar, niega ese efecto. Descarta 1 see de la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Enjambre de Insectos (3).png": {
+    "efecto": "N Jugar: Descarta 1 carta de la Mano del Rival. Reacción: Cuando este Personaje reciba un Ataque, si no ha sido Derrotado, puedes Derrotar al Personaje Activo del Rival. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Escaraalto (2).png": {
+    "efecto": "Este Personaje obtiene +3 de ataque mientras haya una o menos cartas en la Mano de un Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Gran Sierpe de Arena (2).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras haya una o menos cartas en la Mano de un Jugador). Al Final de cada turno, si hay dos o más cartas en la Mano de un Jugador, Descarta 1 carta de la Mano de cada Jugador. Pon este Personaje en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 6,
+    "vidaOcr": 10
+  },
+  "cartas/personajes/Esbirros/desierto/Guerreros de las Arenas.png": {
+    "efecto": "Reacción: Cuando un Equipo sea puesto en un Descarte desde el Mazo o la Mano, puedes Equiparlo a este Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Lagarto Territorial (1).png": {
+    "efecto": "N Reacción: Cuando Descartes una Maniobra de tu Mano, puedes elegir una opción: - Haz un Ataque. - Haz un Intercambio. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Mercader de Camellos (1).png": {
+    "efecto": "Acción Rápida: Descarta 1 carta de tu Mano. Pon el Esbirro Objetivo de la Banca del Rival en tu Banca. Pon este Personaje en la Banca del Rival. (Solo puedes Activar esta Acción de carta mientras haya una o más cartas en tu Mano).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/desierto/Nómadas de las Arenas (1).png": {
+    "efecto": "Acción Normal: Descarta 2 cartas de la Mano de cada Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Amo de Tótems (1).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Tótem, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Reacción: Cuando Juegues un Tótem, el Personaje Activo Aliado obtiene +2 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Entidad de la Tormenta (3).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras haya cuatro o más Magias de Tipo Agua y/o Tipo Viento en tu Descarte). Derrotado: Cuando este Personaje sea Derrotado, si hay menos cartas Permanentes en tu Banca que en la Banca del Rival, puedes poner cada carta Permanente que no sea Personaje en la Mano de su Propietario y cada Personaje en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Espíritu (1).png": {
+    "efecto": "Cuando este Personaje sea Objetivo de un efecto, Retira del Juego este Personaje. Acción Rápida: Descarta 1 Magia de Tipo Vida de tu Mano. Pon una Magia de Tipo Muerte de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Ethralito (1).png": {
+    "efecto": "N Mientras esta carta esté en el Descarte se considera como una Magia de cada Tipo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Ethralito Titán (1).png": {
+    "efecto": "Este Personaje obtiene +1/+1 por cada Magia de Tipos diferentes en tu Descarte y en el Descarte del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Goblin Canalizador (2).png": {
+    "efecto": "Acción Rápida: Haz 1 punto de daño a este Personaje. Puedes Jugar tu siguiente Magia como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Gólem de Runas.png": {
+    "efecto": "N Acción Rápida: Mientras este Personaje esté tu Banca, se considera como una Base este turno. (Deja de considerarse como un Personaje).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Heraldo de la Destrucción.png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras haya cuatro o más Magias de Tipo Fuego y/o Tipo Rayo en tu Descarte). Jugar: Haz 2 puntos de daño a cada Personaje del Rival. Cuando este Personaje sea puesto en el Campo de Batalla, si no se ha Jugado, Derrota este Personaje. Haz 2 puntos de daño a cada Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/elementales/Manifestación de Ethra.png": {
+    "efecto": "Reacción: Al Final de tu turno, si hay 50 más cartas en tu Mano, puedes hacer 3 puntos de daño al Personaje Activo del PINCIA",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Capataz (1).png": {
+    "efecto": "Acción Rápida: Haz el efecto de la Acción de carta de la Base o Objeto Aliado Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Constructores.png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Suministros para Campamento, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Las Bases Aliadas obtienen +1 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Equipo de Mineros (1).png": {
+    "efecto": "Acción Normal: Destruye una Base Aliada. Pon una Base de tu Descarte en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Glompy (3).png": {
+    "efecto": "Reacción: Cuando se Destruya un Objeto, puedes curar 1 punto de salud a este Personaje",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Guerrero Enano.png": {
+    "efecto": "N Reduce en 1 el daño que fuese a recibir este Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Herrero (1).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Metales, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Los Personajes Equipados Aliados obtienen +1 de ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Maestro de Armas (1).png": {
+    "efecto": "Reacción: Cuando Equipes un Equipo a este Personaje, puedes curar 1 punto de salud a este Personaje. Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Minero.png": {
+    "efecto": "Jugar: Pon las 3 primeras cartas de tu Mazo en el Descarte. Pon un Objeto de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/enanos/Turba de Trabajadores (2).png": {
+    "efecto": "Cuando se ponga un Objeto desde el Campo de Batalla en tu Descarte o Descartes un Objeto de tu Mano, este Personaje obtiene +1 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Amalgama de Huesos (2).png": {
+    "efecto": "Jugar: Derrota un Esbirro Aliado. Derrotado: Pon una Ficha Esqueleto en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Arquero Esqueleto.png": {
+    "efecto": "Jugar: Haz 1 punto de daño al Personaje Objetivo. Derrotado: Haz 1 punto de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Calavera Ardiente.png": {
+    "efecto": "Derrotado: Haz 4 puntos de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Campeón de la Cripta (1).png": {
+    "efecto": "Este Personaje obtiene +1 de ataque por cada Personaje en tu Descarte y en el Descarte del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Dragón Esqueleto (3).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras haya tres o más Esbirros en tu Descarte). Cuando este Personaje sea puesto en el Campo de Batalla, si no se ha Jugado, Derrota este Personaje. Derrotado: Retira del Juego este Personaje. Puedes poner un Esbirro de tu Descarte en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Escriba Esqueleto (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Muerte, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Muerte como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Guerrero Esqueleto.png": {
+    "efecto": "Jugar: Puedes poner un Equipo de tu Descarte en tu Mano. Derrotado: Puedes poner un Equipo de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Horda de Esqueletos (1).png": {
+    "efecto": "Derrotado: Puedes poner hasta dos Fichas Esqueleto en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/esqueletos/Necromante (2).png": {
+    "efecto": "N Acción Rápida: la siguiente vez que se fuese a Activar un efecto de Derrotado este turno, ese efecto es activado una vez adicional.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Asaltantes goblin (2).png": {
+    "efecto": "Cuando este Personaje sea puesto en el Campo de Batalla, obtiene +3 de ataque este turno. Derrotado: Pon una Ficha Goblin en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Chamán (1).png": {
+    "efecto": "Cuando Juegues una Magia, haz 1 punto de daño al Personaje Activo Aliado y al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/General Goblin (1).png": {
+    "efecto": "Acción Rápida: Descarta 1 carta de tu Mano o Derrota un Esbirro Aliado. Haz punto de daño al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Goblin Bruto (3).png": {
+    "efecto": "Jugar: Elige una opción: - Descarta 1 carta de tu Mano. - Derrota un Esbirro aliado. Cuando Descartes una o más cartas de tu Mano, este Personaje obtiene +1 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Goblin Guerrero (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Jugar: Pon una Ficha Goblin en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Goblin Pesado (1).png": {
+    "efecto": "Reacción: Cuando hagas un Ataque, puedes Descartar 1 carta de tu Mano o Derrotar un Esbirro Aliado. Este Personaje obtiene +1 de ataque este turno. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Goblins Artilleros.png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Barril de Pólvora, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Acción Rápida: Descarta 1 carta de tu Mano. Haz 5 puntos de daño al Personaje Objetivo. Derrota este Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Goblins Lanceros.png": {
+    "efecto": "Jugar: Puedes hacer Ataques al Esbirro Objetivo en la Banca del Rival este turno. Derrotado: Haz 1 punto de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/goblins/Horda de Goblins.png": {
+    "efecto": "Jugar: Pon tantas Fichas Goblin como sea posible en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Alcaide (2).png": {
+    "efecto": "No se pueden Jugar cartas Preparadas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Carcelero (1).png": {
+    "efecto": "Jugar: Muestra la Party del Rival. Puedes Anexar un Esbirro de la Party del Rival a este Personaje (esa carta no se considera como un Personaje y pierde todos sus efectos mientras esté Anexada). Derrotado: Pon el Personaje Anexado en la Banca del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Confesor.png": {
+    "efecto": "N Reacción: Cuando tu Rival fuese a buscar una carta en su Mazo, en vez su lugar, Roba 1 una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Inquisidor (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida al Comienzo del turno del Rival). Jugar: El Personaje Objetivo pierde todos sus efectos este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Interrogador.png": {
+    "efecto": "N Jugar: Tu Rival Prepara una carta. Reacción: Cuando se Destruya una carta Preparada, pon las 2 primeras cartas del Mazo del Rival en su Descarte.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Legislador (6).png": {
+    "efecto": "Tu Rival no puede Jugar cartas de su Mano como Acción Rápida.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Protectores del Orden.png": {
+    "efecto": "Jugar: Muestra la Mano del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Tribunal.png": {
+    "efecto": "Acción Rápida: Tu Rival Prepara una carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/inquisición/Vigilantes.png": {
+    "efecto": "Jugar: Destruye la carta Preparada Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Ariete (1).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras controles una o más Bases). Jugar: Destruye una Base Aliada. Acción Rápida: Destruye la Base Objetivo. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Capitán (1).png": {
+    "efecto": "Acción Rápida: Puedes Jugar tu siguiente Maniobra como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Defensas de la Ciudad (1).png": {
+    "efecto": "Reacción: Cuando Juegues una Maniobra, haz 1 punto de daño al Personaje Activo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Duelista (1).png": {
+    "efecto": "Reacción: Cuando este Personaje reciba un Ataque, puedes hacer un Ataque. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Escudero (1).png": {
+    "efecto": "Mientras este Personaje esté en tu Banca, el Personaje Activo Aliado obtiene +1 de ataque. Acción Rápida: Derrota este Personaje. Cura 2 puntos de salud al Personaje Activo Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Estratega (1).png": {
+    "efecto": "Jugar: Roba 3 cartas. Elige una opción. - Descarta 1 Maniobra de tu Mano. - Descarta 2 cartas de tu Mano. Derrotado: Descarta 1 carta de la Mano e[-] E INCIA",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Guardia de Palacio.png": {
+    "efecto": "Tu Héroe obtiene +1 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Recluta Novato (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Derrotado: Pon una Maniobra de tu Descarte en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/milicia/Soldado (2).png": {
+    "efecto": "(Mientras haya menos personajes en tu Banca que en la Banca del Rival, puedes Jugar esta carta como una Acción Rápida). Derrotado: Pon este Personaje en la Party de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Augur del Invierno (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Agua, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Agua como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Berserker.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Bárbaro (2).png": {
+    "efecto": "Acción Normal: Al Final del siguiente turno del Rival, si no ha hecho un Intercambio, haz 5 puntos de daño al Personaje Activo del Rival. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Depredador de las Montañas (1).png": {
+    "efecto": "N Reacción: Cuando se ponga un Personaje en la Banca del Rival durante tu turno, haz 3 puntos de daño a ese Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Elemental de Nieve (1).png": {
+    "efecto": "N Acción Rápida: Mueve este Personaje. Reacción: Cuando muevas o Intercambies a este Personaje, obtiene +1 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Gigante de las Nieves (1).png": {
+    "efecto": "Este Personaje no puede ponerse en la Party de su Propietario. Este Personaje no puede recibir curaciones.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Mamut a la Carga (2).png": {
+    "efecto": "Jugar: Haz 1 punto de daño a cada otro Esbirro. Mientras este Personaje esté en tu Puesto Activo, no puedes hacer Intercambios.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Patrulla de Caza.png": {
+    "efecto": "Jugar: Pon una Ficha Presa en la Banca (e[-]PINCI",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/montaña/Sabio de la Tribu (1).png": {
+    "efecto": "Mientras haya menos Personajes en tu Party que en la Party del Rival, los Personajes Aliados obtienen +1 de ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Acechante del Pantano (1).png": {
+    "efecto": "(Puedes Jugar esta carta como una Acción Rápida). Reacción: Cuando se ponga un Esbirro en la Banca del Rival, haz 1 punto de daño a ese Esbirro.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Armadura Reptante (2).png": {
+    "efecto": "Jugar: Puedes Equipar el Equipo Objetivo al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Cocodrilo de Pantano (1).png": {
+    "efecto": "N (Solo puedes Jugar esta carta como una Acción Normal). Acción Normal: Derrota al Esbirro Objetivo con O de ataque. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Criatura del Pantano.png": {
+    "efecto": "El ataque de este Personaje no puede cambiar.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Devorador.png": {
+    "efecto": "Jugar: Puedes Destruir el Equipo o carta Anexada Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Elemental de Putrefacción (1).png": {
+    "efecto": "Jugar: Pon una Ficha Enfermedad Equipada al Personaje Objetivo. Los Personajes no pueden recibir curaciones.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Saga (1).png": {
+    "efecto": "Los Personajes Activos obtienen -1 de Ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Sapo Gigante (1).png": {
+    "efecto": "Acción Normal: Mueve al Personaje Activo del Rival. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/pantano/Slime (1).png": {
+    "efecto": "Reduce en 1 el daño que fuese a recibir este Personaje por Ataques. Derrotado: Pon hasta dos Fichas Slime Pequeño en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Agente Enmascarado (1).png": {
+    "efecto": "Jugar: Copia el nombre y el Efecto del Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Agente Infiltrado (2).png": {
+    "efecto": "Este Personaje obtiene -2 de ataque mientras no sea de tu Propiedad. Al Final de tu turno, pon este Personaje en la Banca de su Propietario.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Bibliotecarios (1).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Grimorio o Libro, muéstralo y ponlo en tu Mano. Baraja tu Mazo. Derrotado: Roba 2 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Consejero Sobornado (1).png": {
+    "efecto": "Acción Normal: Pon al Esbirro Objetivo que no sea Ficha de la Banca del Rival en tu Banca. Pon al Esbirro Objetivo que no sea Ficha de tu Banca en la Banca del Rival. Derrotado: Pon la primera carta del Mazo del Rival en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Contrabandista (1).png": {
+    "efecto": "Acción Normal: Pon la primera carta del Mazo del Rival en tu Mano. Puedes Jugar cartas que no sean de tu Propiedad como Acción Rápida.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Instigadores de Revueltas (3).png": {
+    "efecto": "Los Personajes Aliados que no sean de tu Propiedad obtienen +1/+1.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Revolucionarios (1).png": {
+    "efecto": "N Al Final de tu turno, Ganas la Partida mientras haya cuatro o más Revolucionarios en el Campo de Batalla.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Sabio (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Arcana, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Arcana como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/revolucionarios/Vagabundo (1).png": {
+    "efecto": "Jugar: Puedes Jugar una carta que no sea Personaje del Descarte del Rival. Tu Rival no recibe un Punto de Victoria cuando este Personaje es Derrotado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Aldeanos (2).png": {
+    "efecto": "Derrotado: Pon una Ficha Aldeano en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Arcanólogo.png": {
+    "efecto": "Jugar: Puedes Jugar una Magia de tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Asesino.png": {
+    "efecto": "Reacción: Cuando hagas un Intercambio, este Personaje obtiene +2 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Aventurero (2).png": {
+    "efecto": "Jugar: Puedes jugar una Maniobra de tu Mano",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Ballestero (1).png": {
+    "efecto": "Jugar: Haz 2 puntos de daño al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Buey (1).png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Cazador.png": {
+    "efecto": "Acción Normal: Derrota al Esbirro Objetivo con 8 o más salud máxima. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Comerciante (2).png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo un Objeto, muéstralo y ponlo en tu Mano. Baraja tu Mazo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Guerrero.png": {
+    "efecto": "Jugar: Haz un Ataque.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Ladrón (2).png": {
+    "efecto": "Jugar: Muestra la Mano del Rival. Puedes poner una carta de su Mano en tu Mano.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/set inicial/Tabernero.png": {
+    "efecto": "Jugar: Roba 2 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Draconólogo.png": {
+    "efecto": "Jugar: Puedes buscar en tu Mazo una Magia de Tipo Fuego, muéstrala y ponla en tu Mano. Baraja tu Mazo. Acción Rápida: Puedes Jugar tu siguiente Magia de Tipo Fuego como una Acción Rápida este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Fénix (2).png": {
+    "efecto": "Derrotado: Puedes Retirar del Juego una Magia de Tipo Fuego de tu Descarte. Si lo haces, tu Rival pierde un Punto de Victoria y pon este Personaje en tu Party.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Geodo (1).png": {
+    "efecto": "Este Personaje no puede recibir daño que no sea de Ataques.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Geodo Furioso (1).png": {
+    "efecto": "Acción Rápida: Este Personaje no puede recibir daño este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 2,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Geodo Incandescente (1).png": {
+    "efecto": "N Potencia el daño que fuesen a recibir los Personajes Activos.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Guardaespaldas (1).png": {
+    "efecto": "Jugar: Pon este Personaje en el Puesto Activo. Este Personaje obtiene +3 de ataque mientras esté dañado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Gusano de Fuego (1).png": {
+    "efecto": "Acción Rápida: Haz 1 punto de daño a este Personaje y al Personaje Activo del PINCIA Derrotado: Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Gólem de Magma (3).png": {
+    "efecto": "Jugar: Haz 1 punto de daño a cada otro Esbirro Aliado y Base Aliada.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Esbirros/volcan/Tirano de Obsidiana (1).png": {
+    "efecto": "N (Solo puedes Jugar esta carta mientras haya cinco o más cartas en tu Mano). Jugar: Descarta todas las cartas de tu Mano. Haz X puntos de daño al Personaje Objetivo donde X es el número de cartas Descartadas por este efecto. Derrotado: Tu Rival Roba 5 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Heroes/Abad (3).png": {
+    "efecto": "Acción Normal: Cura 2 puntos de salud al Personaje Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Heroes/Archiduque Konrado (1).png": {
+    "efecto": "Potencia tu Magia de Tipo Muerte. Acción Normal: Derrota un Esbirro Aliado. Roba 3 cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Bob, Protagonista.png": {
+    "efecto": "Jugar: Pon una Ficha Veil en tu Banca. Este Personaje obtiene +2 de ataque mientras hayas jugado una Maniobra este turno. Acción Rápida: Pon a Veil en tu Puesto Activo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Capitán Rackham Drake.png": {
+    "efecto": "Potencia tu Magia de Tipo Agua. Acción Normal: Mueve al Personaje Objetivo del Rival.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Chonk.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 8
+  },
+  "cartas/personajes/Heroes/El Caballero Verde.png": {
+    "efecto": "Potencia tu Magia de Tipo Naturaleza. Acción Rápida: Elige una opción: - La Ficha Objetivo obtiene +1 de ataque este turno. - Cura 3 puntos de salud a la Base Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Campeón.png": {
+    "efecto": "",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 3,
+    "vidaOcr": 6
+  },
+  "cartas/personajes/Heroes/El Conquistador (1).png": {
+    "efecto": "N Reacción: Al Final del turno, si se han Destruido una o más Bases que no sean Ficha del Rival, recibes un Punto de Victoria.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Corazón del Volcán.png": {
+    "efecto": "Potencia tu Magia de Tipo Fuego. Jugar: Pon una Ficha Volcán en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Gran Khalid (2).png": {
+    "efecto": "N Reacción: Cuando tu Rival Descarte una 0 más cartas de su Mano, puedes Jugar una de esas cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Gran Tecno-mago.png": {
+    "efecto": "Potencia tu Magia de Tipo Rayo. Jugar: Descarta todas las cartas de tu Mano. Roba $ cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Guardabosques (1).png": {
+    "efecto": "Puedes Activar Acciones de carta de Personajes como Acción Rápida. Acción Normal: El Personaje Objetivo obtiene +1 de ataque este turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Juez de Justicia (1).png": {
+    "efecto": "N Reacción: Cuando tu Rival Juegue una carta, puedes poner la primera carta del Mazo del Rival en su Descarte.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Maestro Futogoshi.png": {
+    "efecto": "N Puedes Jugar una Maniobra adicional en cada turno. Acción Rápida: Muestra la primera carta de tu Mazo. si es una Maniobra Normal o Rápida, puedes Jugarla como una Acción Rápida este turno. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Heroes/El Rey Emperador (2).png": {
+    "efecto": "N Este Personaje obtiene +2 de ataque mientras haya tres o más Esbirros que no sean Ficha en tu Banca. Acción Rápida: Puedes Jugar tu siguiente Personaje con una Acción Rápida este turno. (Solo puedes Activar esta Acción de carta mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/El Rey Goblin.png": {
+    "efecto": "Acción Rápida: Derrota un Esbirro Aliado. Este Personaje Obtiene +2 de ataque este turno. Reacción: Cuando una Ficha Esbirro sea Derrotada, cura 1 punto de saluda este Personaje.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Heroes/El Rey de las Minas (1).png": {
+    "efecto": "Los Personajes Equipados Aliados obtienen +1/41.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Espíritu del Bosque.png": {
+    "efecto": "Las Fichas Esbirro Aliadas obtienen +2 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Geodo III.png": {
+    "efecto": "Acción Rápida: Cura 1 punto de saluda cada Esbirro Aliado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 6
+  },
+  "cartas/personajes/Heroes/Jefe Chamán Goblin (1).png": {
+    "efecto": "Reacción: Cuando Juegues una Magia, puedes poner una Ficha Goblin en tu Banca.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": null
+  },
+  "cartas/personajes/Heroes/La Bruja del Pantano (1).png": {
+    "efecto": "Al Comienzo del turno del Rival, haz 1 punto de daño a cada Personaje Activo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/La Cábala.png": {
+    "efecto": "Acción Rápida: Elige una opción: - Haz 1 punto de daño a cada Esbirro que esté equipado o Anexado. - Cura 1 punto de salud a cada Esbirro que esté equipado o Anexado.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/La Santa Orden.png": {
+    "efecto": "Potencia tu Magia de Tipo Vida. Reacción: Cuando hagas Objetivo a un Personaje Aliado con una Magia, puedes Robar 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Llamavientos.png": {
+    "efecto": "Potencia tu Magia de Tipo Viento. Jugar: Cada Jugador Prepara dos cartas.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Líder de la Banda (2).png": {
+    "efecto": "N Acción Rápida: Prepara una carta. Reacción: Cuando Juegues una carta Preparada, Puedes mirar la primera carta del Mazo de cada Jugador.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Mente Maestra (2).png": {
+    "efecto": "Potencia tu Magia de Tipo Arcana. Al Comienzo de tu turno, Roba 1 carta.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": 1,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Orden del Gremio (1).png": {
+    "efecto": "Acción Rápida: Retira del Juego tres Objetos Desechables de tu Descarte. Elige una opción: - Haz 1 punto de daño al Personaje Objetivo. - Roba 2 cartas. - Cura 3 puntos de salud al Esbirro Objetivo.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Protector del Ethra (1).png": {
+    "efecto": "Acción Normal: Destruye una Base Aliada. Roba 2 cartas. Las Bases Aliadas obtienen +1 de salud.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 6
+  },
+  "cartas/personajes/Heroes/Señor de la Montaña.png": {
+    "efecto": "N Reacción: Cuando muevas un Personaje del Rival, puedes hacer un Ataque. (Solo puedes Activar esta Reacción mientras este Personaje esté en el Puesto Activo).",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  },
+  "cartas/personajes/Heroes/Soberano de la cripta (2).png": {
+    "efecto": "Tu Rival no puede recibir Puntos de Victoria durante tu turno.",
+    "ataque": null,
+    "vida": null,
+    "ataqueOcr": null,
+    "vidaOcr": 5
+  }
+}

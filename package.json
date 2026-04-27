@@ -1,0 +1,12 @@
+{
+  "name": "ethra-cg",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Herramientas de EthrA CG (scripts de OCR, etc.)",
+  "scripts": {
+    "ocr": "node scripts/ocr-cards.js"
+  },
+  "dependencies": {
+    "tesseract.js": "^5.1.1"
+  }
+}
