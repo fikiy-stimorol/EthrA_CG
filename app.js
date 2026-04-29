@@ -18,14 +18,17 @@ const FRAMES = {
   'Objeto':            { hasStats: true,  file: 'Objeto.png' },
 };
 
-// bbox de cada zona en coordenadas del lienzo 1500x2100
+// bbox de cada zona en coordenadas del lienzo 1500x2100.
+// Las zonas atk/hp/type están medidas a píxel sobre Esbirro.png — los `<>`
+// del marco están en y≈[1875, 1965] y la banda del tipo se solapa con esa
+// franja, así que ambos comparten centro vertical (y=1920).
 const LAYOUT = {
   art:    { x: 90,   y: 230,  w: 1320, h: 1010 },
   name:   { x: 200,  y: 80,   w: 1100, h: 130 },
-  effect: { x: 150,  y: 1320, w: 1200, h: 480 },
-  type:   { x: 200,  y: 1820, w: 1100, h: 100 },
-  atk:    { x: 30,   y: 1955, w: 200,  h: 100 },
-  hp:     { x: 1270, y: 1955, w: 200,  h: 100 },
+  effect: { x: 150,  y: 1310, w: 1200, h: 540 },
+  type:   { x: 290,  y: 1870, w: 920,  h: 100 },
+  atk:    { x: 110,  y: 1875, w: 180,  h: 90 },
+  hp:     { x: 1210, y: 1875, w: 180,  h: 90 },
 };
 
 // Color del texto según el marco. El nombre y las estadísticas siempre en
