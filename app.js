@@ -1056,6 +1056,43 @@ createApp({
       return ref.getDownloadURL();
     }
 
+    async function deleteCard() {
+      if (!selectedCard.value || !currentUser.value) return;
+      const card = selectedCard.value;
+      const isCustom = !!card.custom;
+      const msg = isCustom
+        ? `¿Eliminar la carta "${card.nombre}" definitivamente? Esto borra la imagen y los datos.`
+        : `¿Restablecer la carta "${card.nombre}" a su versión original? Se perderán los cambios y la imagen renderizada.`;
+      if (!confirm(msg)) return;
+
+      savingMeta.value = true;
+      saveProgress.value = isCustom ? 'Eliminando...' : 'Restableciendo...';
+      saveMetaError.value  = '';
+      try {
+        const ov = metaOverrides.value[card.id] || {};
+        // 1) Borrar archivos en Storage si existen.
+        const tryDelete = async (url) => {
+          if (!url) return;
+          try { await storage.refFromURL(url).delete(); }
+          catch (e) { if (e.code !== 'storage/object-not-found') console.warn('storage delete', e); }
+        };
+        await tryDelete(ov.renderedUrl);
+        await tryDelete(ov.artUrl);
+
+        // 2) Borrar el doc de Firestore.
+        await db.collection('cards-meta').doc(metaDocId(card.id)).delete();
+
+        saveMetaStatus.value = 'saved';
+        closeEditor();
+      } catch (e) {
+        console.error('delete error', e);
+        saveMetaError.value = 'No se pudo eliminar: ' + (e.message || e);
+      } finally {
+        savingMeta.value = false;
+        saveProgress.value = 'Guardando...';
+      }
+    }
+
     async function saveCardMeta() {
       if (!currentUser.value) return;
       const nombre = editingMeta.nombre.trim();
@@ -1222,7 +1259,7 @@ createApp({
       // Editor de carta
       editorOpen, editorMode, openCreator, closeEditor, previewCanvas,
       editingMeta, savingMeta, saveMetaStatus, saveMetaError, saveProgress,
-      metaDirty, saveCardMeta, onArtUpload, loadArtFromUrl,
+      metaDirty, saveCardMeta, deleteCard, onArtUpload, loadArtFromUrl,
       loadingArt, artUrlError, frameHasStats,
       FRAMES_LIST, knownTipos, knownSubtipos,
     };

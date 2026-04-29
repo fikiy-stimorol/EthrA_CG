@@ -418,6 +418,10 @@
                 {{ savingMeta ? saveProgress : (editorMode === 'create' ? 'Crear carta' : 'Guardar cambios') }}
               </button>
               <button @click="closeEditor" class="btn btn-ghost">Cancelar</button>
+              <button v-if="editorMode==='edit' && selectedCard && (selectedCard.custom || selectedCard.metaEdited)"
+                @click="deleteCard" class="btn btn-danger" :disabled="savingMeta">
+                {{ selectedCard.custom ? 'Eliminar carta' : 'Restablecer original' }}
+              </button>
             </div>
           </div>
         </div>
