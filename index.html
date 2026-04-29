@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EthrA CG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -113,6 +116,7 @@
               @click="filterSubsubtipo=s.value">{{ s.label }}</button>
           </div>
           <span class="result-count">{{ filteredCards.length }} cartas</span>
+          <button class="btn btn-primary new-card-btn" @click="openCreator">+ Nueva carta</button>
         </div>
 
         <div class="content-layout">
@@ -124,8 +128,10 @@
               @mousemove="moveHover($event)"
               @mouseleave="endHover">
               <div class="card-img-wrap">
-                <!-- WebP optimizado para galería; fallback al PNG original si aún no existe -->
-                <img :src="webUrl(card.path)" :alt="card.nombre" loading="lazy"
+                <!-- Si la carta fue editada/creada y tiene renderedUrl, esa
+                     versión gana. Si no, el WebP optimizado (galería); y si
+                     no existe el WebP aún, fallback al PNG del repo. -->
+                <img :src="card.renderedUrl || webUrl(card.path)" :alt="card.nombre" loading="lazy"
                   @error="$event.target.src = cardUrl(card.path)" />
                 <div class="card-overlay">
                   <button class="add-to-deck-btn" @click.stop="addToDeck(card)">+</button>
@@ -304,57 +310,104 @@
 
     <!-- ZOOM PREVIEW -->
     <Transition name="zoom">
-      <div v-if="hoveredCard && !selectedCard" class="card-zoom" :style="zoomStyle">
-        <img :src="webUrl(hoveredCard.path)" :alt="hoveredCard.nombre"
+      <div v-if="hoveredCard && !editorOpen" class="card-zoom" :style="zoomStyle">
+        <img :src="hoveredCard.renderedUrl || webUrl(hoveredCard.path)" :alt="hoveredCard.nombre"
           @error="$event.target.src = cardUrl(hoveredCard.path)" />
         <div class="card-zoom-label">{{ hoveredCard.nombre }}</div>
       </div>
     </Transition>
 
-    <!-- MODAL -->
+    <!-- MODAL EDITOR -->
     <Transition name="fade">
-      <div v-if="selectedCard" class="modal-bg" @click.self="selectedCard=null">
-        <div class="modal">
-          <button class="modal-close" @click="selectedCard=null">✕</button>
-          <img :src="webUrl(selectedCard.path)" :alt="selectedCard.nombre" class="modal-img"
-            @error="$event.target.src = cardUrl(selectedCard.path)" />
-          <div class="modal-info">
-            <h3>{{ selectedCard.nombre }}</h3>
-            <p class="modal-type">
-              {{ selectedCard.tipo }}<span v-if="selectedCard.subtipo"> · {{ selectedCard.subtipo }}</span><span v-if="selectedCard.subsubtipo"> · {{ selectedCard.subsubtipo }}</span>
-              <span v-if="selectedCard.metaEdited" class="meta-badge" title="Metadatos editados manualmente">✎</span>
-            </p>
-            <p v-if="selectedCard.copies > 1" class="modal-copies">Copias en el set: {{ selectedCard.copies }}</p>
+      <div v-if="editorOpen" class="modal-bg" @click.self="closeEditor">
+        <div class="modal modal-editor">
+          <button class="modal-close" @click="closeEditor">✕</button>
 
-            <!-- Editor de metadatos: efecto, ataque, vida -->
-            <div class="meta-editor">
-              <div class="form-group">
-                <label>Efecto</label>
-                <textarea v-model="editingMeta.efecto" class="form-input meta-efecto"
-                  rows="5" placeholder="Texto del efecto..."></textarea>
-              </div>
-              <div class="meta-stats">
-                <div class="form-group">
-                  <label>Ataque</label>
-                  <input v-model="editingMeta.ataque" type="number" class="form-input"
-                    placeholder="—" />
-                </div>
-                <div class="form-group">
-                  <label>Vida</label>
-                  <input v-model="editingMeta.vida" type="number" class="form-input"
-                    placeholder="—" />
-                </div>
-              </div>
-              <p v-if="saveMetaError" class="auth-error">{{ saveMetaError }}</p>
-              <p v-if="saveMetaStatus === 'saved'" class="meta-saved-msg">Guardado ✓</p>
+          <!-- Preview canvas (lado izquierdo) -->
+          <div class="editor-preview">
+            <canvas ref="previewCanvas" class="preview-canvas"></canvas>
+            <p class="preview-hint" v-if="editorMode==='create'">Vista previa de la nueva carta</p>
+            <p class="preview-hint" v-else>Vista previa — los cambios se mostrarán al guardar</p>
+          </div>
+
+          <!-- Formulario (lado derecho) -->
+          <div class="editor-form">
+            <h3>{{ editorMode === 'create' ? 'Nueva carta' : 'Editar carta' }}</h3>
+
+            <div class="form-group">
+              <label>Nombre</label>
+              <input v-model="editingMeta.nombre" type="text" class="form-input"
+                placeholder="Nombre de la carta" maxlength="60" />
             </div>
 
+            <div class="form-row">
+              <div class="form-group">
+                <label>Tipo</label>
+                <input v-model="editingMeta.tipo" type="text" class="form-input"
+                  placeholder="magia, personajes…" list="tipo-list" />
+                <datalist id="tipo-list">
+                  <option v-for="t in knownTipos" :key="t" :value="t" />
+                </datalist>
+              </div>
+              <div class="form-group">
+                <label>Subtipo</label>
+                <input v-model="editingMeta.subtipo" type="text" class="form-input"
+                  placeholder="arcana, Heroes…" list="subtipo-list" />
+                <datalist id="subtipo-list">
+                  <option v-for="s in knownSubtipos" :key="s" :value="s" />
+                </datalist>
+              </div>
+              <div class="form-group">
+                <label>Sub-subtipo</label>
+                <input v-model="editingMeta.subsubtipo" type="text" class="form-input"
+                  placeholder="opcional" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Marco</label>
+              <select v-model="editingMeta.frameKey" class="form-input">
+                <option v-for="(_, k) in FRAMES_LIST" :key="k" :value="k">{{ k }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Imagen / arte central</label>
+              <input type="file" accept="image/*" @change="onArtUpload" class="form-input file-input" />
+              <p v-if="editingMeta.artUrl && !editingMeta.artFile" class="art-hint">
+                Usando arte previo. Sube una imagen para reemplazarlo.
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label>Efecto</label>
+              <textarea v-model="editingMeta.efecto" class="form-input meta-efecto"
+                rows="5" placeholder="Texto del efecto..."></textarea>
+            </div>
+
+            <div class="meta-stats" v-if="frameHasStats">
+              <div class="form-group">
+                <label>Ataque</label>
+                <input v-model="editingMeta.ataque" type="text" class="form-input"
+                  placeholder="—" />
+              </div>
+              <div class="form-group">
+                <label>Vida</label>
+                <input v-model="editingMeta.vida" type="text" class="form-input"
+                  placeholder="—" />
+              </div>
+            </div>
+
+            <p v-if="saveMetaError" class="auth-error">{{ saveMetaError }}</p>
+            <p v-if="saveMetaStatus === 'saved'" class="meta-saved-msg">Guardado ✓</p>
+
             <div class="modal-actions">
-              <button @click="addToDeck(selectedCard); selectedCard=null" class="btn btn-primary">+ Añadir al mazo</button>
-              <button @click="saveCardMeta" class="btn btn-ghost"
-                :disabled="savingMeta || !metaDirty">
-                {{ savingMeta ? 'Guardando...' : 'Guardar cambios' }}
+              <button v-if="editorMode==='edit'" @click="addToDeck(selectedCard); closeEditor()" class="btn btn-primary">+ Añadir al mazo</button>
+              <button @click="saveCardMeta" class="btn btn-primary"
+                :disabled="savingMeta || (!metaDirty && editorMode==='edit')">
+                {{ savingMeta ? saveProgress : (editorMode === 'create' ? 'Crear carta' : 'Guardar cambios') }}
               </button>
+              <button @click="closeEditor" class="btn btn-ghost">Cancelar</button>
             </div>
           </div>
         </div>
@@ -367,6 +420,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script src="app.js"></script>
