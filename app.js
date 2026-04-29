@@ -22,21 +22,21 @@ const FRAMES = {
 const LAYOUT = {
   art:    { x: 90,   y: 230,  w: 1320, h: 1010 },
   name:   { x: 200,  y: 80,   w: 1100, h: 130 },
-  effect: { x: 150,  y: 1320, w: 1200, h: 540 },
-  type:   { x: 200,  y: 1900, w: 1100, h: 100 },
-  atk:    { x: 50,   y: 1985, w: 220,  h: 110 },
-  hp:     { x: 1230, y: 1985, w: 220,  h: 110 },
+  effect: { x: 150,  y: 1320, w: 1200, h: 480 },
+  type:   { x: 200,  y: 1820, w: 1100, h: 100 },
+  atk:    { x: 30,   y: 1955, w: 200,  h: 100 },
+  hp:     { x: 1270, y: 1955, w: 200,  h: 100 },
 };
 
-// Color del texto según el marco (los marcos de Hero son claros, el resto
-// llevan paneles oscuros).
+// Color del texto según el marco. El nombre y las estadísticas siempre en
+// blanco; el efecto y el tipo se ajustan al marco para mejor contraste.
 const FRAME_TEXT_COLOR = {
-  'Heroe':             { name: '#2b1f04', type: '#f5e9c2', effect: '#f8eecf' },
-  'Esbirro':           { name: '#f8e8e8', type: '#f8e8e8', effect: '#f5e6e6' },
-  'Magia':             { name: '#eaf0ff', type: '#eaf0ff', effect: '#f0f4ff' },
-  'Maniobra':          { name: '#f5f5f5', type: '#f5f5f5', effect: '#f5f5f5' },
-  'Objeto':            { name: '#f0f0f4', type: '#f0f0f4', effect: '#f0f0f4' },
-  'Objeto-desechable': { name: '#f0f0f4', type: '#f0f0f4', effect: '#f0f0f4' },
+  'Heroe':             { name: '#ffffff', type: '#ffffff', effect: '#f8eecf' },
+  'Esbirro':           { name: '#ffffff', type: '#ffffff', effect: '#f5e6e6' },
+  'Magia':             { name: '#ffffff', type: '#ffffff', effect: '#f0f4ff' },
+  'Maniobra':          { name: '#ffffff', type: '#ffffff', effect: '#f5f5f5' },
+  'Objeto':            { name: '#ffffff', type: '#ffffff', effect: '#f0f0f4' },
+  'Objeto-desechable': { name: '#ffffff', type: '#ffffff', effect: '#f0f0f4' },
 };
 
 // Cache de imágenes (frames + arts) para no descargar en cada pintada
@@ -174,15 +174,15 @@ async function renderCardCanvas(opts) {
     ctx.fillText(typeStr, LAYOUT.type.x + LAYOUT.type.w / 2, LAYOUT.type.y + LAYOUT.type.h / 2);
   }
 
-  // 6) Ataque / Vida (solo en marcos con stats)
+  // 6) Ataque / Vida (solo en marcos con stats), siempre en blanco
   if (frame.hasStats) {
-    ctx.fillStyle = colors.name;
+    ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     const drawStat = (val, box) => {
       if (val === null || val === undefined || val === '') return;
       const text = String(val);
-      const size = fitSingleLine(ctx, text, 'Quango', 80, 40, box.w * 0.8);
+      const size = fitSingleLine(ctx, text, 'Quango', 70, 36, box.w * 0.7);
       ctx.font = `${size}px Quango`;
       ctx.fillText(text, box.x + box.w / 2, box.y + box.h / 2);
     };
@@ -858,11 +858,14 @@ createApp({
       artUrl: '',          // URL del arte previo en Storage
       artFile: null,       // File nuevo (si el usuario sube uno)
       artLocalUrl: '',     // ObjectURL para el preview en vivo
+      artUrlInput: '',     // URL que el usuario teclea para cargar
     });
     const savingMeta     = ref(false);
     const saveMetaStatus = ref('');
     const saveMetaError  = ref('');
     const saveProgress   = ref('Guardando...');
+    const loadingArt     = ref(false);
+    const artUrlError    = ref('');
 
     // Lista para el dropdown del marco (sin reactividad, solo para la plantilla)
     const FRAMES_LIST = FRAMES;
@@ -900,6 +903,8 @@ createApp({
       editingMeta.artUrl     = ov.artUrl || '';
       editingMeta.artFile    = null;
       editingMeta.artLocalUrl = '';
+      editingMeta.artUrlInput = '';
+      artUrlError.value = '';
       saveMetaStatus.value = '';
       saveMetaError.value  = '';
       editorOpen.value = true;
@@ -920,6 +925,8 @@ createApp({
       editingMeta.artUrl     = '';
       editingMeta.artFile    = null;
       editingMeta.artLocalUrl = '';
+      editingMeta.artUrlInput = '';
+      artUrlError.value = '';
       saveMetaStatus.value = '';
       saveMetaError.value  = '';
       editorOpen.value = true;
@@ -940,7 +947,38 @@ createApp({
       if (editingMeta.artLocalUrl) URL.revokeObjectURL(editingMeta.artLocalUrl);
       editingMeta.artFile = file;
       editingMeta.artLocalUrl = URL.createObjectURL(file);
+      artUrlError.value = '';
       refreshPreview();
+    }
+
+    // Carga una imagen desde una URL pública. Se descarga vía fetch para
+    // evitar problemas de CORS al renderizar en canvas — la imagen pasa a
+    // tratarse como un File local. Si el servidor remoto no permite CORS,
+    // se notifica el error claramente.
+    async function loadArtFromUrl() {
+      const url = editingMeta.artUrlInput.trim();
+      if (!url) return;
+      loadingArt.value = true;
+      artUrlError.value = '';
+      try {
+        const res = await fetch(url, { mode: 'cors' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        if (!blob.type.startsWith('image/')) throw new Error('La URL no apunta a una imagen.');
+        const ext = (blob.type.split('/')[1] || 'png').replace('jpeg', 'jpg');
+        const file = new File([blob], 'art.' + ext, { type: blob.type });
+        if (editingMeta.artLocalUrl) URL.revokeObjectURL(editingMeta.artLocalUrl);
+        editingMeta.artFile = file;
+        editingMeta.artLocalUrl = URL.createObjectURL(file);
+        editingMeta.artUrlInput = '';
+        refreshPreview();
+      } catch (e) {
+        console.error('loadArtFromUrl', e);
+        artUrlError.value = 'No se pudo cargar la imagen (CORS bloqueado o URL inválida). '
+                          + 'Prueba con otra URL o sube el archivo directamente.';
+      } finally {
+        loadingArt.value = false;
+      }
     }
 
     // Pinta el preview con los valores actuales del editor.
@@ -1181,7 +1219,8 @@ createApp({
       // Editor de carta
       editorOpen, editorMode, openCreator, closeEditor, previewCanvas,
       editingMeta, savingMeta, saveMetaStatus, saveMetaError, saveProgress,
-      metaDirty, saveCardMeta, onArtUpload, frameHasStats,
+      metaDirty, saveCardMeta, onArtUpload, loadArtFromUrl,
+      loadingArt, artUrlError, frameHasStats,
       FRAMES_LIST, knownTipos, knownSubtipos,
     };
   }

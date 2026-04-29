@@ -392,6 +392,8 @@ body {
   display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
 }
 .file-input { padding: 6px; background: var(--bg3); }
+.art-url-row { display: flex; gap: 6px; margin-top: 6px; }
+.art-url-row .form-input { flex: 1; }
 .art-hint { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .new-card-btn { margin-left: auto; }
 

@@ -374,8 +374,18 @@
             <div class="form-group">
               <label>Imagen / arte central</label>
               <input type="file" accept="image/*" @change="onArtUpload" class="form-input file-input" />
+              <div class="art-url-row">
+                <input v-model="editingMeta.artUrlInput" type="url" class="form-input"
+                  placeholder="...o pega una URL de imagen y dale a Cargar"
+                  @keyup.enter="loadArtFromUrl" />
+                <button type="button" class="btn btn-ghost sm" @click="loadArtFromUrl"
+                  :disabled="!editingMeta.artUrlInput || loadingArt">
+                  {{ loadingArt ? 'Cargando...' : 'Cargar' }}
+                </button>
+              </div>
+              <p v-if="artUrlError" class="auth-error">{{ artUrlError }}</p>
               <p v-if="editingMeta.artUrl && !editingMeta.artFile" class="art-hint">
-                Usando arte previo. Sube una imagen para reemplazarlo.
+                Usando arte previo. Sube otra imagen o pega URL para reemplazarlo.
               </p>
             </div>
 
