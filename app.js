@@ -19,11 +19,12 @@ const FRAMES = {
 };
 
 // bbox de cada zona en coordenadas del lienzo 1500x2100.
-// Las zonas atk/hp/type están medidas a píxel sobre Esbirro.png — los `<>`
-// del marco están en y≈[1875, 1965] y la banda del tipo se solapa con esa
-// franja, así que ambos comparten centro vertical (y=1920).
+// La zona del arte cubre TODO el hueco transparente del marco (medido en
+// Esbirro.png: x=40-1460, y=210-1230). El frame se dibuja encima y recorta
+// lo que sobresalga, así que pasarse por dentro es seguro y elimina margen.
+// atk/hp/type están alineados con los `<>` del marco (y≈[1875, 1965]).
 const LAYOUT = {
-  art:    { x: 90,   y: 230,  w: 1320, h: 1010 },
+  art:    { x: 40,   y: 210,  w: 1420, h: 1020 },
   name:   { x: 200,  y: 80,   w: 1100, h: 130 },
   effect: { x: 150,  y: 1310, w: 1200, h: 540 },
   type:   { x: 290,  y: 1870, w: 920,  h: 100 },
@@ -122,7 +123,12 @@ async function renderCardCanvas(opts) {
   const ctx    = canvas.getContext('2d');
   canvas.width  = CARD_W;
   canvas.height = CARD_H;
-  ctx.clearRect(0, 0, CARD_W, CARD_H);
+  // Fondo opaco: las esquinas redondeadas del marco son transparentes (RGBA
+  // 0,0,0,0). Sin este relleno, en Tabletop Simulator (y otras apps que
+  // muestren el PNG sobre cualquier color) las esquinas dejarían pasar el
+  // fondo. Negro coincide con el aspecto del resto de cartas del juego.
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, CARD_W, CARD_H);
 
   const frame = FRAMES[opts.frameKey] || FRAMES['Magia'];
   const colors = FRAME_TEXT_COLOR[opts.frameKey] || FRAME_TEXT_COLOR['Magia'];
