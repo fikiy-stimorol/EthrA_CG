@@ -172,8 +172,10 @@ async function renderCardCanvas(opts) {
     });
   }
 
-  // 5) Tipo - Subtipo (Quango)
-  const typeStr = [opts.tipo, opts.subtipo].filter(Boolean).map(cap).join(' - ');
+  // 5) Tipo - Subtipo (Quango). Se pasa a singular: "personajes - esbirros"
+  // se muestra como "Personaje - Esbirro" en la carta final.
+  const typeStr = [opts.tipo, opts.subtipo].filter(Boolean)
+                   .map(s => cap(singularize(s))).join(' - ');
   if (typeStr) {
     ctx.fillStyle = colors.type;
     ctx.textAlign = 'center';
@@ -238,6 +240,18 @@ function webUrl(path) {
   return webPath.split('/').map(encodeURIComponent).join('/');
 }
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+// Pasa una palabra de plural a singular (heurística simple para español).
+// Solo se usa al pintar la carta — los filtros y categorías siguen en plural.
+// Cubre todos los tipos/subtipos del juego: personajes→personaje, Heroes→Heroe,
+// Esbirros→Esbirro, objetos→objeto, fichas→ficha, maniobras→maniobra,
+// desechables→desechable. Lápices→lápiz por completitud.
+function singularize(s) {
+  if (!s) return s;
+  if (/ces$/i.test(s)) return s.slice(0, -3) + 'z';
+  if (/s$/i.test(s))   return s.slice(0, -1);
+  return s;
+}
 
 function translateAuthError(code) {
   return ({
