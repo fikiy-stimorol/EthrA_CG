@@ -360,7 +360,10 @@
               <div class="form-group">
                 <label>Sub-subtipo</label>
                 <input v-model="editingMeta.subsubtipo" type="text" class="form-input"
-                  placeholder="opcional" />
+                  placeholder="Trampa, Poción…" list="subsubtipo-list" />
+                <datalist id="subsubtipo-list">
+                  <option v-for="s in knownSubsubtipos" :key="s" :value="s" />
+                </datalist>
               </div>
             </div>
 

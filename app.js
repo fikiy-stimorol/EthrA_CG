@@ -172,9 +172,9 @@ async function renderCardCanvas(opts) {
     });
   }
 
-  // 5) Tipo - Subtipo (Quango). Se pasa a singular: "personajes - esbirros"
-  // se muestra como "Personaje - Esbirro" en la carta final.
-  const typeStr = [opts.tipo, opts.subtipo].filter(Boolean)
+  // 5) Tipo - Subtipo - Sub-subtipo (Quango). Se pasan a singular:
+  // "objetos - desechables - Trampa" se muestra como "Objeto - Desechable - Trampa".
+  const typeStr = [opts.tipo, opts.subtipo, opts.subsubtipo].filter(Boolean)
                    .map(s => cap(singularize(s))).join(' - ');
   if (typeStr) {
     ctx.fillStyle = colors.type;
@@ -893,14 +893,16 @@ createApp({
     // Lista para el dropdown del marco (sin reactividad, solo para la plantilla)
     const FRAMES_LIST = FRAMES;
 
-    // Datalists con valores existentes para tipo/subtipo. Añadimos algunos
-    // subtipos sugeridos (trampa/pocion/totem) que aún no tienen cartas creadas
-    // pero deberían estar disponibles al elegir desde el editor.
-    const SUGGESTED_SUBTIPOS = ['trampa', 'pocion', 'totem'];
-    const knownTipos = computed(() => [...new Set(allCards.value.map(c => c.tipo).filter(Boolean))].sort());
-    const knownSubtipos = computed(() => {
-      const fromCards = allCards.value.map(c => c.subtipo).filter(Boolean);
-      return [...new Set([...fromCards, ...SUGGESTED_SUBTIPOS])].sort();
+    // Datalists con valores existentes para tipo/subtipo/sub-subtipo.
+    // Para sub-subtipo añadimos Trampa/Poción/Totem como sugerencias fijas
+    // (categorías de objetos desechables) aunque aún no exista ninguna carta
+    // con esos valores.
+    const SUGGESTED_SUBSUBTIPOS = ['Trampa', 'Poción', 'Totem'];
+    const knownTipos       = computed(() => [...new Set(allCards.value.map(c => c.tipo).filter(Boolean))].sort());
+    const knownSubtipos    = computed(() => [...new Set(allCards.value.map(c => c.subtipo).filter(Boolean))].sort());
+    const knownSubsubtipos = computed(() => {
+      const fromCards = allCards.value.map(c => c.subsubtipo).filter(Boolean);
+      return [...new Set([...fromCards, ...SUGGESTED_SUBSUBTIPOS])].sort();
     });
 
     const frameHasStats = computed(() => (FRAMES[editingMeta.frameKey] || {}).hasStats);
@@ -1025,12 +1027,13 @@ createApp({
           canvas:   previewCanvas.value,
           frameKey: editingMeta.frameKey,
           artUrl,
-          nombre:   editingMeta.nombre,
-          efecto:   editingMeta.efecto,
-          tipo:     editingMeta.tipo,
-          subtipo:  editingMeta.subtipo,
-          ataque:   editingMeta.ataque,
-          vida:     editingMeta.vida,
+          nombre:     editingMeta.nombre,
+          efecto:     editingMeta.efecto,
+          tipo:       editingMeta.tipo,
+          subtipo:    editingMeta.subtipo,
+          subsubtipo: editingMeta.subsubtipo,
+          ataque:     editingMeta.ataque,
+          vida:       editingMeta.vida,
         });
       } catch (e) {
         if (token === _previewToken) console.warn('preview error', e);
@@ -1039,7 +1042,7 @@ createApp({
 
     // Re-render del preview cuando cambia cualquier campo relevante.
     watch(() => [
-      editingMeta.nombre, editingMeta.tipo, editingMeta.subtipo,
+      editingMeta.nombre, editingMeta.tipo, editingMeta.subtipo, editingMeta.subsubtipo,
       editingMeta.frameKey, editingMeta.efecto, editingMeta.ataque,
       editingMeta.vida, editingMeta.artLocalUrl, editingMeta.artUrl,
     ], () => { if (editorOpen.value) refreshPreview(); });
@@ -1168,11 +1171,12 @@ createApp({
           frameKey: editingMeta.frameKey,
           artUrl:   artUrl || (baseCard ? cardUrl(baseCard.path) : ''),
           nombre,
-          efecto:   editingMeta.efecto,
+          efecto:     editingMeta.efecto,
           tipo,
-          subtipo:  editingMeta.subtipo.trim(),
-          ataque:   editingMeta.ataque.trim(),
-          vida:     editingMeta.vida.trim(),
+          subtipo:    editingMeta.subtipo.trim(),
+          subsubtipo: editingMeta.subsubtipo.trim(),
+          ataque:     editingMeta.ataque.trim(),
+          vida:       editingMeta.vida.trim(),
         });
         saveProgress.value = 'Subiendo carta...';
         const renderedBlob = await canvasToBlob(off);
@@ -1287,7 +1291,7 @@ createApp({
       editingMeta, savingMeta, saveMetaStatus, saveMetaError, saveProgress,
       metaDirty, saveCardMeta, deleteCard, onArtUpload, loadArtFromUrl,
       loadingArt, artUrlError, frameHasStats,
-      FRAMES_LIST, knownTipos, knownSubtipos,
+      FRAMES_LIST, knownTipos, knownSubtipos, knownSubsubtipos,
     };
   }
 }).mount('#app');
