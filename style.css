@@ -434,6 +434,7 @@ body {
 
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group label { font-size: 13px; color: var(--muted); }
+.form-hint { font-size: 11px; opacity: 0.7; font-weight: 400; }
 .form-input {
   background: var(--bg3); border: 1px solid var(--border);
   border-radius: 6px; padding: 9px 12px; color: var(--text);

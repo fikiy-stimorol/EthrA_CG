@@ -115,6 +115,11 @@
               class="pill xs" :class="{active: filterSubsubtipo===s.value}"
               @click="filterSubsubtipo=s.value">{{ s.label }}</button>
           </div>
+          <div v-if="arquetipoOptions.length > 1" class="filter-row">
+            <button v-for="a in arquetipoOptions" :key="a.value"
+              class="pill xs" :class="{active: filterArquetipo===a.value}"
+              @click="filterArquetipo=a.value">{{ a.label }}</button>
+          </div>
           <span class="result-count">{{ filteredCards.length }} cartas</span>
           <button class="btn btn-primary new-card-btn" @click="openCreator">+ Nueva carta</button>
         </div>
@@ -365,6 +370,15 @@
                   <option v-for="s in knownSubsubtipos" :key="s" :value="s" />
                 </datalist>
               </div>
+            </div>
+
+            <div v-if="showArquetipo" class="form-group">
+              <label>Arquetipo <span class="form-hint">(solo para filtrar; no aparece en la carta)</span></label>
+              <input v-model="editingMeta.arquetipo" type="text" class="form-input"
+                placeholder="animales, bandidos, artífices…" list="arquetipo-list" />
+              <datalist id="arquetipo-list">
+                <option v-for="a in knownArquetipos" :key="a" :value="a" />
+              </datalist>
             </div>
 
             <div class="form-group">

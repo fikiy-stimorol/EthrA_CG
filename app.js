@@ -228,8 +228,13 @@ function parseCard(path) {
   const copies     = m && m[2] ? parseInt(m[2]) : 1;
   const tipo       = parts[0];
   const subtipo    = parts.length >= 3 ? parts[1] : null;
-  const subsubtipo = parts.length >= 4 ? parts[2] : null;
-  return { id: withoutPrefix.replace('.png', ''), path, nombre, copies, tipo, subtipo, subsubtipo };
+  // Para personajes el tercer nivel de la ruta (animales, bandidos, …) es el
+  // ARQUETIPO, no un sub-subtipo: agrupa cartas pero no se imprime en la carta.
+  // Para otros tipos (objetos/desechables/Trampa) sí es un sub-subtipo real.
+  const isPersonaje = tipo === 'personajes';
+  const subsubtipo  = (parts.length >= 4 && !isPersonaje) ? parts[2] : null;
+  const arquetipo   = (parts.length >= 4 &&  isPersonaje) ? parts[2] : null;
+  return { id: withoutPrefix.replace('.png', ''), path, nombre, copies, tipo, subtipo, subsubtipo, arquetipo };
 }
 
 function cardUrl(path) { return path.split('/').map(encodeURIComponent).join('/'); }
@@ -433,6 +438,7 @@ createApp({
           tipo:       ov.tipo       || card.tipo,
           subtipo:    ov.subtipo    || card.subtipo,
           subsubtipo: ov.subsubtipo || card.subsubtipo,
+          arquetipo:  ov.arquetipo  || card.arquetipo,
           efecto: pick('efecto') || '',
           ataque: pick('ataque'),
           vida:   pick('vida'),
@@ -455,6 +461,7 @@ createApp({
           tipo:        ov.tipo       || null,
           subtipo:     ov.subtipo    || null,
           subsubtipo:  ov.subsubtipo || null,
+          arquetipo:   ov.arquetipo  || null,
           efecto:      ov.efecto || '',
           ataque:      ov.ataque,
           vida:        ov.vida,
@@ -473,6 +480,7 @@ createApp({
     const filterTipo       = ref('todos');
     const filterSubtipo    = ref('todos');
     const filterSubsubtipo = ref('todos');
+    const filterArquetipo  = ref('todos');
 
     const tipoOptions = computed(() => {
       const tipos = [...new Set(allCards.value.map(c => c.tipo))].sort();
@@ -492,11 +500,24 @@ createApp({
       if (!seen.size) return [];
       return [{ value: 'todos', label: 'Todos' }, ...[...seen].sort().map(s => ({ value: s, label: cap(s) }))];
     });
+    // Filtro de arquetipo (solo aplica a personajes). Lista los arquetipos
+    // que existen para el tipo/subtipo activos.
+    const arquetipoOptions = computed(() => {
+      if (filterTipo.value !== 'personajes') return [];
+      const seen = new Set(allCards.value
+        .filter(c => c.tipo === 'personajes'
+                  && (filterSubtipo.value === 'todos' || c.subtipo === filterSubtipo.value)
+                  && c.arquetipo)
+        .map(c => c.arquetipo));
+      if (!seen.size) return [];
+      return [{ value: 'todos', label: 'Todos' }, ...[...seen].sort().map(a => ({ value: a, label: cap(a) }))];
+    });
     const filteredCards = computed(() => {
       let cards = allCards.value;
       if (filterTipo.value !== 'todos')       cards = cards.filter(c => c.tipo       === filterTipo.value);
       if (filterSubtipo.value !== 'todos')    cards = cards.filter(c => c.subtipo    === filterSubtipo.value);
       if (filterSubsubtipo.value !== 'todos') cards = cards.filter(c => c.subsubtipo === filterSubsubtipo.value);
+      if (filterArquetipo.value !== 'todos')  cards = cards.filter(c => c.arquetipo  === filterArquetipo.value);
       if (search.value.trim()) {
         const q = search.value.toLowerCase();
         cards = cards.filter(c =>
@@ -506,8 +527,8 @@ createApp({
       }
       return cards;
     });
-    function setTipo(t)  { filterTipo.value = t;  filterSubtipo.value = 'todos'; filterSubsubtipo.value = 'todos'; }
-    function setSubtipo(s){ filterSubtipo.value = s; filterSubsubtipo.value = 'todos'; }
+    function setTipo(t)  { filterTipo.value = t;  filterSubtipo.value = 'todos'; filterSubsubtipo.value = 'todos'; filterArquetipo.value = 'todos'; }
+    function setSubtipo(s){ filterSubtipo.value = s; filterSubsubtipo.value = 'todos'; filterArquetipo.value = 'todos'; }
 
     // ── UI state ───────────────────────────────
     const view         = ref('gallery');
@@ -875,7 +896,7 @@ createApp({
     const editorMode     = ref('edit');         // 'edit' | 'create'
     const previewCanvas  = ref(null);
     const editingMeta    = reactive({
-      nombre: '', tipo: '', subtipo: '', subsubtipo: '',
+      nombre: '', tipo: '', subtipo: '', subsubtipo: '', arquetipo: '',
       frameKey: 'Magia',
       efecto: '', ataque: '', vida: '',
       artUrl: '',          // URL del arte previo en Storage
@@ -904,6 +925,10 @@ createApp({
       const fromCards = allCards.value.map(c => c.subsubtipo).filter(Boolean);
       return [...new Set([...fromCards, ...SUGGESTED_SUBSUBTIPOS])].sort();
     });
+    const knownArquetipos  = computed(() => [...new Set(allCards.value.map(c => c.arquetipo).filter(Boolean))].sort());
+
+    // El campo arquetipo solo es relevante para personajes (Heroes y Esbirros)
+    const showArquetipo    = computed(() => editingMeta.tipo === 'personajes');
 
     const frameHasStats = computed(() => (FRAMES[editingMeta.frameKey] || {}).hasStats);
 
@@ -927,6 +952,7 @@ createApp({
       editingMeta.tipo       = ov.tipo       || card.tipo       || '';
       editingMeta.subtipo    = ov.subtipo    || card.subtipo    || '';
       editingMeta.subsubtipo = ov.subsubtipo || card.subsubtipo || '';
+      editingMeta.arquetipo  = ov.arquetipo  || card.arquetipo  || '';
       editingMeta.frameKey   = ov.frameKey   || defaultFrameFor(card);
       editingMeta.efecto     = card.efecto || '';
       editingMeta.ataque     = card.ataque != null ? String(card.ataque) : '';
@@ -949,6 +975,7 @@ createApp({
       editingMeta.tipo       = '';
       editingMeta.subtipo    = '';
       editingMeta.subsubtipo = '';
+      editingMeta.arquetipo  = '';
       editingMeta.frameKey   = 'Magia';
       editingMeta.efecto     = '';
       editingMeta.ataque     = '';
@@ -1068,12 +1095,17 @@ createApp({
           || editingMeta.tipo       !== (ov.tipo       || c.tipo       || '')
           || editingMeta.subtipo    !== (ov.subtipo    || c.subtipo    || '')
           || editingMeta.subsubtipo !== (ov.subsubtipo || c.subsubtipo || '')
+          || editingMeta.arquetipo  !== (ov.arquetipo  || c.arquetipo  || '')
           || editingMeta.frameKey   !== (ov.frameKey   || defaultFrameFor(c))
           || editingMeta.artFile != null;
     });
 
     function buildCardId(meta) {
-      const parts = [meta.tipo, meta.subtipo, meta.subsubtipo, meta.nombre]
+      // Para personajes, el tercer nivel de la ruta es el arquetipo
+      // (personajes/Esbirros/animales/Lobo). Para el resto es el sub-subtipo
+      // (objetos/desechables/Trampa/MiCarta).
+      const third = meta.tipo === 'personajes' ? meta.arquetipo : meta.subsubtipo;
+      const parts = [meta.tipo, meta.subtipo, third, meta.nombre]
         .map(s => (s || '').trim())
         .filter(Boolean);
       return parts.join('/');
@@ -1144,7 +1176,8 @@ createApp({
         // Para creación, lo construimos a partir de tipo/subtipo/nombre.
         const cardId = isCreate
           ? buildCardId({ tipo, subtipo: editingMeta.subtipo.trim(),
-                          subsubtipo: editingMeta.subsubtipo.trim(), nombre })
+                          subsubtipo: editingMeta.subsubtipo.trim(),
+                          arquetipo:  editingMeta.arquetipo.trim(), nombre })
           : baseCard.id;
 
         if (!cardId) throw new Error('No se pudo construir el id de la carta.');
@@ -1194,6 +1227,7 @@ createApp({
           tipo,
           subtipo:    editingMeta.subtipo.trim()    || null,
           subsubtipo: editingMeta.subsubtipo.trim() || null,
+          arquetipo:  editingMeta.arquetipo.trim()  || null,
           frameKey:   editingMeta.frameKey,
           efecto:     editingMeta.efecto,
           ataque:     numOrStr(atkStr),
@@ -1235,6 +1269,13 @@ createApp({
     // Resetear paginación al cambiar filtros/búsqueda
     watch(filteredCards, () => { visibleCount.value = PAGE; });
 
+    // Si el arquetipo activo deja de existir entre las opciones (p. ej. al
+    // cambiar de subtipo), volvemos a "todos" para no dejar la lista vacía.
+    watch(arquetipoOptions, (opts) => {
+      if (filterArquetipo.value === 'todos') return;
+      if (!opts.find(o => o.value === filterArquetipo.value)) filterArquetipo.value = 'todos';
+    });
+
     // ── Lifecycle ──────────────────────────────
     onMounted(() => {
       // IntersectionObserver: cargar más cartas al llegar al final del grid
@@ -1268,8 +1309,8 @@ createApp({
       currentUser, authLoading, authMode, authEmail, authPassword, authPasswordConfirm, authError, authSubmitting,
       login, register, logout,
       allCards, loading, loadError,
-      search, filterTipo, filterSubtipo, filterSubsubtipo,
-      tipoOptions, subtipoOptions, subsubtipoOptions, filteredCards,
+      search, filterTipo, filterSubtipo, filterSubsubtipo, filterArquetipo,
+      tipoOptions, subtipoOptions, subsubtipoOptions, arquetipoOptions, filteredCards,
       setTipo, setSubtipo,
       view, showDeck, selectedCard, openModal,
       deckName, activeSection, partyCards, mainCards, benchCards, fichaCards,
@@ -1291,7 +1332,7 @@ createApp({
       editingMeta, savingMeta, saveMetaStatus, saveMetaError, saveProgress,
       metaDirty, saveCardMeta, deleteCard, onArtUpload, loadArtFromUrl,
       loadingArt, artUrlError, frameHasStats,
-      FRAMES_LIST, knownTipos, knownSubtipos, knownSubsubtipos,
+      FRAMES_LIST, knownTipos, knownSubtipos, knownSubsubtipos, knownArquetipos, showArquetipo,
     };
   }
 }).mount('#app');
