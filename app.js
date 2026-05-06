@@ -893,9 +893,15 @@ createApp({
     // Lista para el dropdown del marco (sin reactividad, solo para la plantilla)
     const FRAMES_LIST = FRAMES;
 
-    // Datalists con valores existentes para tipo/subtipo
+    // Datalists con valores existentes para tipo/subtipo. Añadimos algunos
+    // subtipos sugeridos (trampa/pocion/totem) que aún no tienen cartas creadas
+    // pero deberían estar disponibles al elegir desde el editor.
+    const SUGGESTED_SUBTIPOS = ['trampa', 'pocion', 'totem'];
     const knownTipos = computed(() => [...new Set(allCards.value.map(c => c.tipo).filter(Boolean))].sort());
-    const knownSubtipos = computed(() => [...new Set(allCards.value.map(c => c.subtipo).filter(Boolean))].sort());
+    const knownSubtipos = computed(() => {
+      const fromCards = allCards.value.map(c => c.subtipo).filter(Boolean);
+      return [...new Set([...fromCards, ...SUGGESTED_SUBTIPOS])].sort();
+    });
 
     const frameHasStats = computed(() => (FRAMES[editingMeta.frameKey] || {}).hasStats);
 
