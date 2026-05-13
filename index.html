@@ -123,10 +123,15 @@
           <span class="result-count">{{ filteredCards.length }} cartas</span>
           <button class="btn btn-ghost new-card-btn" @click="downloadAllVisible"
                   :disabled="bulkDownloading || !visibleWithArtCount"
-                  :title="'Descarga solo el arte (sin marco/texto) de las cartas visibles que tengan imagen subida. Pensado para usar como sprites en Unity.'">
+                  :title="'ZIP con los artes + cards.json de las cartas visibles que tengan imagen subida. Pensado para una primera importación en Unity.'">
             {{ bulkDownloading
                ? 'Descargando ' + bulkDone + '/' + bulkTotal + '…'
                : '⬇ Descargar artes para Unity (' + visibleWithArtCount + ')' }}
+          </button>
+          <button class="btn btn-ghost new-card-btn" @click="downloadMetadataJson"
+                  :disabled="bulkDownloading || !filteredCards.length"
+                  title="Descarga solo cards.json con textos/stats actualizados. Útil para refrescar datos en Unity sin volver a bajar las imágenes.">
+            ⬇ Solo metadatos (JSON)
           </button>
           <button class="btn btn-primary new-card-btn" @click="openCreator">+ Nueva carta</button>
         </div>

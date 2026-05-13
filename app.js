@@ -883,6 +883,58 @@ createApp({
     const visibleWithArtCount = computed(() =>
       filteredCards.value.filter(c => !!c.artUrl).length);
 
+    // Extrae la extensión real desde la URL del arte ("arts/foo.jpg?token=..." -> "jpg").
+    function extFromUrl(url) {
+      if (!url) return 'png';
+      try {
+        const clean = decodeURIComponent(url).split('?')[0];
+        const m = clean.match(/\.([a-z0-9]+)$/i);
+        return m ? m[1].toLowerCase() : 'png';
+      } catch { return 'png'; }
+    }
+
+    // Construye el array de metadatos de las cartas visibles, listo para JSON.
+    // Pensado para que un ScriptableObject en Unity lo deserialice y resuelva
+    // sus sprites por `artFile` (ruta relativa dentro del ZIP).
+    function buildCardsJsonData(cards) {
+      return {
+        exportedAt: new Date().toISOString(),
+        schemaVersion: 1,
+        count: cards.length,
+        cards: cards.map(c => {
+          // Frame deducido si la carta no tiene override explícito de marco.
+          const frameKey = c.frameKey || defaultFrameFor(c);
+          // artFile: ruta relativa (sin "cartas/") con la extensión real del
+          // arte si está disponible. Cadena vacía si no hay arte subido aparte.
+          let artFile = '';
+          if (c.artUrl) {
+            const ext = extFromUrl(c.artUrl);
+            artFile = c.path.replace(/^cartas\//, '').replace(/\.png$/i, '.' + ext);
+          }
+          return {
+            id:         c.id,
+            nombre:     c.nombre || '',
+            tipo:       c.tipo || '',
+            subtipo:    c.subtipo || '',
+            subsubtipo: c.subsubtipo || '',
+            arquetipo:  c.arquetipo || '',
+            frameKey,
+            efecto:     c.efecto || '',
+            ataque:     c.ataque ?? null,
+            vida:       c.vida   ?? null,
+            artFile,
+          };
+        }),
+      };
+    }
+
+    // Botón rápido: bajar solo los metadatos (textos/stats actualizados) sin
+    // tener que volver a descargar todas las imágenes.
+    function downloadMetadataJson() {
+      const data = buildCardsJsonData(filteredCards.value);
+      downloadFile(JSON.stringify(data, null, 2), 'ethra-cards.json', 'application/json');
+    }
+
     // Descarga el arte de una carta. Si la carta no tiene arte subido (cartas
     // antiguas no editadas desde la web), avisa al usuario.
     async function downloadCard(card) {
@@ -950,6 +1002,10 @@ createApp({
           }
         });
         await Promise.all(workers);
+        // Incluimos cards.json con los metadatos de las MISMAS cartas que han
+        // entrado al ZIP, así Unity puede emparejar arte ↔ datos por artFile.
+        const data = buildCardsJsonData(cards);
+        zip.file('cards.json', JSON.stringify(data, null, 2));
         const zipBlob = await zip.generateAsync({ type: 'blob' });
         downloadFile(zipBlob, 'ethra-artes-unity.zip', 'application/zip');
       } catch (e) {
@@ -1424,8 +1480,8 @@ createApp({
       hoveredCard, zoomStyle, startHover, startHoverById, moveHover, endHover,
       exportCurrentToTTS, exportSavedToTTS,
       exportDecksJson, importDecksJson, importMsg,
-      downloadCard, downloadAllVisible, bulkDownloading, bulkDone, bulkTotal,
-      visibleWithArtCount,
+      downloadCard, downloadAllVisible, downloadMetadataJson,
+      bulkDownloading, bulkDone, bulkTotal, visibleWithArtCount,
       formatDate, cardUrl, webUrl,
       visibleCards, hasMore, loadMore,
       RULES,
