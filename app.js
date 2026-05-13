@@ -854,10 +854,110 @@ createApp({
     const importMsg = ref('');
 
     function downloadFile(content, filename, type) {
-      const blob = new Blob([content], { type });
+      const blob = content instanceof Blob ? content : new Blob([content], { type });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = filename; a.click();
       URL.revokeObjectURL(url);
+    }
+
+    // ── Descarga de artes para Unity ───────────
+    // Las descargas solo entregan el ARTE subido (el archivo de imagen original),
+    // no la carta renderizada con marco/nombre/efecto. En Unity el marco y los
+    // textos se componen como UI dinámica encima del sprite.
+    function safeFilename(s) {
+      return (s || 'carta').replace(/[\\/:*?"<>|]+/g, '_').trim();
+    }
+
+    // Deriva la extensión a partir del MIME type del blob (preserva el formato
+    // original del arte: jpg, png, webp...).
+    function extensionFromBlob(blob, fallback = 'png') {
+      const t = (blob.type || '').toLowerCase();
+      if (t.includes('jpeg') || t.includes('jpg')) return 'jpg';
+      if (t.includes('webp')) return 'webp';
+      if (t.includes('gif'))  return 'gif';
+      if (t.includes('png'))  return 'png';
+      return fallback;
+    }
+
+    // Cuántas cartas visibles tienen arte disponible (para el contador del botón)
+    const visibleWithArtCount = computed(() =>
+      filteredCards.value.filter(c => !!c.artUrl).length);
+
+    // Descarga el arte de una carta. Si la carta no tiene arte subido (cartas
+    // antiguas no editadas desde la web), avisa al usuario.
+    async function downloadCard(card) {
+      if (!card) return;
+      if (!card.artUrl) {
+        alert('Esta carta todavía no tiene arte subido por separado. '
+            + 'Para tenerlo disponible para Unity, abre el editor, sube el '
+            + 'arte original y guarda la carta.');
+        return;
+      }
+      try {
+        const res = await fetch(card.artUrl, { mode: 'cors' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        const ext  = extensionFromBlob(blob);
+        downloadFile(blob, safeFilename(card.nombre) + '.' + ext, blob.type);
+      } catch (e) {
+        console.error('downloadCard', e);
+        alert('No se pudo descargar el arte: ' + (e.message || e));
+      }
+    }
+
+    // Progreso de la descarga masiva para mostrar en el botón.
+    const bulkDownloading = ref(false);
+    const bulkDone        = ref(0);
+    const bulkTotal       = ref(0);
+
+    // ZIP con los artes de las cartas visibles (las que tengan artUrl).
+    // Mantiene la estructura de carpetas para importar limpio en Unity como
+    // sprites organizados por tipo/subtipo.
+    async function downloadAllVisible() {
+      if (bulkDownloading.value) return;
+      const cards = filteredCards.value.filter(c => !!c.artUrl);
+      if (!cards.length) {
+        alert('Ninguna carta visible tiene arte subido por separado. '
+            + 'Filtra cartas creadas/editadas desde el editor, o sube el arte '
+            + 'original a las cartas que quieras antes de exportar.');
+        return;
+      }
+      if (typeof JSZip === 'undefined') {
+        alert('JSZip no se cargó. Recarga la página.'); return;
+      }
+      bulkDownloading.value = true;
+      bulkTotal.value = cards.length;
+      bulkDone.value  = 0;
+      try {
+        const zip = new JSZip();
+        const queue = cards.slice();
+        const workers = Array.from({ length: 8 }, async () => {
+          while (queue.length) {
+            const card = queue.shift();
+            try {
+              const res  = await fetch(card.artUrl, { mode: 'cors' });
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              const blob = await res.blob();
+              const ext  = extensionFromBlob(blob);
+              // Ruta relativa sin "cartas/" y con extensión real del arte
+              // (no forzamos .png — puede ser .jpg/.webp).
+              const relPath = card.path.replace(/^cartas\//, '').replace(/\.png$/i, '.' + ext);
+              zip.file(relPath, blob);
+            } catch (e) {
+              console.warn('skip', card.id, e);
+            }
+            bulkDone.value++;
+          }
+        });
+        await Promise.all(workers);
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        downloadFile(zipBlob, 'ethra-artes-unity.zip', 'application/zip');
+      } catch (e) {
+        console.error('downloadAllVisible', e);
+        alert('Error generando el ZIP: ' + (e.message || e));
+      } finally {
+        bulkDownloading.value = false;
+      }
     }
 
     function exportDecksJson() {
@@ -1324,6 +1424,8 @@ createApp({
       hoveredCard, zoomStyle, startHover, startHoverById, moveHover, endHover,
       exportCurrentToTTS, exportSavedToTTS,
       exportDecksJson, importDecksJson, importMsg,
+      downloadCard, downloadAllVisible, bulkDownloading, bulkDone, bulkTotal,
+      visibleWithArtCount,
       formatDate, cardUrl, webUrl,
       visibleCards, hasMore, loadMore,
       RULES,

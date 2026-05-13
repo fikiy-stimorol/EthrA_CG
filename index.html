@@ -121,6 +121,13 @@
               @click="filterArquetipo=a.value">{{ a.label }}</button>
           </div>
           <span class="result-count">{{ filteredCards.length }} cartas</span>
+          <button class="btn btn-ghost new-card-btn" @click="downloadAllVisible"
+                  :disabled="bulkDownloading || !visibleWithArtCount"
+                  :title="'Descarga solo el arte (sin marco/texto) de las cartas visibles que tengan imagen subida. Pensado para usar como sprites en Unity.'">
+            {{ bulkDownloading
+               ? 'Descargando ' + bulkDone + '/' + bulkTotal + '…'
+               : '⬇ Descargar artes para Unity (' + visibleWithArtCount + ')' }}
+          </button>
           <button class="btn btn-primary new-card-btn" @click="openCreator">+ Nueva carta</button>
         </div>
 
@@ -430,6 +437,14 @@
 
             <div class="modal-actions">
               <button v-if="editorMode==='edit'" @click="addToDeck(selectedCard); closeEditor()" class="btn btn-primary">+ Añadir al mazo</button>
+              <button v-if="editorMode==='edit' && selectedCard"
+                      @click="downloadCard(selectedCard)" class="btn btn-ghost"
+                      :disabled="!selectedCard.artUrl"
+                      :title="selectedCard.artUrl
+                              ? 'Descarga solo el arte de esta carta (sin marco/texto). Pensado para usar como sprite en Unity.'
+                              : 'Sin arte disponible. Sube el arte original desde el editor y guarda para poder descargarlo.'">
+                ⬇ Descargar arte (Unity)
+              </button>
               <button @click="saveCardMeta" class="btn btn-primary"
                 :disabled="savingMeta || (!metaDirty && editorMode==='edit')">
                 {{ savingMeta ? saveProgress : (editorMode === 'create' ? 'Crear carta' : 'Guardar cambios') }}
@@ -454,6 +469,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
