@@ -291,9 +291,16 @@ const RULES = {
   },
 };
 
-function isHero(card)    { return card.tipo === 'personajes' && card.subtipo === 'Heroes'; }
-function isEsbirro(card) { return card.tipo === 'personajes' && card.subtipo === 'Esbirros'; }
-function isFicha(card)   { return card.tipo === 'fichas'; }
+// Normaliza un tipo/subtipo para compararlo: singular + minúsculas.
+// Necesario porque las cartas creadas desde el editor pueden venir con el
+// tipo en singular ("ficha") o plural ("fichas"), y queremos que ambos
+// cuenten como ficha. Lo mismo aplica para subtipos arbitrarios
+// ("ficha - objeto", "ficha - magia", etc.): solo nos importa el tipo raíz.
+function normTipo(s) { return singularize((s || '').trim().toLowerCase()); }
+
+function isHero(card)    { return normTipo(card.tipo) === 'personaje' && normTipo(card.subtipo) === 'heroe'; }
+function isEsbirro(card) { return normTipo(card.tipo) === 'personaje' && normTipo(card.subtipo) === 'esbirro'; }
+function isFicha(card)   { return normTipo(card.tipo) === 'ficha'; }
 
 function canAdd(section, card, entries) {
   const total  = entries.reduce((s, e) => s + e.count, 0);
@@ -893,22 +900,67 @@ createApp({
       } catch { return 'png'; }
     }
 
-    // Construye el array de metadatos de las cartas visibles, listo para JSON.
-    // Pensado para que un ScriptableObject en Unity lo deserialice y resuelva
-    // sus sprites por `artFile` (ruta relativa dentro del ZIP).
-    function buildCardsJsonData(cards) {
+    // Formatos que Unity importa nativamente como sprite. WebP, AVIF y otros
+    // exóticos no están aquí y se convierten a PNG al exportar.
+    const UNITY_SPRITE_EXTS = new Set(['png','jpg','jpeg','gif','bmp','tga','tif','tiff','psd']);
+    function targetUnityExt(ext) {
+      const e = (ext || 'png').toLowerCase();
+      return UNITY_SPRITE_EXTS.has(e) ? e : 'png';
+    }
+
+    // Convierte un blob de imagen (cualquier formato que el navegador entienda)
+    // a un blob PNG. Se usa para reescribir los WebP subidos vía URL a un
+    // formato que Unity sí pueda importar como sprite.
+    async function blobToPngBlob(blob) {
+      const url = URL.createObjectURL(blob);
+      try {
+        const img = await new Promise((resolve, reject) => {
+          const i = new Image();
+          i.onload  = () => resolve(i);
+          i.onerror = reject;
+          i.src = url;
+        });
+        const canvas = document.createElement('canvas');
+        canvas.width  = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        return await new Promise((resolve, reject) =>
+          canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob falló')), 'image/png'));
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    // Toma un blob descargado y devuelve {blob, ext} apto para Unity. Si el
+    // formato original ya es válido (jpg/png/...), lo pasa tal cual; si no
+    // (webp, avif...), lo reencode a PNG.
+    async function asUnitySpriteBlob(blob, originalExt) {
+      const target = targetUnityExt(originalExt || extensionFromBlob(blob));
+      // Si la extensión final coincide con lo que Unity importa Y el MIME del
+      // blob no es webp/avif/etc, lo dejamos tal cual.
+      const blobExt = extensionFromBlob(blob);
+      if (UNITY_SPRITE_EXTS.has(blobExt) && target === blobExt) return { blob, ext: target };
+      // En cualquier otro caso convertimos a PNG.
+      const png = await blobToPngBlob(blob);
+      return { blob: png, ext: 'png' };
+    }
+
+    // Construye el array de metadatos, listo para JSON. Si se pasa `finalPaths`
+    // (mapa cardId → rutaReal), usa esa ruta como artFile (post-conversión). Si
+    // no, predice la extensión "amigable para Unity" (webp → png) a partir de
+    // la URL, para que el JSON suelto coincida con el ZIP que se genera.
+    function buildCardsJsonData(cards, finalPaths) {
       return {
         exportedAt: new Date().toISOString(),
         schemaVersion: 1,
         count: cards.length,
         cards: cards.map(c => {
-          // Frame deducido si la carta no tiene override explícito de marco.
           const frameKey = c.frameKey || defaultFrameFor(c);
-          // artFile: ruta relativa (sin "cartas/") con la extensión real del
-          // arte si está disponible. Cadena vacía si no hay arte subido aparte.
           let artFile = '';
-          if (c.artUrl) {
-            const ext = extFromUrl(c.artUrl);
+          if (finalPaths && finalPaths.has(c.id)) {
+            artFile = finalPaths.get(c.id);
+          } else if (c.artUrl) {
+            const ext = targetUnityExt(extFromUrl(c.artUrl));
             artFile = c.path.replace(/^cartas\//, '').replace(/\.png$/i, '.' + ext);
           }
           return {
@@ -948,8 +1000,9 @@ createApp({
       try {
         const res = await fetch(card.artUrl, { mode: 'cors' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        const blob = await res.blob();
-        const ext  = extensionFromBlob(blob);
+        const rawBlob = await res.blob();
+        // Convierte WebP/AVIF/etc. a PNG para que Unity pueda importarlo.
+        const { blob, ext } = await asUnitySpriteBlob(rawBlob, extFromUrl(card.artUrl));
         downloadFile(blob, safeFilename(card.nombre) + '.' + ext, blob.type);
       } catch (e) {
         console.error('downloadCard', e);
@@ -983,18 +1036,21 @@ createApp({
       try {
         const zip = new JSZip();
         const queue = cards.slice();
+        // Mapa cardId → ruta real con la que se ha guardado el archivo dentro
+        // del ZIP (puede cambiar la extensión si convertimos WebP → PNG).
+        const finalPaths = new Map();
         const workers = Array.from({ length: 8 }, async () => {
           while (queue.length) {
             const card = queue.shift();
             try {
-              const res  = await fetch(card.artUrl, { mode: 'cors' });
+              const res = await fetch(card.artUrl, { mode: 'cors' });
               if (!res.ok) throw new Error('HTTP ' + res.status);
-              const blob = await res.blob();
-              const ext  = extensionFromBlob(blob);
-              // Ruta relativa sin "cartas/" y con extensión real del arte
-              // (no forzamos .png — puede ser .jpg/.webp).
+              const rawBlob = await res.blob();
+              // Convierte WebP/AVIF a PNG para que Unity pueda importarlo.
+              const { blob, ext } = await asUnitySpriteBlob(rawBlob, extFromUrl(card.artUrl));
               const relPath = card.path.replace(/^cartas\//, '').replace(/\.png$/i, '.' + ext);
               zip.file(relPath, blob);
+              finalPaths.set(card.id, relPath);
             } catch (e) {
               console.warn('skip', card.id, e);
             }
@@ -1003,8 +1059,8 @@ createApp({
         });
         await Promise.all(workers);
         // Incluimos cards.json con los metadatos de las MISMAS cartas que han
-        // entrado al ZIP, así Unity puede emparejar arte ↔ datos por artFile.
-        const data = buildCardsJsonData(cards);
+        // entrado al ZIP, usando la ruta real (post-conversión) en artFile.
+        const data = buildCardsJsonData(cards, finalPaths);
         zip.file('cards.json', JSON.stringify(data, null, 2));
         const zipBlob = await zip.generateAsync({ type: 'blob' });
         downloadFile(zipBlob, 'ethra-artes-unity.zip', 'application/zip');
