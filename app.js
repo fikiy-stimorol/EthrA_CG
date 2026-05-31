@@ -294,13 +294,20 @@ const RULES = {
 // Normaliza un tipo/subtipo para compararlo: singular + minúsculas.
 // Necesario porque las cartas creadas desde el editor pueden venir con el
 // tipo en singular ("ficha") o plural ("fichas"), y queremos que ambos
-// cuenten como ficha. Lo mismo aplica para subtipos arbitrarios
-// ("ficha - objeto", "ficha - magia", etc.): solo nos importa el tipo raíz.
+// cuenten como ficha. Lo mismo aplica para subtipos.
 function normTipo(s) { return singularize((s || '').trim().toLowerCase()); }
+
+// Detecta si una carta es ficha. Acepta cualquier variante razonable que
+// empiece por "ficha": 'fichas', 'Ficha', 'ficha - objeto', 'fichas/objeto',
+// 'ficha-personaje', etc. Esto permite que en el futuro existan subtipos
+// arbitrarios de ficha (ficha - magia, ficha - whatever) sin tocar el código.
+function isFicha(card) {
+  const t = (card && card.tipo || '').toLowerCase().trim();
+  return /^fichas?\b/.test(t);
+}
 
 function isHero(card)    { return normTipo(card.tipo) === 'personaje' && normTipo(card.subtipo) === 'heroe'; }
 function isEsbirro(card) { return normTipo(card.tipo) === 'personaje' && normTipo(card.subtipo) === 'esbirro'; }
-function isFicha(card)   { return normTipo(card.tipo) === 'ficha'; }
 
 function canAdd(section, card, entries) {
   const total  = entries.reduce((s, e) => s + e.count, 0);
